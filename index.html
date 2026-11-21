@@ -624,7 +624,7 @@ button.card{display:flex;flex-direction:column;justify-content:flex-start;align-
     <div style='margin-top:.8rem'><label for='a-pass'>รหัสผ่าน (อย่างน้อย 8 ตัว)</label><input id='a-pass' type='password' autocomplete='current-password' minlength='8' required></div>
     <label class='chk'><input id='a-remember' type='checkbox' checked>จำฉันไว้ในเครื่องนี้ (ไม่ต้องล็อกอินใหม่ทุกครั้ง)</label>
     <button class='save' id='a-submit' type='submit'>เข้าสู่ระบบ</button>
-    <div class='auth-actions'><button class='link' id='a-switch' type='button'>ยังไม่มีบัญชี? สมัครใหม่</button><button class='link' id='a-forgot' type='button'>ลืมรหัสผ่าน?</button></div>
+    <div class='auth-actions'><button class='link' id='a-switch' type='button'>ยังไม่มีบัญชี? สมัครใหม่</button><button class='link' id='a-forgot' type='button'>ลืมรหัสผ่าน?</button><button class='link' id='a-resend' type='button' hidden>ส่งอีเมลยืนยันอีกครั้ง</button></div>
     <p class='hint' id='a-msg' role='status' aria-live='polite'></p>
   </form>
   <form id='reset-form' class='panel' hidden novalidate>
@@ -1426,8 +1426,8 @@ window.addEventListener('resize', movePill);
 /* ===== บัญชีผู้ใช้จริงด้วย Supabase =====
    หลังสร้างโปรเจกต์ Supabase ให้ใส่ 2 ค่านี้ (anon key เป็นกุญแจสาธารณะ ใส่ในเว็บได้ ห้ามใส่ service_role เด็ดขาด)
    ถ้าเว้นว่างไว้ แอปจะทำงานแบบไม่ต้องล็อกอิน จำข้อมูลไว้ในเครื่องเท่านั้น */
-const SUPABASE_URL = '';
-const SUPABASE_ANON_KEY = '';
+const SUPABASE_URL = 'https://keehzqxmkeshvjsrcjba.supabase.co';
+const SUPABASE_ANON_KEY = 'sb_publishable_HwntCkB9mud6OW5IsQ4ygw_KCOVarAF'; // publishable key (ใช้แทน anon key ได้)
 const REQUIRE_LOGIN = false; // true = ต้องล็อกอินก่อนใช้แอป (ซ่อนปุ่ม "ใช้งานแบบไม่ล็อกอิน")
 const AUTH_ENABLED = !!(SUPABASE_URL && SUPABASE_ANON_KEY);
 const AUTH_URL = SUPABASE_URL.replace(/\/+$/, '');
@@ -1534,6 +1534,7 @@ function setAuthMode(m) {
   $('a-switch').textContent = m === 'login' ? 'ยังไม่มีบัญชี? สมัครใหม่' : 'มีบัญชีแล้ว? เข้าสู่ระบบ';
   $('a-pass').autocomplete = m === 'login' ? 'current-password' : 'new-password';
   $('a-forgot').hidden = m !== 'login';
+  $('a-resend').hidden = true;
   $('a-msg').textContent = '';
 }
 function showAuth(msg) {
@@ -1589,12 +1590,12 @@ $('auth-form').addEventListener('submit', async (ev) => {
     if (authMode === 'register') {
       const d = await api('/auth/v1/signup', { method: 'POST', body: { email, password: pass } });
       if (d && d.access_token) { startSession(d, remember); $('a-pass').value = ''; msg(''); await afterLogin(); }
-      else { setAuthMode('login'); msg('สมัครแล้ว กรุณาตรวจอีเมลเพื่อกดลิงก์ยืนยัน แล้วกลับมาเข้าสู่ระบบ'); }
+      else { setAuthMode('login'); $('a-resend').hidden = false; msg('สมัครแล้ว ส่งอีเมลยืนยันไปที่ ' + email + ' กรุณากดลิงก์ในอีเมล (ตรวจกล่องสแปมด้วย) แล้วกลับมาเข้าสู่ระบบ ถ้าไม่ได้รับอีเมล อาจเพราะอีเมลนี้สมัครไว้แล้ว ลองเข้าสู่ระบบหรือกด "ลืมรหัสผ่าน?"'); }
     } else {
       const d = await api('/auth/v1/token?grant_type=password', { method: 'POST', body: { email, password: pass } });
       startSession(d, remember); $('a-pass').value = ''; msg(''); await afterLogin();
     }
-  } catch (e) { if (session && !e.status) { clearSession(); } msg(authError(e)); }
+  } catch (e) { if (session && !e.status) { clearSession(); } if (e.code === 'email_not_confirmed') $('a-resend').hidden = false; msg(authError(e)); }
   finally { $('a-submit').disabled = false; }
 });
 $('a-forgot').addEventListener('click', async () => {
@@ -1602,6 +1603,12 @@ $('a-forgot').addEventListener('click', async () => {
   if (!AUTH_ENABLED) return msg('โหมดตัวอย่าง: ยังไม่ได้เชื่อมต่อ Supabase จึงยังล็อกอินจริงไม่ได้ กด "ใช้งานแบบไม่ล็อกอินก่อน" เพื่อลองแอป');
   if (!/^\S+@\S+\.\S+$/.test(email)) return msg('กรอกอีเมลก่อน แล้วกด "ลืมรหัสผ่าน?" อีกครั้ง');
   try { await api('/auth/v1/recover', { method: 'POST', body: { email } }); msg('ถ้ามีบัญชีนี้ ระบบส่งลิงก์ตั้งรหัสผ่านใหม่ไปที่อีเมลแล้ว'); }
+  catch (e) { msg(authError(e)); }
+});
+$('a-resend').addEventListener('click', async () => {
+  const email = $('a-email').value.trim(), msg = (t) => { $('a-msg').textContent = t; };
+  if (!/^\S+@\S+\.\S+$/.test(email)) return msg('กรอกอีเมลที่สมัครไว้ก่อน');
+  try { await api('/auth/v1/resend', { method: 'POST', body: { type: 'signup', email } }); msg('ส่งอีเมลยืนยันอีกครั้งแล้ว ตรวจกล่องจดหมายและสแปม'); }
   catch (e) { msg(authError(e)); }
 });
 $('reset-form').addEventListener('submit', async (ev) => {
