@@ -1,0 +1,1961 @@
+<!DOCTYPE html>
+<html lang="en" class="nojs">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<script>document.documentElement.className = 'js';</script>
+<title>My gym</title>
+<meta name="description" content="My gym — แผนที่กล้ามเนื้อ ท่าออกกำลังกายกว่า 60 ท่า เครื่องคำนวณแคลอรี่และโปรตีน โปรแกรมฝึก และสรุปงานวิจัยด้านการออกกำลังกาย" />
+<meta name="theme-color" content="#0a0a0a" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&family=Sarabun:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px;-webkit-font-smoothing:antialiased}
+@media (max-width:1920px){html{font-size:0.833333vw}}
+@media (max-width:1440px){html{font-size:1.111111vw}}
+@media (max-width:1024px){html{font-size:1.5625vw}}
+@media (max-width:640px){html{font-size:4.444444vw}}
+:root{--bg:#fff;--fg:#111;--ink:#0a0a0a;--muted:#8d8d8d;--subtle:#b6b6b6;--line:#e6e5e2;--surface:#f1f0ee;--surface-2:#e3e2df;--accent:#b15f2c;--accent-from:#cf8047;--accent-to:#97501f;--hero-to:#c9c9c9}
+body{background:#fff;color:#111;font-family:'Onest','Sarabun',sans-serif;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
+ul{list-style:none}
+img{display:block}
+[hidden]{display:none!important}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+:focus-visible{outline:2px solid #b15f2c;outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+.ic{width:1em;height:1em;display:inline-block;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.ic.f{fill:currentColor;stroke:none}
+.shell{max-width:88rem;margin-inline:auto}
+.skip{position:fixed;left:1rem;top:1rem;z-index:130;border-radius:.875rem;background:#0a0a0a;padding:.5rem 1rem;font-size:.875rem;color:#fff;transform:translateY(-300%)}
+.skip:focus{transform:none}
+/* ---------- reveal ---------- */
+.rv{opacity:0;transform:translateY(var(--ry,24px)) scale(var(--rs,1));transition:opacity .7s cubic-bezier(.22,1,.36,1) var(--rd,0ms),transform .8s cubic-bezier(.22,1,.36,1) var(--rd,0ms)}
+.rv.in{opacity:1;transform:none}
+.lines .ln{display:block;overflow:hidden;padding-bottom:.12em;margin-bottom:-.12em}
+.lines .ln>span{display:block;opacity:0;transform:translateY(105%);transition:transform .9s cubic-bezier(.215,.61,.355,1) calc(var(--rd,0ms) + var(--i,0)*var(--ls,0ms)),opacity .9s cubic-bezier(.215,.61,.355,1) calc(var(--rd,0ms) + var(--i,0)*var(--ls,0ms))}
+.lines.in .ln>span{opacity:1;transform:none}
+.words .w{display:inline-block;opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.165,.84,.44,1) calc(var(--i)*35ms),transform .7s cubic-bezier(.165,.84,.44,1) calc(var(--i)*35ms)}
+.words.in .w{opacity:1;transform:none}
+.nojs #loader{display:none}
+.nojs .rv,.nojs .lines .ln>span,.nojs .words .w{opacity:1;transform:none}
+/* ---------- loader ---------- */
+#loader{position:fixed;inset:0;z-index:120;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2rem;background:#0a0a0a;color:#fff;border-radius:0 0 2rem 2rem;transition:transform .8s cubic-bezier(.22,1,.36,1)}
+#loader.out{transform:translateY(-100%)}
+.ld-center{display:flex;flex-direction:column;align-items:center;gap:1.25rem;text-align:center;transition:opacity .5s ease,transform .5s ease}
+.out .ld-center{opacity:0;transform:translateY(-12px)}
+.ld-brand{display:flex;align-items:center;gap:.5rem;font-weight:600;font-size:1.5rem}
+.ld-brand .ic{font-size:1.875rem;color:#cf8047}
+.ld-tag{max-width:24ch;font-size:.875rem;color:rgba(255,255,255,.55)}
+.ld-prog{width:min(22rem,72vw);display:flex;flex-direction:column;gap:.75rem}
+.ld-track{height:1px;background:rgba(255,255,255,.15)}
+.ld-fill{height:100%;width:0;background:#cf8047;transition:width .1s ease-out}
+.ld-row{display:flex;justify-content:space-between;font-size:.75rem;font-weight:500;text-transform:uppercase;letter-spacing:.05em;color:rgba(255,255,255,.45)}
+.ld-row b{font-weight:500;color:rgba(255,255,255,.8);font-variant-numeric:tabular-nums}
+@media (min-width:640px){.ld-brand{font-size:1.875rem}}
+/* ---------- shared pieces ---------- */
+.eyebrow{display:inline-flex;align-items:center;gap:.5rem;font-size:.875rem;font-weight:500;color:rgba(17,17,17,.7)}
+.eyebrow::before{content:'';width:.375rem;height:.375rem;border-radius:9999px;background:rgba(17,17,17,.5)}
+.eyebrow.lt{color:rgba(255,255,255,.7)}.eyebrow.lt::before{background:rgba(255,255,255,.6)}
+.eyebrow.bd{border:1px solid #e6e5e2;border-radius:9999px;padding:.375rem 1rem}
+.pill{display:inline-block;transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+.pill-in{display:inline-flex;align-items:center;gap:.75rem;border-radius:9999px;font-size:.875rem;font-weight:500;padding:.875rem 1.75rem}
+.pill-in.arr{padding:.375rem .375rem .375rem 1.5rem}
+.pill-in .bd{width:2.25rem;height:2.25rem;display:grid;place-items:center;border-radius:9999px;font-size:1rem;background:#0a0a0a;color:#fff}
+.pill-in .bd .ic{transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+.v-dark{background:#0a0a0a;color:#fff}.v-dark .bd{background:#fff;color:#0a0a0a}
+.v-light{background:#f1f0ee;color:#111}
+.v-outline{border:1px solid #e6e5e2;background:transparent;color:#111}
+.tagc{display:inline-flex;border:1px solid rgba(255,255,255,.25);color:#fff;border-radius:9999px;padding:.5rem 1rem;font-size:.875rem}
+.alink{display:inline-flex}
+.alink>span{display:inline-block;opacity:.65;transition:transform .35s cubic-bezier(.2,.8,.2,1),opacity .3s}
+@media (hover:hover){
+ .pill:hover{transform:scale(1.04)}
+ .pill:hover .bd .ic{transform:translate(3px,0)}
+ .pill.up:hover .bd .ic{transform:translate(2px,-2px)}
+ .alink:hover>span{transform:translateX(4px);opacity:1}
+}
+/* ---------- header ---------- */
+.hdr{position:absolute;inset-inline:0;top:0;z-index:50;--ry:-14px}
+.hdr-in{display:flex;align-items:center;justify-content:space-between;gap:1.5rem;padding:1.25rem}
+.brand{display:flex;align-items:center;gap:.5rem;font-size:1.125rem;font-weight:600;letter-spacing:-.01em;transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+.brand .ic{font-size:1.25rem;color:#b15f2c}
+.pnav{display:none;gap:2rem;font-size:.875rem;font-weight:500}
+.pnav button{display:inline-block;opacity:.8;transition:transform .3s cubic-bezier(.2,.8,.2,1),opacity .3s}
+.pnav small{font-size:.75rem;opacity:.6;margin-left:.25rem}
+.hdr-r{display:flex;align-items:center;gap:.75rem}
+.clock{display:none;align-items:center;gap:.75rem;border:1px solid rgba(230,229,226,.8);background:rgba(255,255,255,.4);backdrop-filter:blur(4px);border-radius:.875rem;padding:.5rem .75rem;font-size:.75rem;color:rgba(17,17,17,.7)}
+.clock .lb{color:rgba(17,17,17,.45)}.clock .tm{min-width:3.5rem;font-variant-numeric:tabular-nums;font-weight:500;color:#111}.clock .sp{color:rgba(17,17,17,.3)}.clock .dt{font-weight:500}
+.menu-btn{border:1px solid rgba(230,229,226,.8);background:rgba(255,255,255,.4);backdrop-filter:blur(4px);border-radius:.875rem;transition:background .3s}
+.menu-btn span{display:flex;align-items:center;gap:.5rem;padding:.5rem 1rem;font-size:.75rem;font-weight:500;text-transform:uppercase;letter-spacing:.05em;transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+.menu-btn .ic{font-size:.875rem}.menu-btn .mt{display:none}
+@media (hover:hover){.brand:hover{transform:scale(1.04)}.pnav button:hover{transform:translateY(-2px);opacity:1}.menu-btn:hover{background:rgba(255,255,255,.7)}.menu-btn:hover span{transform:scale(1.05)}}
+@media (min-width:640px){.hdr-in{padding:1.5rem 2rem}.menu-btn .mt{display:inline}}
+@media (min-width:768px){.clock{display:flex}}
+@media (min-width:1024px){.pnav{display:flex}}
+/* ---------- hero ---------- */
+.hero{position:relative;isolation:isolate;overflow:hidden;border-radius:0 0 2rem 2rem;background:#c9c9c9}
+.lq{position:absolute;inset:0;z-index:0}
+.lq img,.lq canvas{position:absolute;inset:0;width:100%;height:100%}
+.lq img{object-fit:cover}.lq canvas{pointer-events:none}
+.vig{position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(to bottom,rgba(255,255,255,.35),transparent,rgba(255,255,255,.35))}
+.wm{pointer-events:none;position:absolute;inset-inline:0;bottom:7rem;z-index:1;text-align:center;user-select:none;font-weight:700;line-height:1;font-size:13rem;color:rgba(255,255,255,.4)}
+.hero-in{position:relative;z-index:20;display:flex;flex-direction:column;gap:2rem;padding:7rem 1.25rem 5rem}
+.hl{display:flex;flex-direction:column;gap:1.75rem}
+.hero h1{max-width:18ch;font-size:2.25rem;font-weight:600;line-height:.98;letter-spacing:-.02em}
+.rate{display:flex;align-items:center;gap:.75rem}
+.rate .st{display:inline-flex;color:#b15f2c;font-size:1rem}
+.rate span.t{font-size:.875rem;font-weight:500;color:rgba(17,17,17,.7)}
+.ctas{display:flex;flex-wrap:wrap;gap:.75rem}
+.hr{display:flex;flex-direction:column;align-items:flex-start;gap:2rem}
+.hcard{width:100%;max-width:24rem;border-radius:1.25rem;background:rgba(255,255,255,.7);padding:.5rem;box-shadow:0 1px 2px rgba(0,0,0,.06),0 0 0 1px rgba(230,229,226,.7);backdrop-filter:blur(12px)}
+.hc-row{display:flex;gap:.5rem;cursor:pointer;border-radius:.875rem}
+.hc-tile{aspect-ratio:1;width:6rem;display:grid;place-items:center;border-radius:.875rem;background:#0a0a0a;font-size:1.875rem;color:#cf8047}
+.hc-pan{flex:1;border-radius:.875rem;background:rgba(241,240,238,.7);padding:.75rem;display:flex;flex-direction:column;justify-content:space-between;min-width:0}
+.hc-slot{position:relative;min-height:3.25rem}
+.hc-slot.swap>div{animation:swapIn .4s cubic-bezier(.2,.8,.2,1)}
+@keyframes swapIn{from{opacity:0;transform:translateY(calc(var(--sd,1)*14px))}to{opacity:1;transform:none}}
+.hc-cap{font-size:.65rem;font-weight:500;text-transform:uppercase;letter-spacing:.05em;color:rgba(17,17,17,.45)}
+.hc-title{max-width:8rem;font-size:.875rem;font-weight:500;line-height:1.35}
+.hc-bot{display:flex;align-items:center;justify-content:space-between}
+.hc-dots{display:flex;gap:.25rem}.hc-dots i{display:block;height:.25rem;border-radius:9999px;width:.375rem;background:rgba(17,17,17,.2);transition:all .3s}.hc-dots i.on{width:1rem;background:rgba(17,17,17,.7)}
+.hc-btns{display:flex;gap:.25rem}
+.hc-btns button{width:1.75rem;height:1.75rem;display:grid;place-items:center;border-radius:9999px;background:#fff;color:rgba(17,17,17,.7);box-shadow:0 0 0 1px #e6e5e2;font-size:.875rem}
+.hc-btns button:hover{color:#111}.hc-btns .pv .ic{transform:rotate(180deg)}
+.partners{width:100%;max-width:24rem}
+.partners .lb{margin-bottom:.75rem;font-size:.75rem;font-weight:500;color:rgba(17,17,17,.45);text-align:left}
+.partners ul{display:grid;grid-template-columns:repeat(4,1fr);column-gap:1rem;row-gap:.75rem}
+.partners li{display:flex;align-items:center;gap:.375rem;font-size:.75rem;color:rgba(17,17,17,.7);opacity:.7;transition:transform .35s cubic-bezier(.2,.8,.2,1),opacity .3s}
+.partners li .ic{font-size:.875rem;color:rgba(17,17,17,.4)}
+@media (hover:hover){.partners li:hover{transform:translateY(-2px);opacity:1}}
+.status{position:relative;z-index:20}
+.status .shell{display:flex;align-items:center;justify-content:space-between;gap:.75rem;border-top:1px solid rgba(17,17,17,.1);padding:1.25rem;font-size:.75rem;font-weight:500;text-transform:uppercase;letter-spacing:.025em;color:rgba(17,17,17,.6)}
+.status .mid{display:none}.status .r{display:inline-flex;gap:.5rem}
+@media (min-width:640px){.hero-in{padding-inline:2rem}.hero h1{font-size:3rem}.status .shell{padding-inline:2rem}.status .mid{display:inline}}
+@media (min-width:768px){.hero h1{font-size:3.75rem}}
+@media (min-width:1024px){.hero-in{display:grid;min-height:100lvh;grid-template-columns:repeat(12,1fr);gap:2.5rem;padding:9rem 2rem 7rem}.hl{grid-column:span 7}.hr{grid-column:span 5;align-items:flex-end}.hcard,.partners{width:19rem}.partners .lb{text-align:right}}
+/* ---------- about ---------- */
+.about .shell{display:grid;grid-template-columns:1fr;align-items:center;gap:3rem;padding:5rem 1.25rem}
+.globe-b{position:relative;min-height:14rem}
+.globe-b>.ic{position:absolute;left:-1rem;top:50%;transform:translateY(-50%);font-size:12rem;color:rgba(17,17,17,.1)}
+.globe-b .eyebrow{position:relative}
+.globe-cap{position:absolute;left:0;bottom:0;display:flex;align-items:center;gap:.75rem;font-size:.875rem;color:rgba(17,17,17,.7);--ry:12px}
+.globe-cap .ic{font-size:1.5rem;color:#111}.globe-cap span{max-width:14rem}
+.about-r{display:flex;flex-direction:column;gap:2.5rem}
+.about h2{font-size:1.5rem;font-weight:500;line-height:1.35;letter-spacing:-.01em}
+.about h2 .mut{color:#8d8d8d}
+.about-foot{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:1.5rem;border-top:1px solid #e6e5e2;padding-top:1.5rem;--ry:12px}
+.about-foot .lb{font-size:.875rem;color:rgba(17,17,17,.45);margin-bottom:.5rem}
+.soc{display:flex;gap:.5rem}
+.soc a{width:2.25rem;height:2.25rem;display:grid;place-items:center;border-radius:9999px;font-size:.875rem;background:#f1f0ee;color:rgba(17,17,17,.7)}
+.soc a.x{background:#b15f2c;color:#fff}
+.soc a .ic{transition:transform .3s cubic-bezier(.3,1.6,.5,1)}
+@media (hover:hover){.soc a:hover .ic{transform:scale(1.18)}}
+@media (min-width:640px){.about .shell{padding-inline:2rem}.globe-b>.ic{font-size:16rem}.about h2{font-size:1.875rem}}
+@media (min-width:1024px){.about .shell{grid-template-columns:1fr 1fr;padding-block:7rem}.globe-b{min-height:20rem}.globe-b>.ic{left:-1.5rem;font-size:20rem}}
+/* ---------- create band ---------- */
+.cb ul{display:flex;flex-direction:column;gap:.75rem;padding:2.5rem 1.25rem}
+.cb li{flex:1}
+.cb .tile{display:grid;place-items:center;height:6rem;border-radius:9999px;font-size:1.875rem;font-weight:500;transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+.cb .tile .ic{font-size:2.25rem}
+.t-light{background:#f1f0ee;color:#111}
+.t-accent{background:linear-gradient(to bottom right,#cf8047,#97501f);color:#fff}
+.t-dark{background:#0a0a0a;color:#fff}
+.t-ghost{background:rgba(241,240,238,.6);color:rgba(17,17,17,.35)}
+@media (hover:hover){.cb .tile:hover{transform:scale(1.03)}}
+@media (min-width:640px){.cb ul{flex-direction:row;gap:1rem;padding-inline:2rem}.cb .tile{height:10rem;font-size:2.25rem}.cb .tile .ic{font-size:3rem}}
+/* ---------- portfolio ---------- */
+.works .shell{padding:2.5rem 1.25rem 5rem}
+.works .eyebrow-w{text-align:center}
+.works h2,.services h2{font-size:2.25rem;font-weight:600;letter-spacing:-.02em}
+.works h2{width:fit-content;margin:1.25rem auto 1rem;text-align:center}
+.rs-note{max-width:40rem;margin:0 auto 3rem;text-align:center;font-size:.875rem;color:rgba(17,17,17,.55)}
+.cards{display:grid;grid-template-columns:1fr;gap:1.5rem}
+.card{position:relative;display:block;min-height:22rem;overflow:hidden;border-radius:2rem;background:#0a0a0a;padding:1.5rem;color:#fff;box-shadow:0 0 0 1px rgba(255,255,255,.05);transition:transform .45s cubic-bezier(.2,.8,.2,1)}
+.card .meta{display:flex;justify-content:space-between;font-size:.75rem;text-transform:uppercase;letter-spacing:.025em;color:rgba(255,255,255,.45)}
+.card .bdg{width:2.75rem;height:2.75rem;display:grid;place-items:center;border-radius:9999px;background:rgba(255,255,255,.1);color:#fff;box-shadow:0 0 0 1px rgba(255,255,255,.15);transition:transform .4s cubic-bezier(.3,1.5,.5,1)}
+.card .wmk{position:absolute;inset:0;display:grid;place-items:center;pointer-events:none}
+.card .wmk>div{display:flex;align-items:flex-start;gap:.15rem}
+.card .wmk .ic{font-size:4.5rem;color:rgba(255,255,255,.9)}.card .wmk sup{font-size:.75rem;color:rgba(255,255,255,.6)}
+.card .bt{position:absolute;inset-inline:1.5rem;bottom:1.5rem}
+.card h3{font-size:1.5rem;font-weight:500;letter-spacing:-.01em}
+.card p{margin-top:.5rem;max-width:28rem;font-size:.875rem;color:rgba(255,255,255,.55)}
+.card .tags{margin-top:1.25rem;display:flex;flex-wrap:wrap;gap:.5rem}
+@media (hover:hover){.card:hover{transform:translateY(-8px) scale(1.012)}.card:hover .bdg{transform:rotate(45deg) scale(1.08)}}
+@media (min-width:640px){.works .shell{padding-inline:2rem}.works h2,.services h2{font-size:3rem}.card{min-height:26rem;padding:2rem}.card .bt{inset-inline:2rem;bottom:2rem}.card h3{font-size:1.875rem}}
+@media (min-width:768px){.cards{grid-template-columns:1fr 1fr}}
+@media (min-width:1024px){.works .shell{padding-bottom:7rem}}
+/* ---------- services ---------- */
+.services .shell{padding:5rem 1.25rem}
+.services h2{margin:1.25rem 0 3rem;max-width:16ch}
+.srow{display:block;border-top:1px solid #e6e5e2}
+.services li:first-child .srow{border-top:0}
+.srow-in{display:flex;align-items:center;gap:1rem;border-radius:1.25rem;padding:1.5rem 1.5rem;background:rgba(241,240,238,0);transition:background .35s,padding .35s cubic-bezier(.2,.8,.2,1)}
+.srow .n{width:1.75rem;font-size:.875rem;font-weight:500;color:rgba(17,17,17,.4)}
+.srow h3{flex:1;font-size:1.5rem;font-weight:500;letter-spacing:-.01em}
+.srow p{display:none;max-width:20rem;font-size:.875rem;color:rgba(17,17,17,.55)}
+.srow .bd{width:2.5rem;height:2.5rem;display:grid;place-items:center;border-radius:9999px;background:#0a0a0a;color:#fff;transition:transform .35s cubic-bezier(.3,1.5,.5,1)}
+@media (hover:hover){.srow:hover .srow-in{background:#f1f0ee;padding-left:2rem;padding-right:1.25rem}.srow:hover .bd{transform:translateX(5px)}}
+@media (min-width:640px){.services .shell{padding-inline:2rem}.services h2{margin-bottom:3.5rem}.srow-in{gap:1.5rem;padding-block:2rem}.srow .n{width:2.5rem}.srow h3{font-size:1.875rem}.srow .bd{width:3rem;height:3rem}}
+@media (min-width:768px){.srow h3{font-size:2.25rem}}
+@media (min-width:1024px){.services .shell{padding-block:7rem}.srow p{display:block}}
+/* ---------- footer ---------- */
+footer{position:relative;overflow:hidden;border-radius:2rem 2rem 0 0;background:#0a0a0a;color:#fff}
+.f-in{position:relative;z-index:10;padding:5rem 1.25rem 2.5rem}
+.f-cta{display:flex;flex-direction:column;gap:2rem;border-bottom:1px solid rgba(255,255,255,.1);padding-bottom:4rem}
+.f-cta h2{max-width:16ch;font-size:2.25rem;font-weight:600;letter-spacing:-.02em}
+.f-cols{display:grid;grid-template-columns:1fr;gap:3rem;padding-block:4rem}
+.f-brand{display:flex;align-items:center;gap:.5rem;font-size:1.125rem;font-weight:600}.f-brand .ic{font-size:1.25rem}
+.f-tag{margin-top:1rem;max-width:20rem;font-size:.875rem;color:rgba(255,255,255,.55)}
+.f-cols h4{font-size:.75rem;font-weight:400;text-transform:uppercase;letter-spacing:.025em;color:rgba(255,255,255,.4);margin-bottom:1rem}
+.f-cols li{margin-bottom:.75rem;font-size:.875rem}
+.legal{display:flex;flex-direction:column;align-items:center;justify-content:space-between;gap:1rem;border-top:1px solid rgba(255,255,255,.1);padding-top:2rem;font-size:.75rem;color:rgba(255,255,255,.45)}
+.legal div{display:flex;gap:1.5rem}
+.f-wm{position:absolute;inset-inline:0;bottom:-1.5rem;z-index:0;text-align:center;pointer-events:none;user-select:none;font-weight:700;line-height:1;font-size:13rem;color:rgba(255,255,255,.05)}
+@media (hover:hover){.f-cols .alink:hover>span{opacity:1}}
+@media (min-width:640px){.f-in{padding-inline:2rem}.f-cta h2{font-size:3rem}.legal{flex-direction:row}}
+@media (min-width:768px){.f-cols{grid-template-columns:1fr 1fr}.f-cta h2{font-size:3.75rem}}
+@media (min-width:1024px){.f-in{padding-top:6rem}.f-cta{flex-direction:row;align-items:flex-end;justify-content:space-between}.f-cols{grid-template-columns:repeat(4,1fr)}}
+/* ---------- nav menu overlay ---------- */
+.navm{position:fixed;inset:0;z-index:115;display:flex;flex-direction:column;background:#0a0a0a;color:#fff;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .35s ease,visibility 0s .35s}
+.navm.open{opacity:1;visibility:visible;pointer-events:auto;transition:opacity .35s ease}
+.nm-top{display:flex;align-items:center;justify-content:space-between;padding:1.25rem}
+.nm-brand{display:flex;align-items:center;gap:.5rem;font-size:1.125rem;font-weight:600}.nm-brand .ic{font-size:1.25rem;color:#cf8047}
+.nm-close{display:inline-flex;align-items:center;gap:.5rem;border:1px solid rgba(255,255,255,.15);border-radius:.875rem;padding:.5rem 1rem;font-size:.75rem;font-weight:500;text-transform:uppercase;letter-spacing:.05em;color:rgba(255,255,255,.7);transition:border-color .3s,color .3s}
+.nm-close:hover{border-color:rgba(255,255,255,.4);color:#fff}.nm-close .ic{font-size:.875rem}
+.nm-nav{flex:1;display:flex;flex-direction:column;justify-content:center;padding-inline:1.25rem}
+.nm-nav ul{display:flex;flex-direction:column;gap:.25rem}
+.nm-nav button{width:100%;display:flex;align-items:baseline;gap:1rem;padding-block:.5rem;text-align:left;font-size:2.25rem;font-weight:600;letter-spacing:-.02em;transition:all .5s ease-out;transition-delay:calc(var(--i)*45ms + 80ms);transform:translateY(1rem);opacity:0}
+.navm.open .nm-nav button{transform:none;opacity:1}
+.nm-nav .ix{font-size:1rem;font-weight:400;color:rgba(255,255,255,.3);transition:color .3s}
+.nm-nav .lbn{color:rgba(255,255,255,.7);transition:color .3s}
+.nm-nav button:hover .ix{color:#cf8047}.nm-nav button:hover .lbn{color:#fff}
+.nm-bot{display:flex;flex-direction:column;gap:.75rem;border-top:1px solid rgba(255,255,255,.1);padding:1.5rem 1.25rem;font-size:.75rem;text-transform:uppercase;letter-spacing:.025em;color:rgba(255,255,255,.45)}
+.nm-bot button{color:rgba(255,255,255,.7);text-align:left}.nm-bot button:hover{color:#fff;text-decoration:underline}
+@media (min-width:640px){.nm-top{padding:1.5rem 2rem}.nm-nav{padding-inline:2rem}.nm-nav button{font-size:3.75rem}.nm-bot{flex-direction:row;justify-content:space-between;padding-inline:2rem}}
+/* ---------- request modal ---------- */
+.modal{position:fixed;inset:0;z-index:110;display:flex;align-items:flex-end;justify-content:center;padding:1rem;background:rgba(17,17,17,.3);backdrop-filter:blur(16px);opacity:0;visibility:hidden;pointer-events:none;transition:opacity .3s ease,visibility 0s .3s}
+.modal.open{opacity:1;visibility:visible;pointer-events:auto;transition:opacity .3s ease}
+.m-panel{position:relative;width:100%;max-width:32rem;overflow:hidden;border-radius:2rem;background:#fff;padding:1.5rem;box-shadow:0 25px 50px -12px rgba(0,0,0,.25),0 0 0 1px #e6e5e2;transform:translateY(28px);transition:transform .5s cubic-bezier(.22,1,.36,1);max-height:calc(100% - 2rem);overflow-y:auto}
+.modal.open .m-panel{transform:none}
+.m-close{position:absolute;right:1rem;top:1rem;width:2.25rem;height:2.25rem;display:grid;place-items:center;border-radius:9999px;background:#f1f0ee;color:rgba(17,17,17,.6);transition:background .3s,color .3s}
+.m-close:hover{background:#e3e2df;color:#111}
+.m-head{margin-bottom:1.5rem;display:flex;flex-direction:column;gap:.375rem}
+.m-head .k{display:inline-flex;align-items:center;gap:.5rem;font-size:.875rem;font-weight:500;color:rgba(17,17,17,.6)}
+.m-head .k::before{content:'';width:.375rem;height:.375rem;border-radius:9999px;background:#b15f2c}
+.m-head h2{font-size:1.5rem;font-weight:600;letter-spacing:-.01em;padding-right:2.5rem}
+.m-form{display:flex;flex-direction:column;gap:1rem}
+.m-form label{display:block}
+.m-form .cap{display:block;margin-bottom:.375rem;font-size:.75rem;font-weight:500;text-transform:uppercase;letter-spacing:.025em;color:rgba(17,17,17,.5)}
+.m-form input,.m-form textarea{width:100%;font:inherit;font-size:.875rem;border:1px solid #e6e5e2;background:rgba(241,240,238,.5);border-radius:.875rem;padding:.75rem 1rem;outline:none;transition:border-color .3s,background .3s;resize:none;color:#111}
+.m-form input:focus,.m-form textarea:focus{border-color:rgba(17,17,17,.3);background:#fff}
+.m-bot{margin-top:.5rem;display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.m-bot .note{font-size:.75rem;color:rgba(17,17,17,.45)}
+.m-ok{display:flex;flex-direction:column;align-items:center;text-align:center;gap:1rem;padding-block:2rem}
+.m-ok .bdg{width:3.5rem;height:3.5rem;display:grid;place-items:center;border-radius:9999px;background:#0a0a0a;color:#cf8047;font-size:1.5rem}
+.m-ok h2{font-size:1.5rem;font-weight:600}.m-ok p{max-width:32ch;font-size:.875rem;color:rgba(17,17,17,.6)}
+@media (min-width:640px){.modal{align-items:center}.m-panel{padding:2rem}.m-head h2{font-size:1.875rem}}
+
+/* ---------- new gym sections ---------- */
+.th{color:rgba(17,17,17,.6);font-size:.95rem;line-height:1.7}
+.sec-head{text-align:center}
+.sec-title{font-size:2.25rem;font-weight:600;letter-spacing:-.02em;width:fit-content;margin:1.25rem auto 1rem;text-align:center}
+.sec-desc{max-width:42rem;margin:0 auto 3rem;text-align:center}
+.exs .shell,.progs .shell,.gym .shell{padding:2.5rem 1.25rem 3rem}
+.xgrid,.pgrid{display:grid;grid-template-columns:1fr;gap:1.5rem}
+button.card{width:100%;text-align:left;font:inherit;color:#fff}
+.xcard{min-height:28rem}
+.xcard .fig{position:absolute;inset:3.6rem 1rem 11rem;display:flex;justify-content:center;pointer-events:none;--base:rgba(255,255,255,.09);--zone:rgba(255,255,255,.26);--card:#0a0a0a;--muted:rgba(255,255,255,.45);--p:#cf8047;--s:color-mix(in srgb,#cf8047 38%,#2a2a2a)}
+.xcard .fig svg{height:100%;width:auto;max-width:100%}
+.pcard{display:flex;flex-direction:column;gap:1rem;height:100%;border-radius:2rem;background:#f1f0ee;padding:1.5rem 1.5rem 1.75rem}
+.p-top{display:flex;align-items:center;justify-content:space-between}
+.p-ic{width:3rem;height:3rem;display:grid;place-items:center;border-radius:9999px;background:#0a0a0a;color:#cf8047;font-size:1.5rem}
+.p-lv{font-size:.75rem;font-weight:500;text-transform:uppercase;letter-spacing:.05em;color:rgba(17,17,17,.45)}
+.pcard h3{font-size:1.875rem;font-weight:600;letter-spacing:-.02em;line-height:1.1}
+.pcard .th-name{font-size:.875rem;font-weight:500;color:#b15f2c;margin-top:-.5rem}
+.dchips{display:flex;flex-wrap:wrap;gap:.4rem;flex:1;align-content:flex-start}
+.dchip{border:1px solid #e6e5e2;background:#fff;border-radius:9999px;padding:.3rem .75rem;font-size:.75rem;color:#111}
+.dchip b{font-weight:600;color:#b15f2c;margin-right:.15rem}
+.dchip.rest{background:transparent;color:rgba(17,17,17,.4)}.dchip.rest b{color:rgba(17,17,17,.4)}
+.pcard .pill{align-self:flex-start;margin-top:.5rem}
+.ggrid{display:grid;grid-template-columns:1fr;gap:1rem}
+.gcard{height:100%;min-height:11rem;display:flex;flex-direction:column;gap:.5rem;border:1px dashed #cfcdc8;border-radius:1.5rem;padding:1.5rem}
+.gcard .ic{font-size:1.75rem;color:#b15f2c}
+.gcard h3{font-size:1.25rem;font-weight:600;letter-spacing:-.01em;margin-top:.5rem}
+.gcard .th{font-size:.875rem}
+.soon{align-self:flex-start;margin-top:auto;border-radius:9999px;background:#f1f0ee;padding:.25rem .75rem;font-size:.75rem;font-weight:500;color:rgba(17,17,17,.55)}
+.gym-cta{margin-top:2.5rem;text-align:center}
+.faq .shell{padding:2.5rem 1.25rem 5rem}
+.faq-in{display:grid;grid-template-columns:1fr;gap:2rem}
+.faq .sec-title{margin-left:0;text-align:left}
+.q{border-top:1px solid #e6e5e2}
+.q:last-child{border-bottom:1px solid #e6e5e2}
+.q summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1.25rem 0;font-size:1.0625rem;font-weight:500}
+.q summary::-webkit-details-marker{display:none}
+.q summary .ic{font-size:1.25rem;flex:none;transition:transform .35s cubic-bezier(.3,1.4,.5,1)}
+.q[open] summary .ic{transform:rotate(45deg)}
+.q p{padding:0 2.5rem 1.25rem 0;max-width:42rem}
+.q[open] p{animation:qIn .35s cubic-bezier(.2,.8,.2,1)}
+@keyframes qIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+.rate .st .ic{font-size:1.4rem}
+.srow{width:100%;text-align:left}
+button.srow{font:inherit;color:inherit}
+@media (min-width:640px){.sec-title{font-size:3rem}.exs .shell,.progs .shell,.gym .shell{padding-inline:2rem}.faq .shell{padding-inline:2rem}.ggrid{grid-template-columns:1fr 1fr}}
+@media (min-width:768px){.xgrid{grid-template-columns:1fr 1fr}}
+@media (min-width:1024px){.xgrid{grid-template-columns:repeat(3,1fr)}.pgrid{grid-template-columns:repeat(3,1fr)}.ggrid{grid-template-columns:repeat(4,1fr)}.faq-in{grid-template-columns:1fr 2fr;gap:4rem}.exs .shell,.progs .shell,.gym .shell{padding-bottom:5rem}}
+
+button.card{display:flex;flex-direction:column;justify-content:flex-start;align-items:stretch}
+.partners ul{grid-template-columns:repeat(3,1fr)}
+
+.card .wmk{padding-bottom:5.5rem}
+.xcard .wmk{padding-bottom:0}
+/* ===== ปุ่มแท็บด้านข้าง + ลิ้นชักแอปฟิตเนส ===== */
+.side-tab{position:fixed;right:0;top:50%;transform:translateY(-50%);z-index:55;display:flex;flex-direction:column;align-items:center;gap:.6rem;padding:1.1rem .65rem;background:#0a0a0a;color:#fff;border-radius:1rem 0 0 1rem;box-shadow:0 8px 30px rgba(0,0,0,.25);transition:padding .3s cubic-bezier(.2,.8,.2,1),background .3s,opacity .3s,transform .3s}
+.side-tab .ic{font-size:1.1rem;color:#cf8047}
+.side-tab span{writing-mode:vertical-rl;font-size:.75rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase}
+.side-tab.hide{opacity:0;pointer-events:none;transform:translate(100%,-50%)}
+@media (hover:hover){.side-tab:hover{padding-right:1rem;background:#b15f2c}.side-tab:hover .ic{color:#fff}}
+.d-back{position:fixed;inset:0;z-index:99;background:rgba(17,17,17,.3);backdrop-filter:blur(8px);opacity:0;visibility:hidden;transition:opacity .4s ease,visibility 0s .4s}
+.d-back.open{opacity:1;visibility:visible;transition:opacity .4s ease}
+.drawer{--card:#f1f0ee;--text:#111;--muted:#6f6f6f;--line:#e6e5e2;--tab:#b15f2c;--blue:#b15f2c;--base:color-mix(in srgb,#111 7%,#f1f0ee);--zone:color-mix(in srgb,#111 24%,#f1f0ee);--p:#b15f2c;--s:color-mix(in srgb,#b15f2c 38%,#f1f0ee);
+ position:fixed;top:0;right:0;bottom:0;z-index:100;width:min(30rem,100%);display:flex;flex-direction:column;background:#fff;color:#111;border-radius:2rem 0 0 2rem;box-shadow:0 0 60px rgba(0,0,0,.25);transform:translateX(105%);visibility:hidden;transition:transform .6s cubic-bezier(.22,1,.36,1),visibility 0s .6s}
+.drawer.open{transform:none;visibility:visible;transition:transform .6s cubic-bezier(.22,1,.36,1)}
+@media (max-width:640px){.drawer{border-radius:0}}
+.d-head{display:flex;align-items:center;justify-content:space-between;padding:1.25rem 1.25rem .5rem}
+.d-brand{display:flex;align-items:center;gap:.5rem;font-weight:600;font-size:1.125rem;letter-spacing:-.01em}
+.d-brand .ic{font-size:1.25rem;color:#b15f2c}
+.d-close{width:2.5rem;height:2.5rem;display:grid;place-items:center;border-radius:9999px;background:#f1f0ee;color:rgba(17,17,17,.6);transition:background .3s,color .3s;font-size:1rem}
+.d-close:hover{background:#e3e2df;color:#111}
+.d-body{flex:1;overflow-y:auto;overscroll-behavior:contain;padding:.5rem 1.25rem 1.5rem;scrollbar-width:thin}
+.view{position:relative;overflow-x:clip}
+.view:not([hidden]){animation:slideR .35s cubic-bezier(.2,.8,.2,1)}
+.view[data-dir=left]:not([hidden]){animation-name:slideL}
+@keyframes slideR{from{opacity:0;transform:translateX(40px)}to{opacity:1;transform:none}}
+@keyframes slideL{from{opacity:0;transform:translateX(-40px)}to{opacity:1;transform:none}}
+@keyframes pop{0%{transform:scale(.7)}60%{transform:scale(1.25)}100%{transform:scale(1)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.view h1{font-size:1.625rem;font-weight:600;letter-spacing:-.02em;line-height:1.15;margin-bottom:.35rem}
+.view h2{font-size:1rem;font-weight:600}
+.sub{color:rgba(17,17,17,.55);font-size:.9rem;margin-bottom:1rem}
+.panel{background:#f1f0ee;border-radius:1.25rem;padding:1rem;margin-bottom:.8rem}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}.full{grid-column:1/-1}
+.view label{display:block;font-size:.8rem;font-weight:500;color:rgba(17,17,17,.6);margin-bottom:.3rem}
+.view input,.view select{width:100%;font:inherit;font-size:.92rem;color:#111;border:1px solid var(--line);background:#fff;border-radius:.875rem;padding:.7rem .9rem;transition:border-color .2s,box-shadow .2s}
+.view input:focus,.view select:focus{outline:none;border-color:#b15f2c;box-shadow:0 0 0 3px color-mix(in srgb,#b15f2c 22%,transparent)}
+.hint{color:rgba(17,17,17,.55);font-size:.85rem;margin-top:.3rem}
+.empty{text-align:center;color:rgba(17,17,17,.5);padding:.5rem 0;font-size:.9rem}
+.note{color:rgba(17,17,17,.5);font-size:.8rem;margin-top:1rem}
+.big{font-size:2.5rem;font-weight:600;line-height:1.1;letter-spacing:-.02em}.unit{font-size:.9rem;color:rgba(17,17,17,.55)}
+.result{border-left:.35rem solid #cf8047}.result.protein{border-left-color:#97501f}
+.result h2{font-size:.85rem;font-weight:500;color:rgba(17,17,17,.55);margin-bottom:.2rem}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin-bottom:.8rem}
+.pair .panel{margin:0;border-left:.35rem solid #cf8047}.pair .num{font-size:1.4rem;font-weight:600}
+.go{display:block;width:100%;text-align:left;font-weight:500;transition:transform .3s cubic-bezier(.2,.8,.2,1),background .3s}
+.go:hover{background:#e3e2df}.go:active{transform:scale(.97)}
+.ah{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:1rem}.ah .sub{margin-bottom:0}
+.save{display:inline-block;background:#0a0a0a;color:#fff;border-radius:9999px;padding:.7rem 1.4rem;font-size:.9rem;font-weight:500;cursor:pointer;transition:transform .3s cubic-bezier(.2,.8,.2,1),background .3s}
+.save:hover{background:#b15f2c}.save:active{transform:scale(.95)}
+.link{color:#b15f2c;text-decoration:underline;padding:.7rem .5rem;font-size:.9rem}
+.news-h{font-size:1.15rem;font-weight:600;margin:1.5rem 0 .2rem}
+.news{margin-bottom:.8rem}.news .tag{font-size:.78rem;font-weight:600;color:#b15f2c}
+.news h3{font-size:1rem;font-weight:600;line-height:1.35;margin:.15rem 0 .4rem}.news p{font-size:.9rem;margin-bottom:.5rem}.news a{color:#b15f2c;text-decoration:underline}
+.row{display:grid;grid-template-columns:6.5rem 1fr;gap:.8rem;align-items:center;margin-bottom:.6rem}.row label{margin:0;font-size:.9rem;color:#111;font-weight:500}
+.chips{display:flex;gap:.5rem;overflow-x:auto;padding:.2rem 0 .8rem;scrollbar-width:none}
+.chip{flex:none;font:inherit;font-size:.85rem;border:1px solid var(--line);background:#fff;border-radius:9999px;padding:.4rem 1rem;cursor:pointer;transition:background .2s,color .2s,transform .15s}
+.chip:active{transform:scale(.93)}.chip[aria-pressed=true]{background:#0a0a0a;color:#fff;border-color:#0a0a0a}
+.ex{padding:0;overflow:hidden}.ex summary{list-style:none;cursor:pointer;padding:.9rem 1rem}.ex summary::-webkit-details-marker{display:none}
+.ex .name{display:block;font-weight:600}.ex .meta{color:rgba(17,17,17,.55);font-size:.85rem}
+.ex .body{padding:0 1rem 1rem;border-top:1px solid var(--line)}.ex[open] .body{animation:fadeUp .25s ease}
+.ex ol{padding-left:1.2rem;margin:.8rem 0 .6rem;font-size:.92rem}.ex li{margin-bottom:.2rem}
+.tip{background:#fff;border-radius:.875rem;padding:.6rem .8rem;font-size:.88rem}
+.mm-h{font-size:.95rem;font-weight:600;margin:1.1rem 0 .5rem;display:flex;align-items:center}
+.result .mm-name{font-size:1.25rem;font-weight:600;color:#111;margin-bottom:.35rem}
+.legend{color:rgba(17,17,17,.6);font-size:.85rem;line-height:1.8;margin-bottom:.5rem}
+.dot{display:inline-block;width:.6rem;height:.6rem;border-radius:50%;margin-right:.4rem}.dot.p{background:#b15f2c}.dot.s{background:color-mix(in srgb,#b15f2c 38%,#f1f0ee)}
+.bm{display:block;width:100%;max-width:16rem;height:auto;margin:.8rem auto .3rem}
+.mm{max-width:28rem;margin:.2rem auto}
+.mm .zone{fill:var(--zone);stroke:var(--card);stroke-width:1.5;cursor:pointer;outline:none;transition:fill .15s}
+.mm .zone:hover{fill:color-mix(in srgb,#b15f2c 30%,#f1f0ee)}.mm .zone:focus-visible{fill:color-mix(in srgb,#b15f2c 45%,#f1f0ee)}
+.mm .zone.sel{fill:#b15f2c;filter:drop-shadow(0 0 4px color-mix(in srgb,#b15f2c 70%,transparent))}
+.lbl{cursor:pointer}.lbl line{stroke:rgba(17,17,17,.45);stroke-width:.9}.lbl circle{fill:#111}
+.lbl text{font:13.5px Onest,Sarabun,sans-serif;fill:#111;stroke:none}
+.lbl.sel text{fill:#b15f2c;font-weight:700}.lbl.sel line{stroke:#b15f2c}.lbl.sel circle{fill:#b15f2c}
+.avatar{width:3.25rem;height:3.25rem;flex:none;display:flex;align-items:center;justify-content:center;overflow:hidden;border-radius:9999px 9999px .5rem .5rem;border:2px solid #b15f2c;color:rgba(17,17,17,.5);background:#f1f0ee center/cover no-repeat;cursor:pointer;padding:0}
+.avatar.lg{width:6.5rem;height:7.75rem;cursor:default}
+.avatar svg{width:55%;height:auto;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round}
+.avatar-box{display:flex;align-items:center;gap:1.1rem}
+.filebtn{cursor:pointer}
+#p-photo:focus-visible+.filebtn{outline:2px solid #b15f2c;outline-offset:2px}
+/* เมนูล่างในลิ้นชัก: แผ่นสีดำเลื่อนไปมาระหว่างแท็บ */
+.tabbar{padding:.5rem .9rem calc(.8rem + env(safe-area-inset-bottom,0px))}
+.tabbar-in{position:relative;display:flex;gap:2px;padding:6px;background:#f1f0ee;border-radius:9999px}
+.tab-pill{position:absolute;top:6px;bottom:6px;left:6px;width:0;background:#0a0a0a;border-radius:9999px;pointer-events:none;transition:transform .45s cubic-bezier(.3,1.25,.5,1),width .3s ease}
+.tabbar button{position:relative;z-index:1;flex:1;display:flex;flex-direction:column;align-items:center;gap:.15rem;padding:.5rem 0 .45rem;border-radius:9999px;color:rgba(17,17,17,.55);font-size:.7rem;line-height:1.2;transition:color .25s,transform .15s}
+.tabbar button[aria-current=page]{color:#fff}.tabbar button:active{transform:scale(.9)}
+.tabbar svg{width:1.3rem;height:1.3rem;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.tabbar button[aria-current=page] svg{animation:pop .4s ease}
+
+.chk{display:flex;align-items:center;gap:.55rem;margin:.9rem 0 .7rem;font-size:.9rem;color:#111;font-weight:400;cursor:pointer}
+.view .chk input{width:auto;accent-color:#b15f2c}
+.auth-actions{display:flex;flex-wrap:wrap;align-items:center;gap:.2rem .6rem;margin-top:.4rem}
+#a-submit{width:100%;padding:.85rem 1.4rem}
+
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs id="bm-defs"></defs>
+<symbol id="i-logo" viewBox="0 0 48 48"><path d="M24 2c2.2 13.8 7.9 19.6 22 22-14.1 2.4-19.8 8.2-22 22-2.2-13.8-7.9-19.6-22-22 14.1-2.4 19.8-8.2 22-22Z"/></symbol>
+<symbol id="i-arr" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+<symbol id="i-up" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></symbol>
+<symbol id="i-star" viewBox="0 0 24 24"><path d="M12 2.5l2.9 5.88 6.49.94-4.7 4.58 1.11 6.46L12 17.9l-5.8 3.05 1.1-6.46-4.69-4.58 6.49-.94L12 2.5z"/></symbol>
+<symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.25"/><path d="M12 2.75c2.6 2.3 4 5.8 4 9.25s-1.4 6.95-4 9.25c-2.6-2.3-4-5.8-4-9.25s1.4-6.95 4-9.25zM2.75 12h18.5"/></symbol>
+<symbol id="i-x" viewBox="0 0 24 24"><path d="M4 4l16 16M20 4 4 20"/></symbol>
+<symbol id="i-dot" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" style="stroke-width:1.6"/><circle cx="12" cy="12" r="3.2" style="fill:currentColor;stroke:none"/></symbol>
+<symbol id="i-dumbbell" viewBox="0 0 24 24"><path d="M6.5 6.5v11M17.5 6.5v11M3.5 9v6M20.5 9v6M6.5 12h11"/></symbol>
+<symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-6-5.2-6-10a6 6 0 1 1 12 0c0 4.8-6 10-6 10z"/><circle cx="12" cy="11" r="2.2"/></symbol>
+<symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+<symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.6"/><path d="M5 20c0-3.6 3.1-6 7-6s7 2.4 7 6"/></symbol>
+<symbol id="i-ticket" viewBox="0 0 24 24"><path d="M3 7h18v3a2 2 0 0 0 0 4v3H3v-3a2 2 0 0 0 0-4z"/><path d="M14 7v10" stroke-dasharray="2 2"/></symbol>
+<symbol id="i-flame" viewBox="0 0 24 24"><path d="M12 3c1 3.2 4.5 4.6 4.5 9a4.5 4.5 0 0 1-9 0c0-1.7.7-3 1.8-4 .2 1.2.9 1.9 1.6 2C11 8.6 11 6 12 3z"/></symbol>
+<symbol id="i-steps" viewBox="0 0 24 24"><path d="M3 20h5v-5h5v-5h5V5h3"/></symbol>
+<symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20s-7.5-4.6-7.5-10.2A4.2 4.2 0 0 1 12 7.4a4.2 4.2 0 0 1 7.5 2.4C19.5 15.4 12 20 12 20z"/><path d="M7 12.5h2l1.4-3 2.2 6 1.4-3H17"/></symbol>
+<symbol id="i-clip" viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4h6v3H9zM9 14l2 2 4-4"/></symbol>
+<symbol id="i-fiber" viewBox="0 0 24 24"><path d="M3 8c3-3 6 3 9 0s6 3 9 0M3 12c3-3 6 3 9 0s6 3 9 0M3 16c3-3 6 3 9 0s6 3 9 0"/></symbol>
+<symbol id="i-brain" viewBox="0 0 24 24"><path d="M9 4a3 3 0 0 0-3 3 3 3 0 0 0-2 2.8 3 3 0 0 0 1 2.3 3 3 0 0 0 2 4.4A3 3 0 0 0 12 17V5a3 3 0 0 0-3-1zM15 4a3 3 0 0 1 3 3 3 3 0 0 1 2 2.8 3 3 0 0 1-1 2.3 3 3 0 0 1-2 4.4A3 3 0 0 1 12 17"/><path d="M12 17v3"/></symbol>
+<symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+<symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></symbol>
+</svg>
+
+<div id="loader" role="status" aria-live="polite">
+  <div class="ld-center"><div class="ld-brand"><svg class="ic f"><use href="#i-logo"/></svg>My gym</div><p class="ld-tag">Train smart. Stay consistent.</p></div>
+  <div class="ld-prog"><div class="ld-track"><div class="ld-fill" id="ld-fill"></div></div><div class="ld-row"><span>Loading</span><b id="ld-num">000</b></div></div>
+</div>
+
+<header class="hdr rv g" style="--rd:150ms">
+  <div class="shell hdr-in">
+    <button class="brand" data-act="scroll:home" aria-label="My gym home"><svg class="ic f"><use href="#i-logo"/></svg>My gym</button>
+    <nav aria-label="Primary"><ul class="pnav">
+      <li><button data-act="scroll:home" aria-current="page">Home</button></li>
+      <li><button data-act="scroll:exercises">Exercises</button></li>
+      <li><button data-act="scroll:programs">Programs</button></li>
+      <li><button data-act="scroll:works">Research</button></li>
+      <li><button data-act="scroll:faq">FAQ</button></li>
+      <li><button data-act="contact">Contact</button></li>
+    </ul></nav>
+    <div class="hdr-r">
+      <div class="clock" aria-label="Local time"><span class="lb">Local time</span><span class="tm" id="clk-t">9:41am</span><span class="sp">•</span><span class="dt" id="clk-d">12 March, 2025</span></div>
+      <button class="menu-btn" id="menu-open" aria-haspopup="dialog"><span><svg class="ic"><use href="#i-menu"/></svg><span class="mt">Menu</span></span></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+<section id="home" class="hero">
+  <div class="lq" id="lq"><img id="lq-img" alt="" fetchpriority="high"><canvas aria-hidden="true"></canvas></div>
+  <div class="vig"></div>
+  <div class="wm rv g" style="--rd:300ms;--ry:20px" aria-hidden="true">MY GYM</div>
+  <div class="shell hero-in">
+    <div class="hl">
+      <div class="eyebrow rv g" style="--rd:200ms;--ry:10px">Train Smarter</div>
+      <h1 class="lines g" style="--rd:250ms;--ls:120ms"><span class="ln" style="--i:0"><span>Train smart,</span></span><span class="ln" style="--i:1"><span>build strength,</span></span><span class="ln" style="--i:2"><span>stay consistent</span></span></h1>
+      <div class="rate rv g" style="--rd:650ms"><span class="st"><svg class="ic" style="stroke-width:1.6;font-size:1.4rem"><use href="#i-dumbbell"/></svg></span><span class="t"><span id="ex-count">60+</span> ท่าออกกำลังกาย Muscle Map และเครื่องคำนวณ ใช้ได้ฟรี</span></div>
+      <div class="ctas rv g" style="--rd:750ms"><button class="pill" data-act="app" aria-haspopup="dialog"><span class="pill-in arr v-dark">Let's Train<span class="bd"><svg class="ic"><use href="#i-arr"/></svg></span></span></button><button class="pill" data-act="scroll:programs"><span class="pill-in v-outline">Explore Programs</span></button></div>
+    </div>
+    <div class="hr">
+      <div class="hcard rv g" style="--rd:400ms;--ry:16px;--rs:.96">
+        <div class="hc-row" id="hc-row"><div class="hc-tile"><svg class="ic f"><use href="#i-logo"/></svg></div>
+          <div class="hc-pan"><div class="hc-slot" id="hc-slot"><div><div class="hc-cap" id="hc-cap">Muscle Map</div><div class="hc-title" id="hc-title">Know every muscle.</div></div></div>
+            <div class="hc-bot"><div class="hc-dots" id="hc-dots"><i class="on"></i><i></i><i></i></div><div class="hc-btns"><button class="pv" id="hc-prev" aria-label="Previous"><svg class="ic"><use href="#i-arr"/></svg></button><button id="hc-next" aria-label="Next"><svg class="ic"><use href="#i-arr"/></svg></button></div></div>
+          </div></div>
+      </div>
+      <div class="partners rv g" style="--rd:550ms;--ry:14px"><p class="lb">Train for</p><ul><li><svg class="ic"><use href="#i-dot"/></svg>Strength</li><li><svg class="ic"><use href="#i-dot"/></svg>Fat loss</li><li><svg class="ic"><use href="#i-dot"/></svg>Muscle gain</li><li><svg class="ic"><use href="#i-dot"/></svg>Endurance</li><li><svg class="ic"><use href="#i-dot"/></svg>Mobility</li><li><svg class="ic"><use href="#i-dot"/></svg>Core</li><li><svg class="ic"><use href="#i-dot"/></svg>Posture</li><li><svg class="ic"><use href="#i-dot"/></svg>Recovery</li></ul></div>
+    </div>
+  </div>
+  <div class="status rv g" style="--rd:900ms;--ry:0px"><div class="shell"><span>Free to use</span><span class="mid">Made for every level</span><span class="r">Scroll to explore <span>↓</span></span></div></div>
+</section>
+
+<section id="about" class="about" style="background:#fff">
+  <div class="shell">
+    <div class="globe-b"><svg class="ic" style="stroke-width:1.4" aria-hidden="true"><use href="#i-dumbbell"/></svg>
+      <div class="globe-cap rv"><svg class="ic" style="stroke-width:1.4"><use href="#i-dumbbell"/></svg><span>ออกแบบให้ทุกคนเริ่มได้ ไม่ว่าจะฝึกที่ยิมหรือที่บ้าน</span></div></div>
+    <div class="about-r">
+      <h2 class="words">We help you train smarter with <span class="mut">research-backed tools, clear programs, and a plan you can actually stick to.</span></h2>
+      <p class="th rv" style="--rd:100ms">My gym รวมแผนที่กล้ามเนื้อ ท่าออกกำลังกายกว่า 60 ท่า เครื่องคำนวณแคลอรี่และโปรตีน ตารางฝึกรายสัปดาห์ และสรุปงานวิจัยด้านการออกกำลังกายไว้ในที่เดียว เพื่อให้คุณรู้ว่าควรฝึกอะไร ทำไม และทำอย่างไร</p>
+      <div class="about-foot rv" style="--rd:200ms"><div><p class="lb">Start free</p><p class="th" style="font-size:.85rem">ลองใช้ได้ทันทีโดยไม่ต้องล็อกอิน</p></div>
+        <button class="pill" data-act="app"><span class="pill-in arr v-outline">Open Fit App<span class="bd"><svg class="ic"><use href="#i-arr"/></svg></span></span></button></div>
+    </div>
+  </div>
+</section>
+
+<section class="cb" style="background:#fff"><ul class="shell">
+  <li class="rv" style="--rd:0ms;--ry:28px"><div class="tile t-light">Train</div></li>
+  <li class="rv" style="--rd:120ms;--ry:28px"><div class="tile t-accent">Lift</div></li>
+  <li class="rv" style="--rd:240ms;--ry:28px"><div class="tile t-dark"><svg class="ic" aria-label="to"><use href="#i-arr"/></svg></div></li>
+  <li class="rv" style="--rd:360ms;--ry:28px"><div class="tile t-ghost">Grow</div></li>
+</ul></section>
+
+<section id="exercises" class="exs" style="background:#fff"><div class="shell">
+  <div class="sec-head rv"><span class="eyebrow bd">Popular Exercises</span></div>
+  <h2 class="sec-title lines" style="--rd:120ms"><span class="ln"><span>Moves worth mastering</span></span></h2>
+  <p class="th sec-desc rv" style="--rd:200ms">ท่าพื้นฐานที่ใช้กันแพร่หลายในการฝึกด้วยน้ำหนัก กดการ์ดเพื่อดูกล้ามเนื้อที่ใช้ และขั้นตอนทำใน Fit App</p>
+  <ul class="xgrid" id="xgrid"></ul>
+</div></section>
+
+<section id="programs" class="progs" style="background:#fff"><div class="shell">
+  <div class="sec-head rv"><span class="eyebrow bd">Training Programs</span></div>
+  <h2 class="sec-title lines" style="--rd:120ms"><span class="ln"><span>Pick a plan, start today</span></span></h2>
+  <p class="th sec-desc rv" style="--rd:200ms">แนวทางทั่วไปสำหรับคนที่เพิ่งเริ่มจนถึงคนที่ฝึกอยู่แล้ว กด "Use this plan" เพื่อใส่ตารางนี้ในแอปแล้วปรับต่อได้ ปรับตามร่างกายของตัวเองเสมอ ไม่ใช่คำแนะนำทางการแพทย์ ถ้ามีโรคประจำตัวหรือบาดเจ็บ ควรปรึกษาแพทย์ก่อน</p>
+  <ul class="pgrid">
+    <li class="rv" style="--rd:0ms;--ry:40px"><article class="pcard"><div class="p-top"><span class="p-ic"><svg class="ic" style="stroke-width:1.6"><use href="#i-steps"/></svg></span><span class="p-lv">Level 1</span></div><h3>Beginner</h3><p class="th-name">เริ่มต้น · 3 วัน/สัปดาห์</p><p class="th">ฝึกทั้งตัว 3 วันต่อสัปดาห์ วันละประมาณ 45–60 นาที เริ่มด้วยน้ำหนักเบา 2–3 เซ็ต เซ็ตละ 10–15 ครั้ง เน้นเรียนรู้ฟอร์ม</p><div class="dchips"><span class="dchip"><b>จ</b> ทั้งตัว</span><span class="dchip rest"><b>อ</b> พัก</span><span class="dchip"><b>พ</b> ทั้งตัว</span><span class="dchip rest"><b>พฤ</b> พัก</span><span class="dchip"><b>ศ</b> ทั้งตัว</span><span class="dchip"><b>ส</b> คาร์ดิโอ</span><span class="dchip rest"><b>อา</b> พัก</span></div><button class="pill" data-act="plan" data-plan="ทั้งตัว,พัก,ทั้งตัว,พัก,ทั้งตัว,คาร์ดิโอ,พัก"><span class="pill-in arr v-dark">Use this plan<span class="bd"><svg class="ic"><use href="#i-arr"/></svg></span></span></button></article></li>
+    <li class="rv" style="--rd:100ms;--ry:40px"><article class="pcard"><div class="p-top"><span class="p-ic"><svg class="ic" style="stroke-width:1.6"><use href="#i-flame"/></svg></span><span class="p-lv">Level 2</span></div><h3>Fat Loss</h3><p class="th-name">ลดไขมัน · 6 วัน/สัปดาห์</p><p class="th">เวทเทรนนิ่ง 3 วัน สลับกับคาร์ดิโอ 3 วัน การลดไขมันขึ้นกับการกินด้วย ใช้เครื่องคำนวณช่วยตั้งเป้าแคลอรี่และโปรตีน</p><div class="dchips"><span class="dchip"><b>จ</b> ทั้งตัว</span><span class="dchip"><b>อ</b> คาร์ดิโอ</span><span class="dchip"><b>พ</b> ทั้งตัว</span><span class="dchip"><b>พฤ</b> คาร์ดิโอ</span><span class="dchip"><b>ศ</b> ทั้งตัว</span><span class="dchip"><b>ส</b> คาร์ดิโอ</span><span class="dchip rest"><b>อา</b> พัก</span></div><button class="pill" data-act="plan" data-plan="ทั้งตัว,คาร์ดิโอ,ทั้งตัว,คาร์ดิโอ,ทั้งตัว,คาร์ดิโอ,พัก"><span class="pill-in arr v-dark">Use this plan<span class="bd"><svg class="ic"><use href="#i-arr"/></svg></span></span></button></article></li>
+    <li class="rv" style="--rd:200ms;--ry:40px"><article class="pcard"><div class="p-top"><span class="p-ic"><svg class="ic" style="stroke-width:1.6"><use href="#i-dumbbell"/></svg></span><span class="p-lv">Level 3</span></div><h3>Muscle Gain</h3><p class="th-name">เพิ่มกล้าม · 5 วัน/สัปดาห์</p><p class="th">แบ่งกลุ่มกล้ามเนื้อ 5 วัน ท่าละ 3–4 เซ็ต เซ็ตละ 6–12 ครั้ง พร้อมกินโปรตีนและพลังงานให้เพียงพอ และพักให้พอ</p><div class="dchips"><span class="dchip"><b>จ</b> อก</span><span class="dchip"><b>อ</b> หลัง</span><span class="dchip"><b>พ</b> ขา</span><span class="dchip"><b>พฤ</b> ไหล่และแขน</span><span class="dchip"><b>ศ</b> ทั้งตัว</span><span class="dchip rest"><b>ส</b> พัก</span><span class="dchip rest"><b>อา</b> พัก</span></div><button class="pill" data-act="plan" data-plan="อก,หลัง,ขา,ไหล่และแขน,ทั้งตัว,พัก,พัก"><span class="pill-in arr v-dark">Use this plan<span class="bd"><svg class="ic"><use href="#i-arr"/></svg></span></span></button></article></li>
+  </ul>
+</div></section>
+
+<section id="works" class="works" style="background:#fff"><div class="shell">
+  <div class="eyebrow-w rv"><span class="eyebrow bd">Research</span></div>
+  <h2 class="lines" style="--rd:120ms"><span class="ln"><span>Latest Research</span></span></h2>
+  <p class="rs-note th rv" style="--rd:200ms">สรุปงานวิจัยด้านการออกกำลังกายล่าสุดด้วยภาษาง่ายๆ งานแบบสังเกตการณ์บอกได้แค่ความสัมพันธ์ ไม่ได้พิสูจน์ว่าสิ่งหนึ่งเป็นสาเหตุของอีกสิ่ง ต้นทางของแต่ละเรื่องกดอ่านได้ที่การ์ด</p>
+  <ul class="cards">
+    <li class="rv" style="--rd:0ms;--ry:48px"><a class="card" href="https://www.eurekalert.org/news-releases/1119943" target="_blank" rel="noopener noreferrer"><div class="meta"><span>Guideline — 2026</span><span class="bdg"><svg class="ic"><use href="#i-up"/></svg></span></div><div class="wmk"><div><svg class="ic" style="stroke-width:1.1"><use href="#i-clip"/></svg></div></div><div class="bt"><h3>ACSM Resistance Training Update</h3><p>อัปเดตแนวทางครั้งใหญ่ครั้งแรกในรอบ 17 ปี สรุปจากงานวิจัยทบทวน 137 ชิ้น เล่นเวทเท่าไรก็ดีกว่าไม่เล่น และความต่อเนื่องสำคัญที่สุด</p><div class="tags"><span class="tagc">Guidelines</span><span class="tagc">Resistance Training</span><span class="tagc">Source: EurekAlert</span></div></div></a></li>
+    <li class="rv" style="--rd:90ms;--ry:48px"><a class="card" href="https://www.etvbharat.com/en/health/resistance-training-longer-life-study-fitness-enn26061801698" target="_blank" rel="noopener noreferrer"><div class="meta"><span>Longevity — 2026</span><span class="bdg"><svg class="ic"><use href="#i-up"/></svg></span></div><div class="wmk"><div><svg class="ic" style="stroke-width:1.1"><use href="#i-heart"/></svg></div></div><div class="bt"><h3>Strength Training and a Longer Life</h3><p>งานวิจัยจากฮาร์วาร์ดพบว่าการเล่นเวทราว 90–120 นาทีต่อสัปดาห์สัมพันธ์กับความเสี่ยงเสียชีวิตที่ลดลงราว 13% (เป็นงานสังเกตการณ์)</p><div class="tags"><span class="tagc">Longevity</span><span class="tagc">Observational</span><span class="tagc">Source: ETV Bharat</span></div></div></a></li>
+    <li class="rv" style="--rd:180ms;--ry:48px"><a class="card" href="https://www.etvbharat.com/en/lifestyle/resistance-training-in-women-muscles-enn26073003619" target="_blank" rel="noopener noreferrer"><div class="meta"><span>Physiology — 2026</span><span class="bdg"><svg class="ic"><use href="#i-up"/></svg></span></div><div class="wmk"><div><svg class="ic" style="stroke-width:1.1"><use href="#i-fiber"/></svg></div></div><div class="bt"><h3>How Lifting Triggers Muscle Repair</h3><p>งานวิจัยใน Nature Communications พบว่าเวทเทรนนิ่งกระตุ้นโปรตีนที่ตรวจจับ กำจัด และแทนที่เส้นใยกล้ามเนื้อที่เสียหาย</p><div class="tags"><span class="tagc">Muscle Repair</span><span class="tagc">Physiology</span><span class="tagc">Source: ETV Bharat</span></div></div></a></li>
+    <li class="rv" style="--rd:270ms;--ry:48px"><a class="card" href="https://medicaldialogues.in/amp/mdtv/neurology-neurosurgery/videos/regular-weight-training-may-slow-brain-ageing-study-finds-164759" target="_blank" rel="noopener noreferrer"><div class="meta"><span>Brain health — 2026</span><span class="bdg"><svg class="ic"><use href="#i-up"/></svg></span></div><div class="wmk"><div><svg class="ic" style="stroke-width:1.1"><use href="#i-brain"/></svg></div></div><div class="bt"><h3>Lifting Weights and the Aging Brain</h3><p>การทดลองแบบสุ่มในผู้สูงอายุพบว่าการเล่นเวทระดับปานกลางถึงหนักสัมพันธ์กับสมองที่ดูอ่อนกว่าวัยราว 1.4–2.3 ปี</p><div class="tags"><span class="tagc">Brain Health</span><span class="tagc">Randomized Trial</span><span class="tagc">Source: Medical Dialogues</span></div></div></a></li>
+  </ul>
+</div></section>
+
+<section id="services" class="services" style="background:#fff"><div class="shell">
+  <div class="rv"><span class="eyebrow">Tools</span></div>
+  <h2 class="lines" style="--rd:120ms"><span class="ln"><span>What you get</span></span></h2>
+  <ul>
+    <li class="rv" style="--rd:0ms"><button class="srow" data-act="app:search"><div class="srow-in"><span class="n">01</span><h3>Muscle Map</h3><p>แตะกล้ามเนื้อบนร่างกายเพื่อดูหน้าที่ ท่าฝึก กล้ามเนื้อหลักและรอง</p><span class="bd"><svg class="ic"><use href="#i-up"/></svg></span></div></button></li>
+    <li class="rv" style="--rd:80ms"><button class="srow" data-act="app:calc"><div class="srow-in"><span class="n">02</span><h3>Calorie & Protein Calculator</h3><p>ประเมินแคลอรี่และโปรตีนต่อวันตามร่างกายและเป้าหมายของคุณ</p><span class="bd"><svg class="ic"><use href="#i-up"/></svg></span></div></button></li>
+    <li class="rv" style="--rd:160ms"><button class="srow" data-act="app:schedule"><div class="srow-in"><span class="n">03</span><h3>Weekly Planner</h3><p>จัดตารางฝึกรายสัปดาห์ แล้วดูแผนของวันนี้ได้ทันที</p><span class="bd"><svg class="ic"><use href="#i-up"/></svg></span></div></button></li>
+    <li class="rv" style="--rd:240ms"><button class="srow" data-act="app:search"><div class="srow-in"><span class="n">04</span><h3>Exercise Library</h3><p>ท่าออกกำลังกายกว่า 60 ท่า ทั้งเครื่อง เคเบิล ดัมเบล บาร์เบล และน้ำหนักตัว</p><span class="bd"><svg class="ic"><use href="#i-up"/></svg></span></div></button></li>
+  </ul>
+</div></section>
+
+<section id="gym" class="gym" style="background:#fff"><div class="shell">
+  <div class="sec-head rv"><span class="eyebrow bd">Visit Us</span></div>
+  <h2 class="sec-title lines" style="--rd:120ms"><span class="ln"><span>Our Gym</span></span></h2>
+  <p class="th sec-desc rv" style="--rd:200ms">ข้อมูลสาขา เวลาเปิด-ปิด เทรนเนอร์ และแพ็กเกจสมาชิกจะประกาศที่นี่เมื่อพร้อม ตอนนี้ยังเว้นช่องไว้ ถ้าสนใจสอบถามล่วงหน้า ติดต่อเราได้</p>
+  <ul class="ggrid">
+    <li class="rv" style="--rd:0ms"><div class="gcard"><svg class="ic" style="stroke-width:1.4"><use href="#i-pin"/></svg><h3>Location</h3><p class="th">ที่ตั้งและการเดินทาง</p><span class="soon">Coming soon</span></div></li>
+    <li class="rv" style="--rd:80ms"><div class="gcard"><svg class="ic" style="stroke-width:1.4"><use href="#i-clock"/></svg><h3>Opening Hours</h3><p class="th">วันและเวลาทำการ</p><span class="soon">Coming soon</span></div></li>
+    <li class="rv" style="--rd:160ms"><div class="gcard"><svg class="ic" style="stroke-width:1.4"><use href="#i-user"/></svg><h3>Trainers</h3><p class="th">ทีมเทรนเนอร์และคลาสกลุ่ม</p><span class="soon">Coming soon</span></div></li>
+    <li class="rv" style="--rd:240ms"><div class="gcard"><svg class="ic" style="stroke-width:1.4"><use href="#i-ticket"/></svg><h3>Membership</h3><p class="th">แพ็กเกจและราคา</p><span class="soon">Coming soon</span></div></li>
+  </ul>
+  <div class="gym-cta rv"><button class="pill" data-act="contact"><span class="pill-in arr v-dark">Contact us<span class="bd"><svg class="ic"><use href="#i-arr"/></svg></span></span></button></div>
+</div></section>
+
+<section id="faq" class="faq" style="background:#fff"><div class="shell faq-in">
+  <div><div class="rv"><span class="eyebrow bd">FAQ</span></div><h2 class="sec-title lines" style="--rd:120ms;margin-left:0;text-align:left"><span class="ln"><span>Questions,</span></span><span class="ln"><span>answered</span></span></h2></div>
+  <div class="faq-list rv" style="--rd:150ms">
+    <details class="q"><summary>ต้องเสียเงินไหม<svg class="ic"><use href="#i-plus"/></svg></summary><p class="th">ตอนนี้เครื่องมือและข้อมูลในหน้านี้ใช้ได้ฟรี ส่วนข้อมูลของยิม (แพ็กเกจและราคา) ยังไม่ได้ประกาศ</p></details>
+    <details class="q"><summary>ต้องสมัครบัญชีก่อนใช้ไหม<svg class="ic"><use href="#i-plus"/></svg></summary><p class="th">ไม่จำเป็น กด "ใช้งานแบบไม่ล็อกอิน" เพื่อลองใช้ได้เลย ข้อมูลจะอยู่ในเบราว์เซอร์ของเครื่องนั้นเท่านั้น ส่วนบัญชีสำหรับใช้หลายเครื่องกำลังเตรียมเปิดใช้</p></details>
+    <details class="q"><summary>เครื่องคำนวณแคลอรี่แม่นแค่ไหน<svg class="ic"><use href="#i-plus"/></svg></summary><p class="th">เป็นค่าประมาณจากสูตรมาตรฐาน (Mifflin-St Jeor) ร่างกายแต่ละคนต่างกัน ใช้เป็นจุดเริ่มต้นแล้วสังเกตผลใน 2–4 สัปดาห์ ค่อยปรับตามจริง ไม่ใช่คำแนะนำทางการแพทย์</p></details>
+    <details class="q"><summary>ควรกินโปรตีนวันละเท่าไหร่<svg class="ic"><use href="#i-plus"/></svg></summary><p class="th">แอปใช้ช่วงที่นิยมใช้ทั่วไปประมาณ 1.4–2.2 กรัมต่อน้ำหนักตัว 1 กิโลกรัม ตามเป้าหมาย แต่งานวิจัยเรื่องปริมาณโปรตีนที่เหมาะสมยังมีความเห็นต่างกัน และถ้ามีโรคประจำตัว (เช่น โรคไต) ควรปรึกษาแพทย์ก่อน</p></details>
+    <details class="q"><summary>เพิ่งเริ่มออกกำลังกาย ควรเริ่มอย่างไร<svg class="ic"><use href="#i-plus"/></svg></summary><p class="th">ลองโปรแกรม Beginner ฝึกทั้งตัว 3 วันต่อสัปดาห์ ใช้น้ำหนักเบาและเน้นฟอร์มก่อนเพิ่มน้ำหนัก ถ้ายังไม่แน่ใจท่าไหน ให้เทรนเนอร์ช่วยดูฟอร์ม</p></details>
+    <details class="q"><summary>Muscle Map ใช้อย่างไร<svg class="ic"><use href="#i-plus"/></svg></summary><p class="th">เปิด Fit App ไปที่แท็บ "ค้นหา" แตะกล้ามเนื้อบนร่างกายด้านหน้าหรือด้านหลัง จะเห็นหน้าที่ของกล้ามเนื้อนั้น และท่าที่ใช้เป็นกล้ามเนื้อหลักและรอง กรองตามอุปกรณ์ได้</p></details>
+    <details class="q"><summary>ถ้ามีอาการเจ็บหรือโรคประจำตัวต้องทำอย่างไร<svg class="ic"><use href="#i-plus"/></svg></summary><p class="th">หยุดท่านั้นก่อน ถ้าเจ็บแปลบ เวียนหัว หายใจไม่สะดวก หรือมีโรคประจำตัว ควรปรึกษาแพทย์ก่อนเริ่มหรือกลับมาออกกำลังกาย ข้อมูลในเว็บนี้ไม่ใช่คำแนะนำทางการแพทย์</p></details>
+  </div>
+</div></section>
+
+</main>
+
+<footer id="contact">
+  <div class="shell f-in">
+    <div class="f-cta"><h2 class="lines" style="--ls:100ms"><span class="ln"><span>Ready to train? Let's get to work.</span></span></h2>
+      <button class="pill up" data-act="app" aria-haspopup="dialog"><span class="pill-in arr v-light">Start Training<span class="bd"><svg class="ic"><use href="#i-up"/></svg></span></span></button></div>
+    <div class="f-cols">
+      <div><div class="f-brand"><svg class="ic f"><use href="#i-logo"/></svg>My gym</div><p class="f-tag">รวมแผนที่กล้ามเนื้อ ท่าออกกำลังกาย เครื่องมือ และงานวิจัยไว้ในที่เดียว</p></div>
+      <div><h4>Explore</h4><ul><li><button class="alink" data-act="scroll:exercises"><span>Exercises</span></button></li><li><button class="alink" data-act="scroll:programs"><span>Programs</span></button></li><li><button class="alink" data-act="scroll:works"><span>Research</span></button></li><li><button class="alink" data-act="scroll:faq"><span>FAQ</span></button></li></ul></div>
+      <div><h4>Fit App</h4><ul><li><button class="alink" data-act="app:search"><span>Muscle Map</span></button></li><li><button class="alink" data-act="app:calc"><span>Calculator</span></button></li><li><button class="alink" data-act="app:schedule"><span>Planner</span></button></li><li><button class="alink" data-act="app:profile"><span>Profile</span></button></li></ul></div>
+      <div><h4>Visit</h4><ul><li><button class="alink" data-act="scroll:gym"><span>Location</span></button></li><li><button class="alink" data-act="scroll:gym"><span>Opening Hours</span></button></li><li><button class="alink" data-act="scroll:gym"><span>Trainers</span></button></li><li><button class="alink" data-act="contact"><span>Contact</span></button></li></ul></div>
+    </div>
+    <div class="legal"><span>© 2026 My gym. All rights reserved.</span><div><a class="alink" href="#privacy"><span>Privacy</span></a><a class="alink" href="#terms"><span>Terms</span></a></div></div>
+  </div>
+  <div class="f-wm" aria-hidden="true">MY GYM</div>
+</footer>
+
+<div class="navm" id="navm" role="dialog" aria-modal="true" aria-label="Menu">
+  <div class="shell nm-top" style="width:100%"><div class="nm-brand"><svg class="ic f"><use href="#i-logo"/></svg>My gym</div><button class="nm-close" id="menu-close"><svg class="ic"><use href="#i-x"/></svg>Close</button></div>
+  <nav class="shell nm-nav" style="width:100%"><ul>
+    <li><button data-act="nav:scroll:home" style="--i:0"><span class="ix">01</span><span class="lbn">Home</span></button></li>
+    <li><button data-act="nav:scroll:exercises" style="--i:1"><span class="ix">02</span><span class="lbn">Exercises</span></button></li>
+    <li><button data-act="nav:scroll:programs" style="--i:2"><span class="ix">03</span><span class="lbn">Programs</span></button></li>
+    <li><button data-act="nav:scroll:works" style="--i:3"><span class="ix">04</span><span class="lbn">Research</span></button></li>
+    <li><button data-act="nav:scroll:faq" style="--i:4"><span class="ix">05</span><span class="lbn">FAQ</span></button></li>
+    <li><button data-act="nav:contact" style="--i:5"><span class="ix">06</span><span class="lbn">Contact</span></button></li>
+  </ul></nav>
+  <div class="shell nm-bot" style="width:100%"><span>Local time<span id="nm-t"></span></span><button data-act="nav:app">Start training →</button></div>
+</div>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="m-title">
+  <div class="m-panel" id="m-panel">
+    <button class="m-close" id="m-close" aria-label="Close"><svg class="ic"><use href="#i-x"/></svg></button>
+    <div id="m-form-wrap">
+      <div class="m-head"><span class="k">Get in touch</span><h2 id="m-title">Tell us how we can help.</h2></div>
+      <form class="m-form" id="m-form">
+        <label><span class="cap">Name</span><input name="name" type="text" required placeholder="Your name"></label>
+        <label><span class="cap">Email</span><input name="email" type="email" required placeholder="you@company.com"></label>
+        <label><span class="cap">Message</span><textarea name="project" rows="4" required placeholder="บอกเป้าหมายหรือคำถามของคุณสั้นๆ"></textarea></label>
+        <div class="m-bot"><span class="note">เราจะตอบกลับโดยเร็วที่สุด</span><button class="pill up" type="submit"><span class="pill-in arr v-dark" id="m-send">Send request<span class="bd"><svg class="ic"><use href="#i-up"/></svg></span></span></button></div>
+      </form>
+    </div>
+    <div class="m-ok" id="m-ok" hidden><div class="bdg"><svg class="ic f"><use href="#i-logo"/></svg></div><h2>Message received</h2><p>ขอบคุณที่ติดต่อมา เราจะตอบกลับโดยเร็วที่สุด</p><button class="pill" id="m-done"><span class="pill-in v-dark">Close</span></button></div>
+  </div>
+</div>
+
+<button class="side-tab" id="side-tab" aria-haspopup="dialog" aria-controls="app-drawer" aria-label="เปิดแอปฟิตเนส (Fit App)"><svg class="ic f"><use href="#i-logo"/></svg><span>Fit App</span></button>
+<div class="d-back" id="d-back"></div>
+<aside class="drawer" id="app-drawer" role="dialog" aria-label="แอปฟิตเนส" inert>
+  <div class="d-head"><div class="d-brand"><svg class="ic f"><use href="#i-logo"/></svg>Fit App</div><button class="d-close" id="d-close" aria-label="ปิด"><svg class="ic"><use href="#i-x"/></svg></button></div>
+  <div class="d-body" id="app-scroll" data-lenis-prevent lang="th">
+    <div id='view-auth' class='view' hidden>
+  <h1 id='auth-title'>เข้าสู่ระบบ</h1><p class='sub' id='auth-sub'>เข้าสู่ระบบเพื่อบันทึกข้อมูลและใช้ได้ทุกเครื่อง</p>
+  <div class='panel' id='demo-note' hidden style='border-left:.35rem solid #cf8047;font-size:.88rem'><b>โหมดตัวอย่าง</b><br>ยังไม่ได้เชื่อมต่อ Supabase จึงยังล็อกอินจริงไม่ได้ ใส่ SUPABASE_URL และ SUPABASE_ANON_KEY ในโค้ดเมื่อพร้อม ตอนนี้กด "ใช้งานแบบไม่ล็อกอินก่อน" เพื่อลองแอปได้</div>
+  <form id='auth-form' class='panel' novalidate>
+    <div><label for='a-email'>อีเมล</label><input id='a-email' type='email' autocomplete='username' inputmode='email' autocapitalize='none' required></div>
+    <div style='margin-top:.8rem'><label for='a-pass'>รหัสผ่าน (อย่างน้อย 8 ตัว)</label><input id='a-pass' type='password' autocomplete='current-password' minlength='8' required></div>
+    <label class='chk'><input id='a-remember' type='checkbox' checked>จำฉันไว้ในเครื่องนี้ (ไม่ต้องล็อกอินใหม่ทุกครั้ง)</label>
+    <button class='save' id='a-submit' type='submit'>เข้าสู่ระบบ</button>
+    <div class='auth-actions'><button class='link' id='a-switch' type='button'>ยังไม่มีบัญชี? สมัครใหม่</button><button class='link' id='a-forgot' type='button'>ลืมรหัสผ่าน?</button></div>
+    <p class='hint' id='a-msg' role='status' aria-live='polite'></p>
+  </form>
+  <form id='reset-form' class='panel' hidden novalidate>
+    <div><label for='r-pass'>ตั้งรหัสผ่านใหม่ (อย่างน้อย 8 ตัว)</label><input id='r-pass' type='password' autocomplete='new-password' minlength='8' required></div>
+    <button class='save' id='r-submit' type='submit' style='margin-top:.9rem'>บันทึกรหัสผ่านใหม่</button>
+    <p class='hint' id='r-msg' role='status' aria-live='polite'></p>
+  </form>
+  <button class='link' id='a-guest' type='button'>ใช้งานแบบไม่ล็อกอินก่อน</button>
+  <p class='note'>ข้อมูลถูกส่งผ่าน HTTPS และเก็บไว้ในบัญชีของคุณ ผู้ให้บริการฐานข้อมูลเก็บรหัสผ่านแบบเข้ารหัสทางเดียว (แฮช) เจ้าของเว็บและผู้ให้บริการเข้าถึงข้อมูลที่เก็บไว้ได้ ไม่ใช่การเข้ารหัสปลายทางถึงปลายทาง</p>
+</div>
+<div id='view-home' class='view' hidden>
+  <div class='ah'><div><h1 id='home-hello'>สวัสดี</h1><p class='sub'>วันนี้เล่นอะไรดี</p></div><button type='button' id='home-avatar' class='avatar' data-go='profile' aria-label='โปรไฟล์ของฉัน'></button></div>
+  <div class='panel result'><h2>แผนวันนี้</h2><div class='big' id='home-today' style='font-size:1.7rem'>–</div><p class='hint'>แก้แผนได้ที่แท็บตาราง</p></div>
+  <div class='pair'><button type='button' class='panel go' data-go='search'>แผนที่กล้ามเนื้อและท่าฝึก</button><button type='button' class='panel go' data-go='calc'>คำนวณแคลอรี่</button></div>
+  <h2 class='news-h'>ข่าวและงานวิจัย</h2>
+  <p class='hint' style='margin:0 0 .8rem'>รวบรวมเมื่อ 13 พ.ย. 2026 จากแหล่งข่าวภายนอก (ไม่อัปเดตเอง) งานวิจัยบางชิ้นเป็นการสังเกต ไม่ได้พิสูจน์เหตุและผล</p>
+  <div id='news-list'></div>
+</div>
+<div id='view-exercises' class='view' hidden>
+  <h1>แผนที่กล้ามเนื้อ</h1>
+  <p class='sub'>แตะกล้ามเนื้อบนภาพเพื่อดูหน้าที่และท่าฝึก (แตะซ้ำเพื่อยกเลิก)</p>
+  <div class='panel' id='mm-wrap' style='padding:6px 2px'></div>
+  <div class='chips' id='gear-chips' style='margin-top:12px'></div>
+  <div id='mm-info'></div>
+  <label for='ex-search' style='margin-top:20px'>หรือค้นหาท่าด้วยชื่อ</label>
+  <input id='ex-search' type='search' placeholder='เช่น สควอต, ดัมเบล'>
+  <div id='ex-list' style='margin-top:12px'></div>
+  <p class='note'>ภาพกล้ามเนื้อเป็นภาพประกอบโดยสังเขป วิธีทำเป็นแนวทางเบื้องต้น ถ้าเพิ่งเริ่ม ควรใช้น้ำหนักเบาและให้เทรนเนอร์ช่วยดูฟอร์ม</p>
+</div>
+<div id='view-calc' class='view' hidden>
+  <h1>คำนวณแคลอรี่และโปรตีนต่อวัน</h1>
+  <p class="sub">กรอกข้อมูลของคุณ ผลจะอัปเดตทันที</p>
+
+  <!-- ===== HTML: โครงของหน้า (ช่องกรอกข้อมูล) ===== -->
+  <section class="panel grid" aria-label="ข้อมูลของคุณ">
+    <div>
+      <label for="sex">เพศ</label>
+      <select id="sex">
+        <option value="male">ชาย</option>
+        <option value="female">หญิง</option>
+      </select>
+    </div>
+    <div>
+      <label for="age">อายุ (ปี)</label>
+      <input id="age" type="number" inputmode="numeric" min="15" max="90" value="25">
+    </div>
+    <div>
+      <label for="weight">น้ำหนัก (กก.)</label>
+      <input id="weight" type="number" inputmode="decimal" min="30" max="250" value="65">
+    </div>
+    <div>
+      <label for="height">ส่วนสูง (ซม.)</label>
+      <input id="height" type="number" inputmode="decimal" min="120" max="230" value="170">
+    </div>
+    <div class="full">
+      <label for="activity">ระดับกิจกรรม</label>
+      <select id="activity">
+        <option value="1.2">แทบไม่ออกกำลังกาย (นั่งทำงานเป็นหลัก)</option>
+        <option value="1.375">ออกกำลังกายเบา 1–3 วัน/สัปดาห์</option>
+        <option value="1.55" selected>ออกกำลังกายปานกลาง 3–5 วัน/สัปดาห์</option>
+        <option value="1.725">ออกกำลังกายหนัก 6–7 วัน/สัปดาห์</option>
+        <option value="1.9">ออกกำลังกายหนักมาก / งานใช้แรงงาน</option>
+      </select>
+    </div>
+    <div class="full">
+      <label for="goal">เป้าหมาย</label>
+      <select id="goal">
+        <option value="lose">ลดไขมัน</option>
+        <option value="keep" selected>รักษาน้ำหนัก</option>
+        <option value="gain">เพิ่มกล้ามเนื้อ</option>
+      </select>
+    </div>
+  </section>
+
+  <!-- ส่วนแสดงผล: JavaScript จะมาเติมตัวเลขลงใน id เหล่านี้ -->
+  <section id="results" aria-live="polite">
+    <div class="panel result">
+      <h2>แคลอรี่ที่ควรกินต่อวัน</h2>
+      <div><span class="big" id="out-kcal">–</span> <span class="unit">กิโลแคลอรี่</span></div>
+      <p class="hint" id="out-kcal-hint"></p>
+    </div>
+    <div class="panel result protein">
+      <h2>โปรตีนที่ควรกินต่อวัน</h2>
+      <div><span class="big" id="out-protein">–</span> <span class="unit">กรัม</span></div>
+      <p class="hint" id="out-protein-hint"></p>
+    </div>
+    <div class="pair">
+      <div class="panel"><h2 class="hint">BMR</h2><div class="num" id="out-bmr">–</div><p class="hint">พลังงานที่ร่างกายใช้ตอนพัก</p></div>
+      <div class="panel"><h2 class="hint">TDEE</h2><div class="num" id="out-tdee">–</div><p class="hint">พลังงานที่ใช้รวมทั้งวัน</p></div>
+    </div>
+  </section>
+
+  <p class="note">เป็นค่าประมาณจากสูตรมาตรฐาน ไม่ใช่คำแนะนำทางการแพทย์ หากมีโรคประจำตัวหรือตั้งครรภ์ ควรปรึกษาแพทย์หรือนักกำหนดอาหาร</p>
+</div>
+<div id='view-schedule' class='view' hidden>
+  <h1>ตารางออกกำลังกาย</h1><p class='sub'>เลือกว่าแต่ละวันจะฝึกส่วนไหน ระบบจำไว้ในเบราว์เซอร์เครื่องนี้</p>
+  <section class='panel' id='sch-list'></section>
+</div>
+<div id='view-profile' class='view' hidden>
+  <h1>โปรไฟล์</h1><p class='sub'>เครื่องคำนวณจะใช้ค่าเหล่านี้ให้อัตโนมัติ</p>
+  <section class='panel' id='acct' hidden>
+    <p id='acct-text' style='font-size:.92rem;margin-bottom:.4rem'></p>
+    <p class='hint' id='sync-msg' hidden aria-live='polite'></p>
+    <button class='save' id='acct-login' type='button' hidden>เข้าสู่ระบบ / สมัครสมาชิก</button>
+    <button class='link' id='acct-logout' type='button' hidden>ออกจากระบบ</button>
+  </section>
+  <section class='panel avatar-box'>
+    <div id='p-avatar' class='avatar lg' role='img' aria-label='รูปโปรไฟล์'></div>
+    <div>
+      <input id='p-photo' type='file' accept='image/*' class='sr-only'>
+      <label for='p-photo' class='save filebtn' style='margin:0;color:#fff;font-size:.9rem'>เลือกรูป</label>
+      <button class='link' id='p-photo-del' type='button' hidden>ลบรูป</button>
+      <p class='hint' id='p-photo-msg' aria-live='polite'>รูปจะถูกย่อขนาดและเก็บในเครื่องนี้</p>
+    </div>
+  </section>
+  <section class='panel grid'>
+    <div class='full'><label for='p-name'>ชื่อเล่น</label><input id='p-name' type='text' maxlength='30'></div>
+    <div><label for='p-sex'>เพศ</label><select id='p-sex'><option value='male'>ชาย</option><option value='female'>หญิง</option></select></div>
+    <div><label for='p-age'>อายุ (ปี)</label><input id='p-age' type='number' inputmode='numeric' min='15' max='90'></div>
+    <div><label for='p-weight'>น้ำหนัก (กก.)</label><input id='p-weight' type='number' inputmode='decimal' min='30' max='250'></div>
+    <div><label for='p-height'>ส่วนสูง (ซม.)</label><input id='p-height' type='number' inputmode='decimal' min='120' max='230'></div>
+    <div class='full'><button class='save' id='p-save' type='button'>บันทึกโปรไฟล์</button><p class='hint' id='p-msg' aria-live='polite'></p></div>
+  </section>
+</div>
+
+  </div>
+  <nav class="tabbar" id="app-tabbar" aria-label="เมนูแอป" hidden><div class="tabbar-in"><span class="tab-pill" id="tab-pill" aria-hidden="true"></span>
+    <button type="button" data-page="home"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/></svg><span>หน้าแรก</span></button>
+    <button type="button" data-page="search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><span>ค้นหา</span></button>
+    <button type="button" data-page="calc"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 12h2M14 12h2M8 16h2M14 16h2"/></svg><span>คำนวณ</span></button>
+    <button type="button" data-page="schedule"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><span>ตาราง</span></button>
+    <button type="button" data-page="profile"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg><span>โปรไฟล์</span></button>
+  </div></nav>
+</aside>
+
+<script>
+
+/* ===== JavaScript: ตรรกะการคำนวณ ===== */
+
+// ฟังก์ชันช่วยดึงองค์ประกอบในหน้าด้วย id
+const $ = (id) => document.getElementById(id);
+
+// ปรับค่าแคลอรี่ตามเป้าหมาย (บวก/ลบจาก TDEE) และช่วงโปรตีน (กรัมต่อน้ำหนักตัว 1 กก.)
+// อยากลองปรับตัวเลขเอง แก้ตรงนี้ได้เลย
+const GOALS = {
+  lose: { kcalAdjust: -400, proteinMin: 1.8, proteinMax: 2.2 },
+  keep: { kcalAdjust: 0,    proteinMin: 1.4, proteinMax: 1.8 },
+  gain: { kcalAdjust: +300, proteinMin: 1.6, proteinMax: 2.2 },
+};
+
+function calculate() {
+  // 1) อ่านค่าจากช่องกรอก
+  const sex = $("sex").value;
+  const age = parseFloat($("age").value);
+  const weight = parseFloat($("weight").value);
+  const height = parseFloat($("height").value);
+  const activity = parseFloat($("activity").value);
+  const goal = GOALS[$("goal").value];
+
+  // 2) ถ้ากรอกไม่ครบ ให้แสดงขีดไว้ก่อน
+  if (!(age > 0 && weight > 0 && height > 0)) {
+    ["kcal", "protein", "bmr", "tdee"].forEach((k) => ($("out-" + k).textContent = "–"));
+    $("out-kcal-hint").textContent = "กรอกอายุ น้ำหนัก และส่วนสูงให้ครบ";
+    $("out-protein-hint").textContent = "";
+    return;
+  }
+
+  // 3) BMR ด้วยสูตร Mifflin-St Jeor
+  const bmr = 10 * weight + 6.25 * height - 5 * age + (sex === "male" ? 5 : -161);
+
+  // 4) TDEE = BMR x ระดับกิจกรรม
+  const tdee = bmr * activity;
+
+  // 5) แคลอรี่เป้าหมาย (ไม่ให้ต่ำกว่า BMR เพื่อความปลอดภัย)
+  const target = Math.max(tdee + goal.kcalAdjust, bmr);
+
+  // 6) โปรตีน = น้ำหนัก x ช่วงกรัมต่อกก.
+  const pMin = Math.round(weight * goal.proteinMin);
+  const pMax = Math.round(weight * goal.proteinMax);
+
+  // 7) แสดงผลลงหน้าเว็บ
+  const fmt = (n) => Math.round(n).toLocaleString("th-TH");
+  $("out-bmr").textContent = fmt(bmr);
+  $("out-tdee").textContent = fmt(tdee);
+  $("out-kcal").textContent = fmt(target);
+  $("out-protein").textContent = pMin + "–" + pMax;
+  $("out-kcal-hint").textContent =
+    goal.kcalAdjust === 0 ? "เท่ากับพลังงานที่ใช้ต่อวัน"
+    : (goal.kcalAdjust > 0 ? "เพิ่มจาก TDEE ประมาณ " : "ลดจาก TDEE ประมาณ ") + Math.abs(goal.kcalAdjust) + " กิโลแคลอรี่";
+  $("out-protein-hint").textContent =
+    "ประมาณ " + goal.proteinMin + "–" + goal.proteinMax + " กรัมต่อน้ำหนักตัว 1 กก.";
+}
+
+// เมื่อผู้ใช้เปลี่ยนค่าช่องไหนก็ตาม ให้คำนวณใหม่ทันที
+document.querySelectorAll("#app-drawer input, #app-drawer select").forEach((el) => {
+  el.addEventListener("input", calculate);
+});
+
+calculate(); // คำนวณครั้งแรกตอนเปิดหน้า
+
+/* ===== คลังท่าออกกำลังกาย ===== */
+// ข้อมูลท่าทั้งหมดอยู่ในลิสต์นี้ อยากเพิ่มท่าใหม่ ให้คัดลอกบล็อกหนึ่งท่าแล้วแก้ข้อความ
+const EXERCISES = [
+  { name: 'ดันอกบาร์เบล (Bench Press)', muscle: 'อก', gear: 'บาร์เบล',
+    steps: ['นอนหงายบนม้านั่ง เท้าวางราบกับพื้น เก็บสะบักเข้าหากัน', 'จับบาร์กว้างกว่าไหล่เล็กน้อย ยกออกจากแร็ค', 'ลดบาร์ลงช้าๆ แตะกลางอก ข้อศอกทำมุมประมาณ 45 องศากับลำตัว', 'ดันขึ้นจนแขนเหยียด หายใจออกตอนดัน'],
+    tip: 'ควรมีคนสปอตเมื่อยกหนัก และไม่ยกก้นออกจากม้านั่ง' },
+  { name: 'วิดพื้น (Push-up)', muscle: 'อก', gear: 'น้ำหนักตัว',
+    steps: ['วางมือกว้างกว่าไหล่เล็กน้อย ลำตัวเป็นเส้นตรงจากศีรษะถึงส้นเท้า', 'เกร็งท้องและก้น ลดตัวลงจนอกเกือบแตะพื้น', 'ดันขึ้นจนแขนเหยียด'],
+    tip: 'ถ้ายากเกินไป เริ่มจากวางเข่าลงพื้นหรือใช้ม้านั่งเอียงช่วย' },
+  { name: 'ดึงข้อ (Pull-up)', muscle: 'หลัง', gear: 'บาร์ราว, น้ำหนักตัว',
+    steps: ['จับบาร์กว้างกว่าไหล่เล็กน้อย ห้อยตัวให้แขนเหยียด', 'ดึงสะบักลงและดึงตัวขึ้นจนคางพ้นบาร์', 'ลดตัวลงช้าๆ จนแขนเหยียด'],
+    tip: 'ถ้ายังทำไม่ได้ ใช้เครื่องช่วยดึงข้อหรือยางยืดช่วย' },
+  { name: 'แล็ตพูลดาวน์ (Lat Pulldown)', muscle: 'หลัง', gear: 'เครื่องเคเบิล',
+    steps: ['นั่งล็อกขาให้แน่น จับบาร์กว้างกว่าไหล่', 'เอนตัวเล็กน้อย ดึงบาร์ลงมาที่ระดับอกส่วนบน', 'ปล่อยบาร์ขึ้นช้าๆ จนแขนเหยียด'],
+    tip: 'คิดว่าใช้ข้อศอกดึง ไม่ใช้มือดึง และไม่แกว่งตัว' },
+  { name: 'เดดลิฟต์ (Deadlift)', muscle: 'หลัง', gear: 'บาร์เบล',
+    steps: ['ยืนเท้ากว้างเท่าสะโพก บาร์อยู่เหนือกลางเท้า', 'ย่อสะโพกลงจับบาร์ หลังตรง อกเปิด', 'ดันเท้าลงพื้นยืดตัวขึ้น ให้บาร์ชิดขา', 'ล็อกสะโพกด้านบน แล้ววางบาร์ลงอย่างควบคุม'],
+    tip: 'หลังต้องไม่โค้งงอ เริ่มจากน้ำหนักเบามากเพื่อฝึกฟอร์ม' },
+  { name: 'สควอต (Squat)', muscle: 'ขา', gear: 'บาร์เบล',
+    steps: ['วางบาร์บนหลังส่วนบน เท้ากว้างเท่าไหล่ ปลายเท้าชี้ออกเล็กน้อย', 'เกร็งท้อง ย่อสะโพกและเข่าลงพร้อมกัน', 'ลงจนต้นขาขนานพื้น เท่าที่ฟอร์มไม่เสีย', 'ดันส้นเท้ายืนขึ้น'],
+    tip: 'เข่าชี้ไปทางเดียวกับปลายเท้า และควรใช้แร็คพร้อมเซฟตี้บาร์' },
+  { name: 'เลกเพรส (Leg Press)', muscle: 'ขา', gear: 'เครื่อง',
+    steps: ['นั่งหลังแนบเบาะ วางเท้ากว้างเท่าไหล่บนแท่น', 'ปลดล็อกแล้วลดแท่นลงช้าๆ จนเข่างอประมาณ 90 องศา', 'ดันขึ้นโดยไม่เหยียดเข่าจนล็อก'],
+    tip: 'ก้นต้องไม่ลอยออกจากเบาะตอนลดลง' },
+  { name: 'ดัมเบลช็อลเดอร์เพรส', muscle: 'ไหล่', gear: 'ดัมเบล',
+    steps: ['นั่งหรือยืน ถือดัมเบลที่ระดับไหล่ ฝ่ามือหันไปด้านหน้า', 'ดันขึ้นเหนือศีรษะจนแขนเกือบเหยียด', 'ลดลงช้าๆ กลับมาระดับไหล่'],
+    tip: 'เกร็งท้อง ไม่แอ่นหลังตอนดัน' },
+  { name: 'ยกดัมเบลด้านข้าง (Lateral Raise)', muscle: 'ไหล่', gear: 'ดัมเบล',
+    steps: ['ยืนถือดัมเบลข้างลำตัว ข้อศอกงอเล็กน้อย', 'ยกแขนออกด้านข้างจนถึงระดับไหล่', 'ลดลงช้าๆ'],
+    tip: 'ใช้น้ำหนักเบา และอย่าเหวี่ยงตัวช่วย' },
+  { name: 'ดัมเบลเคิร์ล (Dumbbell Curl)', muscle: 'แขน', gear: 'ดัมเบล',
+    steps: ['ยืนถือดัมเบลข้างลำตัว ฝ่ามือหันไปด้านหน้า', 'งอข้อศอกยกขึ้น โดยให้ข้อศอกอยู่กับที่', 'บีบค้างเล็กน้อยแล้วลดลงช้าๆ'],
+    tip: 'ไม่แกว่งลำตัวเพื่อช่วยยก' },
+  { name: 'ไตรเซปส์พุชดาวน์ (Triceps Pushdown)', muscle: 'แขน', gear: 'เครื่องเคเบิล',
+    steps: ['ยืนหน้าเครื่อง จับบาร์หรือเชือก ข้อศอกแนบลำตัว', 'ดันลงจนแขนเหยียด', 'ปล่อยขึ้นช้าๆ จนมือถึงระดับอก'],
+    tip: 'ข้อศอกอยู่ที่เดิมตลอด ขยับเฉพาะปลายแขน' },
+  { name: 'แพลงก์ (Plank)', muscle: 'แกนกลาง', gear: 'น้ำหนักตัว',
+    steps: ['วางปลายแขนบนพื้น ข้อศอกอยู่ใต้ไหล่', 'ยกลำตัวให้เป็นเส้นตรงจากศีรษะถึงส้นเท้า', 'เกร็งท้องและก้น ค้างไว้ 20–60 วินาที'],
+    tip: 'อย่าให้สะโพกตกหรือยกสูงเกินไป' },
+];
+
+/* กล้ามเนื้อหลัก (main) และรอง (sec) ของ 12 ท่าแรก เรียงตามลำดับในลิสต์ด้านบน */
+const TARGETS = [
+  { main: ['chest'], sec: ['delt', 'triceps'] },                    // ดันอกบาร์เบล
+  { main: ['chest'], sec: ['delt', 'triceps', 'abs'] },             // วิดพื้น
+  { main: ['lats'], sec: ['biceps', 'forearm', 'traps'] },          // ดึงข้อ
+  { main: ['lats'], sec: ['biceps', 'traps'] },                     // แล็ตพูลดาวน์
+  { main: ['glutes', 'hams', 'lowback'], sec: ['traps', 'quad', 'forearm'] }, // เดดลิฟต์
+  { main: ['quad', 'glutes'], sec: ['hams', 'lowback', 'abs', 'calf'] },      // สควอต
+  { main: ['quad'], sec: ['glutes', 'hams'] },                      // เลกเพรส
+  { main: ['delt'], sec: ['triceps', 'traps'] },                    // ช็อลเดอร์เพรส
+  { main: ['delt'], sec: ['traps'] },                               // ยกด้านข้าง
+  { main: ['biceps'], sec: ['forearm'] },                           // เคิร์ล
+  { main: ['triceps'], sec: [] },                                   // ไตรเซปส์พุชดาวน์
+  { main: ['abs'], sec: ['delt', 'glutes', 'lowback'] },            // แพลงก์
+];
+EXERCISES.forEach((e, i) => Object.assign(e, TARGETS[i]));
+
+// ท่าเพิ่มใหม่
+EXERCISES.push(
+  { name: 'ดัมเบลเพรสเอียง (Incline Dumbbell Press)', muscle: 'อก', gear: 'ดัมเบล, ม้านั่งเอียง', main: ['chest'], sec: ['delt', 'triceps'],
+    steps: ['ปรับม้านั่งเอียงประมาณ 30–45 องศา นั่งถือดัมเบลที่หน้าอกส่วนบน', 'ดันขึ้นเหนือไหล่จนแขนเกือบเหยียด', 'ลดลงช้าๆ จนดัมเบลอยู่ระดับอก'],
+    tip: 'ไม่ปรับม้านั่งชันเกินไป เพราะไหล่จะรับงานแทนอก' },
+  { name: 'ดัมเบลฟลาย (Dumbbell Fly)', muscle: 'อก', gear: 'ดัมเบล, ม้านั่ง', main: ['chest'], sec: ['delt'],
+    steps: ['นอนบนม้านั่ง ถือดัมเบลเหนืออก ฝ่ามือหันเข้าหากัน ข้อศอกงอเล็กน้อย', 'กางแขนออกด้านข้างเป็นเส้นโค้งจนรู้สึกอกยืด', 'โอบแขนกลับขึ้นมาเข้าหากัน'],
+    tip: 'ใช้น้ำหนักเบา และไม่ลดแขนต่ำจนไหล่รู้สึกเจ็บ' },
+  { name: 'บาร์เบลโรว์ (Bent-over Row)', muscle: 'หลัง', gear: 'บาร์เบล', main: ['lats', 'traps'], sec: ['biceps', 'delt', 'lowback'],
+    steps: ['ยืนเท้ากว้างเท่าไหล่ ก้มตัวโดยดันสะโพกไปด้านหลัง หลังตรง จับบาร์', 'ดึงบาร์เข้าหาท้องส่วนล่าง บีบสะบักเข้าหากัน', 'ปล่อยบาร์ลงช้าๆ'],
+    tip: 'หลังไม่โค้งงอ และไม่ใช้แรงเหวี่ยงตัวช่วยดึง' },
+  { name: 'ซีทเทดเคเบิลโรว์ (Seated Cable Row)', muscle: 'หลัง', gear: 'เครื่องเคเบิล', main: ['lats', 'traps'], sec: ['biceps', 'delt'],
+    steps: ['นั่งให้เท้ายันแท่น จับด้ามจับ หลังตรง', 'ดึงด้ามเข้าหาท้อง บีบสะบักเข้าหากัน', 'ปล่อยกลับช้าๆ จนแขนเหยียด'],
+    tip: 'ไม่เอนตัวไปด้านหลังมากเกินไปตอนดึง' },
+  { name: 'โรมาเนียนเดดลิฟต์ (Romanian Deadlift)', muscle: 'ขา', gear: 'บาร์เบล, ดัมเบล', main: ['hams', 'glutes'], sec: ['lowback', 'forearm'],
+    steps: ['ยืนถือน้ำหนักไว้หน้าขา เข่างอเล็กน้อย', 'ดันสะโพกไปด้านหลัง ลดน้ำหนักลงตามขา หลังตรง จนรู้สึกตึงต้นขาด้านหลัง', 'ดันสะโพกไปด้านหน้ากลับขึ้นมายืน'],
+    tip: 'เข่างอคงที่ตลอดท่า ไม่ย่อลงแบบสควอต' },
+  { name: 'ลันจ์ (Lunge)', muscle: 'ขา', gear: 'น้ำหนักตัว, ดัมเบล', main: ['quad', 'glutes'], sec: ['hams', 'calf'],
+    steps: ['ยืนตรง ก้าวเท้าข้างหนึ่งไปข้างหน้า', 'ย่อตัวลงจนเข่าหลังเกือบแตะพื้น เข่าหน้าชี้ไปทางเดียวกับปลายเท้า', 'ดันส้นเท้าหน้ากลับขึ้นยืน แล้วสลับข้าง'],
+    tip: 'ลำตัวตั้งตรง ไม่โน้มไปด้านหน้ามาก' },
+  { name: 'ฮิปธรัสต์ (Hip Thrust)', muscle: 'ขา', gear: 'บาร์เบล, น้ำหนักตัว', main: ['glutes'], sec: ['hams'],
+    steps: ['นั่งพื้น พิงหลังส่วนบนกับม้านั่ง วางน้ำหนักบนสะโพก เท้าวางพื้น เข่างอ', 'ดันสะโพกขึ้นจนลำตัวกับต้นขาเป็นเส้นตรง บีบก้นค้างไว้ครู่หนึ่ง', 'ลดสะโพกลงช้าๆ'],
+    tip: 'เก็บคางเข้าหาอก และไม่แอ่นหลังล่างตอนดันสุด' },
+  { name: 'ยกส้นเท้า (Calf Raise)', muscle: 'ขา', gear: 'น้ำหนักตัว, เครื่อง', main: ['calf'], sec: [],
+    steps: ['ยืนให้ปลายเท้าอยู่บนขอบขั้น จับที่ยึดไว้ช่วยทรงตัว', 'เขย่งส้นเท้าขึ้นสูงสุด ค้างไว้ครู่หนึ่ง', 'ลดส้นเท้าลงช้าๆ จนน่องรู้สึกยืด'],
+    tip: 'ขึ้นและลงให้สุดช่วงการเคลื่อนไหว' },
+  { name: 'เฟซพูล (Face Pull)', muscle: 'ไหล่', gear: 'เครื่องเคเบิล, เชือก', main: ['delt', 'traps'], sec: [],
+    steps: ['ตั้งสายเคเบิลระดับใบหน้า จับเชือกสองมือ ถอยหลังเล็กน้อย', 'ดึงเชือกเข้าหาใบหน้า ศอกกางสูง บีบสะบักเข้าหากัน', 'ปล่อยกลับช้าๆ'],
+    tip: 'ใช้น้ำหนักเบา ท่านี้มักใช้เสริมไหล่ด้านหลังและท่าทาง' },
+  { name: 'แฮมเมอร์เคิร์ล (Hammer Curl)', muscle: 'แขน', gear: 'ดัมเบล', main: ['biceps', 'forearm'], sec: [],
+    steps: ['ยืนถือดัมเบลข้างลำตัว ฝ่ามือหันเข้าหาลำตัว', 'งอข้อศอกยกขึ้น โดยให้ข้อศอกอยู่กับที่', 'ลดลงช้าๆ'],
+    tip: 'ให้นิ้วโป้งชี้ขึ้นตลอด ไม่แกว่งลำตัว' },
+  { name: 'ครันช์ (Crunch)', muscle: 'แกนกลาง', gear: 'น้ำหนักตัว', main: ['abs'], sec: [],
+    steps: ['นอนหงาย งอเข่า เท้าวางพื้น วางมือไขว้บนอกหรือแตะข้างศีรษะ', 'ใช้กล้ามเนื้อท้องม้วนไหล่ขึ้นจากพื้นเล็กน้อย', 'ลดตัวลงช้าๆ'],
+    tip: 'อย่าใช้มือดึงคอ ให้ท้องเป็นตัวออกแรง' },
+);
+
+/* ===== ท่าเครื่องและเคเบิล =====
+   X(ชื่อ, กลุ่ม, อุปกรณ์, กล้ามเนื้อหลัก, กล้ามเนื้อรอง, ขั้นตอน, เคล็ดลับ)
+   อยากเพิ่มท่าใหม่ ก็คัดลอกบรรทัด X(...) หนึ่งอันแล้วแก้ข้อความ */
+const X = (name, muscle, gear, main, sec, steps, tip) => ({ name, muscle, gear, main, sec, steps, tip });
+EXERCISES.push(
+  // ---- เครื่อง (Machine) ----
+  X('เครื่องเชสต์เพรส (Machine Chest Press)', 'อก', 'เครื่อง', ['chest'], ['delt', 'triceps'],
+    ['ปรับเบาะให้ด้ามจับอยู่ระดับกลางอก หลังแนบเบาะ', 'ดันด้ามจับไปข้างหน้าจนแขนเกือบเหยียด', 'ปล่อยกลับช้าๆ จนรู้สึกอกยืดเล็กน้อย'],
+    'ไหล่ไม่ยกขึ้นไปใกล้หู และไม่ล็อกข้อศอกจนสุด'),
+  X('เพคเด็ค (Pec Deck / Machine Fly)', 'อก', 'เครื่อง', ['chest'], ['delt'],
+    ['ปรับเบาะให้ข้อศอกและมืออยู่ระดับอก หลังแนบเบาะ', 'โอบแขนเข้าหากันด้านหน้าจนรู้สึกอกบีบ', 'ปล่อยกลับช้าๆ ไม่ให้แขนไปไกลหลังแนวไหล่'],
+    'ใช้น้ำหนักที่คุมได้ ไม่เหวี่ยงแขน'),
+  X('เครื่องช็อลเดอร์เพรส (Machine Shoulder Press)', 'ไหล่', 'เครื่อง', ['delt'], ['triceps'],
+    ['ปรับเบาะให้ด้ามจับอยู่ระดับไหล่ หลังแนบเบาะ', 'ดันขึ้นเหนือศีรษะจนแขนเกือบเหยียด', 'ลดลงช้าๆ กลับมาระดับไหล่'],
+    'เกร็งท้อง ไม่แอ่นหลัง'),
+  X('เครื่องยกไหล่ด้านข้าง (Machine Lateral Raise)', 'ไหล่', 'เครื่อง', ['delt'], ['traps'],
+    ['ปรับเบาะให้ไหล่ตรงกับจุดหมุนของเครื่อง', 'ยกแขนออกด้านข้างจนถึงระดับไหล่', 'ลดลงช้าๆ'],
+    'ใช้ข้อศอกนำ ไม่ยกไหล่ขึ้นหาหู'),
+  X('เครื่องรีเวิร์สเพคเด็ค (Reverse Pec Deck)', 'ไหล่', 'เครื่อง', ['delt', 'traps'], [],
+    ['นั่งหันหน้าเข้าเบาะ จับด้ามจับระดับไหล่', 'กางแขนไปด้านหลังจนถึงแนวลำตัว บีบสะบักเข้าหากัน', 'ปล่อยกลับช้าๆ'],
+    'ใช้น้ำหนักเบา เน้นไหล่ด้านหลัง'),
+  X('เลกเอกซ์เทนชัน (Leg Extension)', 'ขา', 'เครื่อง', ['quad'], [],
+    ['นั่งหลังแนบเบาะ ให้เข่าตรงกับจุดหมุน ขาเกี่ยวใต้แป้นรอง', 'เหยียดเข่าขึ้นจนขาเกือบตรง บีบต้นขาด้านหน้าค้างครู่', 'ลดลงช้าๆ'],
+    'ไม่เหวี่ยงขา และไม่ล็อกเข่าสุดแรง'),
+  X('เลกเคิร์ล (Leg Curl)', 'ขา', 'เครื่อง', ['hams'], ['calf'],
+    ['ปรับแป้นรองให้อยู่เหนือส้นเท้า เข่าตรงกับจุดหมุน', 'งอเข่าดึงแป้นเข้าหาต้นขาด้านหลัง', 'ปล่อยกลับช้าๆ'],
+    'สะโพกแนบเบาะ ไม่ยกก้นลอย'),
+  X('แฮกสควอต (Hack Squat)', 'ขา', 'เครื่อง', ['quad', 'glutes'], ['hams', 'calf'],
+    ['พิงหลังแนบเบาะ วางเท้ากว้างเท่าไหล่บนแท่น ปลดล็อกเครื่อง', 'ย่อเข่าลดตัวลงจนต้นขาขนานแท่นหรือต่ำกว่าเล็กน้อย', 'ดันส้นเท้ายืนขึ้นโดยไม่ล็อกเข่าสุด'],
+    'เข่าชี้ไปทางเดียวกับปลายเท้า'),
+  X('สมิธแมชชีนสควอต (Smith Machine Squat)', 'ขา', 'เครื่อง (สมิธแมชชีน)', ['quad', 'glutes'], ['hams', 'lowback'],
+    ['วางบาร์บนหลังส่วนบน เท้ากว้างเท่าไหล่ ก้าวไปข้างหน้าเล็กน้อย', 'ย่อสะโพกและเข่าลงพร้อมกัน', 'ดันส้นเท้ายืนขึ้น'],
+    'ปรับเซฟตี้ล็อกให้ต่ำกว่าจุดต่ำสุดของท่า'),
+  X('เครื่องเปิดสะโพก (Hip Abduction)', 'ขา', 'เครื่อง', ['abductor'], ['glutes'],
+    ['นั่งหลังแนบเบาะ วางด้านนอกเข่าชิดแป้นรอง', 'ดันเข่าออกด้านข้างจนสุดช่วงที่สบาย', 'ปล่อยกลับช้าๆ'],
+    'ไม่โยกลำตัวช่วยดัน'),
+  X('เครื่องเตะก้นหลัง (Glute Kickback Machine)', 'ขา', 'เครื่อง', ['glutes'], ['hams'],
+    ['ยืนหรือคุกเข่า พิงอกกับแป้น วางส้นเท้าบนแป้นเตะ', 'เตะขาไปด้านหลังจนก้นเกร็ง', 'ปล่อยกลับช้าๆ'],
+    'ไม่แอ่นหลังล่างตอนเตะ'),
+  X('ฮิปธรัสต์เครื่อง (Machine Hip Thrust)', 'ขา', 'เครื่อง', ['glutes'], ['hams'],
+    ['นั่งพิงหลังส่วนบนกับเบาะ รัดสายเข็มขัดข้ามสะโพก เท้าวางพื้น', 'ดันสะโพกขึ้นจนลำตัวกับต้นขาเป็นเส้นตรง บีบก้น', 'ลดลงช้าๆ'],
+    'เก็บคางเข้าหาอก ไม่แอ่นหลัง'),
+  X('เครื่องยกน่อง (Seated Calf Raise)', 'ขา', 'เครื่อง', ['calf'], [],
+    ['นั่งวางปลายเท้าบนแท่น วางแป้นรองบนต้นขา', 'เขย่งส้นเท้าขึ้นสูงสุด ค้างครู่', 'ลดส้นเท้าลงช้าๆ จนน่องยืด'],
+    'ขึ้นลงให้เต็มช่วง'),
+  X('แล็ตพูลดาวน์มือแคบ (Close-grip Pulldown)', 'หลัง', 'เครื่องเคเบิล, ด้ามจับ V', ['lats'], ['biceps'],
+    ['นั่งล็อกขาให้แน่น จับด้ามจับแคบ ฝ่ามือหันเข้าหากัน', 'เอนตัวเล็กน้อย ดึงด้ามลงมาที่อกส่วนบน', 'ปล่อยกลับช้าๆ จนแขนเหยียด'],
+    'ดึงด้วยข้อศอก ไม่แกว่งตัว'),
+  X('เครื่องโรว์ (Chest-supported Machine Row)', 'หลัง', 'เครื่อง', ['lats', 'traps'], ['biceps', 'delt'],
+    ['วางอกแนบเบาะ จับด้ามจับ แขนเหยียด', 'ดึงข้อศอกไปด้านหลัง บีบสะบักเข้าหากัน', 'ปล่อยกลับช้าๆ'],
+    'ลำตัวแนบเบาะ ไม่ใช้แรงเหวี่ยง'),
+  X('เครื่องช่วยดึงข้อ (Assisted Pull-up)', 'หลัง', 'เครื่อง', ['lats'], ['biceps', 'forearm'],
+    ['เลือกน้ำหนักช่วย คุกเข่าบนแป้นรอง จับด้ามจับ', 'ดึงตัวขึ้นจนคางเลยด้ามจับ', 'ลดตัวลงช้าๆ จนแขนเหยียด'],
+    'ค่อยๆ ลดน้ำหนักช่วยลงเมื่อแข็งแรงขึ้น'),
+  X('เครื่องแบ็กเอกซ์เทนชัน (Back Extension)', 'หลัง', 'เครื่อง, น้ำหนักตัว', ['lowback', 'glutes'], ['hams'],
+    ['ปรับแป้นให้ขอบอยู่ใต้สะโพก ล็อกเท้าให้แน่น ไขว้แขนบนอก', 'ก้มตัวลงช้าๆ โดยหลังตรง', 'ยกลำตัวขึ้นจนเป็นเส้นตรงกับขา'],
+    'ไม่แอ่นหลังเกินแนวตรงตอนยกขึ้น'),
+  X('เครื่องชรัก (Shrug Machine)', 'หลัง', 'เครื่อง', ['traps'], ['forearm'],
+    ['ยืนหรือนั่งจับด้ามจับให้แขนเหยียดตรง', 'ยกไหล่ขึ้นตรงๆ ไปหาหู ค้างครู่', 'ลดไหล่ลงช้าๆ'],
+    'ยกขึ้นลงตรงๆ ไม่หมุนไหล่'),
+  X('เครื่องบิเซปส์เคิร์ล (Machine Biceps Curl)', 'แขน', 'เครื่อง', ['biceps'], ['forearm'],
+    ['ปรับเบาะให้ข้อศอกวางบนแป้นพอดี', 'งอข้อศอกดึงด้ามเข้าหาไหล่', 'ลดลงช้าๆ จนแขนเกือบเหยียด'],
+    'ข้อศอกไม่ลอยออกจากแป้น'),
+  X('เครื่องไตรเซปส์เอกซ์เทนชัน (Machine Triceps Extension)', 'แขน', 'เครื่อง', ['triceps'], [],
+    ['ปรับเบาะให้ข้อศอกตรงกับจุดหมุน จับด้ามจับ', 'เหยียดข้อศอกดันด้ามลงจนแขนตรง', 'ปล่อยกลับช้าๆ'],
+    'ข้อศอกอยู่กับที่ ไม่ยกไหล่'),
+  X('เครื่องดิปช่วย (Assisted Dip)', 'แขน', 'เครื่อง', ['triceps', 'chest'], ['delt'],
+    ['เลือกน้ำหนักช่วย คุกเข่าบนแป้นรอง จับด้ามจับสองข้าง', 'ลดตัวลงช้าๆ จนข้อศอกงอประมาณ 90 องศา', 'ดันตัวขึ้นจนแขนเกือบตรง'],
+    'ไหล่ไม่ยกขึ้นหาหู ถ้าโน้มลำตัวไปข้างหน้าเล็กน้อยจะเน้นอกมากขึ้น'),
+  X('เครื่องครันช์ (Ab Crunch Machine)', 'แกนกลาง', 'เครื่อง', ['abs'], [],
+    ['นั่งปรับเบาะให้จุดหมุนอยู่ระดับท้อง จับด้ามจับ', 'ม้วนลำตัวลงด้านหน้า หดท้อง', 'กลับขึ้นช้าๆ'],
+    'ใช้ท้องออกแรง ไม่ใช้แขนดัน'),
+
+  // ---- เคเบิล (Cable) ----
+  X('เคเบิลครอสโอเวอร์ (Cable Crossover)', 'อก', 'เครื่องเคเบิล', ['chest'], ['delt'],
+    ['ตั้งสายเคเบิลสูงระดับไหล่ทั้งสองฝั่ง จับด้าม ก้าวเท้าข้างหนึ่งไปข้างหน้า โน้มตัวเล็กน้อย', 'โอบแขนลงมาเข้าหากันด้านหน้าลำตัว ข้อศอกงอเล็กน้อย', 'ปล่อยกลับช้าๆ จนรู้สึกอกยืด'],
+    'ข้อศอกงอคงที่ ไม่เปลี่ยนเป็นท่าดัน'),
+  X('เคเบิลเพรสอก (Cable Chest Press)', 'อก', 'เครื่องเคเบิล', ['chest'], ['delt', 'triceps'],
+    ['ตั้งสายเคเบิลระดับอก ยืนหันหลังให้เครื่อง จับด้ามสองข้าง ก้าวเท้าข้างหนึ่งไปข้างหน้า', 'ดันมือไปข้างหน้าจนแขนเกือบเหยียด', 'ปล่อยกลับช้าๆ'],
+    'ลำตัวนิ่ง ไม่โยกตัวตามแรงดึงของสาย'),
+  X('เคเบิลยกไหล่ด้านข้าง (Cable Lateral Raise)', 'ไหล่', 'เครื่องเคเบิล', ['delt'], ['traps'],
+    ['ตั้งสายเคเบิลต่ำ ยืนข้างเครื่อง จับด้ามด้วยมือข้างที่ไกลจากเครื่อง', 'ยกแขนข้ามลำตัวออกด้านข้างจนถึงระดับไหล่', 'ลดลงช้าๆ'],
+    'ใช้น้ำหนักเบา ไม่เหวี่ยงตัว'),
+  X('เคเบิลรีเวิร์สฟลาย (Cable Rear Delt Fly)', 'ไหล่', 'เครื่องเคเบิล', ['delt', 'traps'], [],
+    ['ตั้งสายเคเบิลสูงระดับไหล่ จับด้ามไขว้มือกัน', 'ดึงกางแขนออกด้านข้างและไปด้านหลัง', 'ปล่อยกลับช้าๆ'],
+    'ใช้น้ำหนักเบา แขนงอเล็กน้อย'),
+  X('เคเบิลเคิร์ล (Cable Curl)', 'แขน', 'เครื่องเคเบิล, บาร์ตรง', ['biceps'], ['forearm'],
+    ['ตั้งสายเคเบิลต่ำ จับบาร์ ฝ่ามือหงาย ข้อศอกแนบลำตัว', 'งอข้อศอกยกบาร์ขึ้นมาถึงระดับอก', 'ลดลงช้าๆ'],
+    'ข้อศอกอยู่กับที่ ไม่แกว่งลำตัว'),
+  X('เคเบิลแฮมเมอร์เคิร์ล (Rope Hammer Curl)', 'แขน', 'เครื่องเคเบิล, เชือก', ['biceps', 'forearm'], [],
+    ['ตั้งสายเคเบิลต่ำ จับเชือก ฝ่ามือหันเข้าหากัน ข้อศอกแนบลำตัว', 'งอข้อศอกยกเชือกขึ้นมาที่ระดับไหล่', 'ลดลงช้าๆ'],
+    'ข้อศอกไม่ขยับ'),
+  X('เคเบิลไตรเซปส์โอเวอร์เฮด (Overhead Cable Triceps Extension)', 'แขน', 'เครื่องเคเบิล, เชือก', ['triceps'], [],
+    ['ตั้งสายเคเบิลต่ำ หันหลังให้เครื่อง จับเชือกไว้เหนือศีรษะ ข้อศอกชี้ไปข้างหน้า', 'เหยียดข้อศอกดันเชือกไปข้างหน้าและขึ้นจนแขนตรง', 'ปล่อยกลับช้าๆ'],
+    'ข้อศอกอยู่ใกล้ศีรษะ ไม่กางออก'),
+  X('สเตรทอาร์มพูลดาวน์ (Straight-arm Pulldown)', 'หลัง', 'เครื่องเคเบิล', ['lats'], ['triceps'],
+    ['ตั้งสายเคเบิลสูง จับบาร์หรือเชือก โน้มตัวเล็กน้อย แขนเหยียดตรง', 'กดบาร์ลงมาที่ต้นขาโดยแขนตรงตลอด', 'ปล่อยกลับช้าๆ จนรู้สึกหลังยืด'],
+    'ใช้หลังเป็นตัวดึง ไม่งอข้อศอกเป็นท่าอื่น'),
+  X('เคเบิลโรว์แขนเดียว (Single-arm Cable Row)', 'หลัง', 'เครื่องเคเบิล', ['lats', 'traps'], ['biceps', 'delt'],
+    ['ตั้งสายเคเบิลระดับเอว จับด้ามมือเดียว ก้าวขาข้างหนึ่งไปข้างหน้า', 'ดึงข้อศอกไปด้านหลังเข้าหาลำตัว', 'ปล่อยกลับช้าๆ'],
+    'ลำตัวนิ่ง ไม่บิดตามแรงดึง'),
+  X('เคเบิลวูดชอป (Cable Woodchop)', 'แกนกลาง', 'เครื่องเคเบิล', ['obliques'], ['abs', 'delt'],
+    ['ตั้งสายเคเบิลสูง ยืนข้างเครื่อง จับด้ามสองมือ', 'บิดลำตัวดึงด้ามลงเฉียงผ่านลำตัวไปอีกฝั่ง แขนตรง', 'กลับช้าๆ แล้วสลับข้าง'],
+    'บิดจากลำตัว ไม่ใช้แขนดึงอย่างเดียว'),
+  X('เคเบิลครันช์ (Cable Crunch)', 'แกนกลาง', 'เครื่องเคเบิล, เชือก', ['abs'], [],
+    ['ตั้งสายเคเบิลสูง คุกเข่า จับเชือกไว้ข้างศีรษะ', 'ม้วนลำตัวลง ศอกเข้าหาเข่า', 'กลับขึ้นช้าๆ'],
+    'งอที่ลำตัว ไม่ใช่แค่โน้มสะโพก'),
+  X('พัลลอฟเพรส (Pallof Press)', 'แกนกลาง', 'เครื่องเคเบิล', ['abs', 'obliques'], ['delt'],
+    ['ตั้งสายเคเบิลระดับอก ยืนข้างเครื่อง จับด้ามที่หน้าอกสองมือ', 'ดันมือออกไปข้างหน้าจนแขนตรง ลำตัวไม่หมุนตามสาย', 'ดึงกลับเข้าอก แล้วสลับข้าง'],
+    'ท่านี้ฝึกให้ลำตัวต้านการบิด เริ่มด้วยน้ำหนักเบา'),
+  X('เคเบิลพูลทรู (Cable Pull-through)', 'ขา', 'เครื่องเคเบิล, เชือก', ['glutes', 'hams'], ['lowback'],
+    ['ตั้งสายเคเบิลต่ำ หันหลังให้เครื่อง จับเชือกลอดระหว่างขา ก้าวไปข้างหน้า', 'ดันสะโพกไปด้านหลังโดยหลังตรง เข่างอเล็กน้อย', 'ดันสะโพกไปด้านหน้ายืนขึ้น บีบก้น'],
+    'ขยับที่สะโพกเป็นหลัก ไม่ย่อเหมือนสควอต'),
+  X('เคเบิลเตะก้นหลัง (Cable Glute Kickback)', 'ขา', 'เครื่องเคเบิล, สายรัดข้อเท้า', ['glutes'], ['hams'],
+    ['ตั้งสายเคเบิลต่ำ รัดสายที่ข้อเท้า จับเครื่องไว้ทรงตัว', 'เตะขาไปด้านหลังจนก้นเกร็ง', 'ปล่อยกลับช้าๆ'],
+    'ไม่แอ่นหลังล่างตอนเตะ'),
+);
+
+EXERCISES.push(
+  // ---- เอวข้าง / สะโพกข้าง / ต้นขาด้านใน ----
+  X('เครื่องหุบสะโพก (Hip Adduction)', 'ขา', 'เครื่อง', ['adductor'], [],
+    ['นั่งหลังแนบเบาะ วางด้านในเข่าชิดแป้นรอง ปรับให้ขาเริ่มต้นกางพอสบาย', 'หุบเข่าเข้าหากันจนแป้นชิด', 'ปล่อยกลับช้าๆ ไม่ให้แป้นกระแทก'],
+    'เริ่มจากช่วงกางพอสบาย ไม่ฝืนกางสุด'),
+  X('เคเบิลหุบสะโพก (Cable Hip Adduction)', 'ขา', 'เครื่องเคเบิล, สายรัดข้อเท้า', ['adductor'], [],
+    ['ตั้งสายเคเบิลต่ำ รัดสายที่ข้อเท้าข้างที่ใกล้เครื่อง จับเครื่องไว้ทรงตัว', 'ดึงขาข้ามหน้าลำตัวไปทางอีกข้างโดยเข่าตรง', 'ปล่อยกลับช้าๆ แล้วสลับข้าง'],
+    'ลำตัวตั้งตรง ไม่โยกตามแรงดึง'),
+  X('เคเบิลเปิดสะโพก (Cable Hip Abduction)', 'ขา', 'เครื่องเคเบิล, สายรัดข้อเท้า', ['abductor'], ['glutes'],
+    ['ตั้งสายเคเบิลต่ำ รัดสายที่ข้อเท้าข้างที่ไกลจากเครื่อง จับเครื่องไว้ทรงตัว', 'ยกขาออกด้านข้างโดยเข่าตรง', 'ลดกลับช้าๆ แล้วสลับข้าง'],
+    'ไม่เอนลำตัวไปด้านตรงข้ามเพื่อช่วยยก'),
+  X('ซูโมสควอต (Sumo Squat)', 'ขา', 'ดัมเบล, น้ำหนักตัว', ['quad', 'adductor', 'glutes'], ['hams'],
+    ['ยืนเท้ากว้างกว่าไหล่ ปลายเท้าชี้ออก ถือดัมเบลไว้หน้าลำตัว', 'ย่อสะโพกและเข่าลง เข่าชี้ไปทางเดียวกับปลายเท้า', 'ดันส้นเท้ายืนขึ้นและบีบก้น'],
+    'หลังตรง อกเปิด ไม่ให้เข่าหุบเข้าหากัน'),
+  X('เดินข้างด้วยยางยืด (Banded Lateral Walk)', 'ขา', 'ยางยืด', ['abductor', 'glutes'], [],
+    ['คล้องยางยืดไว้เหนือเข่า ยืนย่อเข่าเล็กน้อย', 'ก้าวเท้าไปด้านข้างโดยให้ยางตึงตลอด', 'ก้าวอีกเท้าตามมา ทำต่อเนื่องแล้วเดินกลับอีกทาง'],
+    'ปลายเท้าชี้ไปด้านหน้า ไม่ให้เข่าหุบเข้า'),
+  X('แพลงก์ข้าง (Side Plank)', 'แกนกลาง', 'น้ำหนักตัว', ['obliques'], ['abs', 'abductor', 'delt'],
+    ['นอนตะแคง วางปลายแขนใต้ไหล่ ขาซ้อนกันหรือเหลื่อมกัน', 'ยกสะโพกขึ้นจนลำตัวเป็นเส้นตรงจากศีรษะถึงเท้า', 'ค้างไว้ 20–45 วินาที แล้วสลับข้าง'],
+    'สะโพกไม่ตกและไม่บิดตัวไปด้านหน้า'),
+  X('รัสเซียนทวิสต์ (Russian Twist)', 'แกนกลาง', 'น้ำหนักตัว, ดัมเบล', ['obliques'], ['abs'],
+    ['นั่งเอนตัวเล็กน้อย งอเข่า ยกเท้าหรือวางเท้าบนพื้น ประสานมือหรือถือน้ำหนักไว้หน้าอก', 'บิดลำตัวไปด้านหนึ่งจนมือแตะข้างลำตัว', 'บิดกลับมาอีกด้านช้าๆ'],
+    'บิดที่ลำตัว ไม่แค่แกว่งแขน หลังตรง'),
+  X('ดัมเบลไซด์เบนด์ (Dumbbell Side Bend)', 'แกนกลาง', 'ดัมเบล', ['obliques'], [],
+    ['ยืนถือดัมเบลข้างลำตัวข้างเดียว มืออีกข้างวางที่เอว', 'เอียงลำตัวลงด้านข้างที่ถือดัมเบลช้าๆ', 'ใช้เอวข้างอีกด้านดึงลำตัวกลับขึ้นตรง แล้วสลับข้าง'],
+    'ใช้น้ำหนักเบา เอียงตรงๆ ไม่โน้มไปด้านหน้า'),
+  X('ไบไซเคิลครันช์ (Bicycle Crunch)', 'แกนกลาง', 'น้ำหนักตัว', ['abs', 'obliques'], [],
+    ['นอนหงาย มือแตะข้างศีรษะ ยกเท้าพ้นพื้นและงอเข่า', 'บิดลำตัวให้ศอกด้านหนึ่งเข้าหาเข่าตรงข้าม พร้อมเหยียดขาอีกข้าง', 'สลับข้างต่อเนื่องอย่างช้าๆ'],
+    'ไม่ดึงคอ ใช้ลำตัวบิด'),
+);
+
+/* ===== ภาพกล้ามเนื้อ (SVG) =====
+   วาดคนด้านหน้า/ด้านหลัง แบ่งเป็นโซนกล้ามเนื้อ แต่ละโซนมีสีตามตัวแปร --m-<ชื่อโซน>
+   พิกัดวาดคนอยู่รอบแกนกลาง x = 0 สูงประมาณ 292 ถ้าวาดครึ่งซ้าย mir() จะสะท้อนเป็นครึ่งขวาให้ */
+const n1 = (v) => Math.round(v * 10) / 10;
+const E = (cx, cy, rx, ry) => `<ellipse cx='${cx}' cy='${cy}' rx='${rx}' ry='${ry}'/>`;
+const R = (x, y, w, h, r) => `<rect x='${x}' y='${y}' width='${w}' height='${h}' rx='${r}'/>`;
+const PG = (d) => `<path d='${d}'/>`;
+const mir = (sh) => sh + `<g transform='scale(-1 1)'>${sh}</g>`;
+// แคปซูลเรียวจากวงกลม (x1,y1,r1) ไปวงกลม (x2,y2,r2) ใช้วาดแขนและขา
+function cap(x1, y1, r1, x2, y2, r2) {
+  const L = Math.hypot(x2 - x1, y2 - y1);
+  const nx = -(y2 - y1) / L, ny = (x2 - x1) / L;
+  const a = [x1 + nx * r1, y1 + ny * r1], b = [x2 + nx * r2, y2 + ny * r2];
+  const c = [x2 - nx * r2, y2 - ny * r2], d = [x1 - nx * r1, y1 - ny * r1];
+  const f = (q) => `${n1(q[0])} ${n1(q[1])}`;
+  return `<path d='M${f(a)}L${f(b)}A${r2} ${r2} 0 0 0 ${f(c)}L${f(d)}A${r1} ${r1} 0 0 0 ${f(a)}Z'/>`;
+}
+const ZONES = {
+  chest:    { n: 'อก',
+              f: [mir(PG('M-1 54Q-16 49-31 57Q-35 72-28 85Q-14 91-1 85Z'))] },
+  abs:      { n: 'หน้าท้อง',
+              f: [[90, 103, 116].map((y) => mir(R(-10, y, 9.5, 11.5, 3.5))).join('') + mir(R(-8, 129, 7.5, 9, 3))] },
+  obliques: { n: 'เอวข้าง (กล้ามเนื้อเฉียงลำตัว)',
+              f: [mir(PG('M-12 92Q-22 97-26 108Q-26 121-22 134L-12 132Q-14 112-12 92Z'))] },
+  traps:    { n: 'หลังส่วนบน (ทราพีเซียส)',
+              b: [PG('M-4 38L4 38Q22 44 40 50Q30 62 14 80Q4 96 0 100Q-4 96-14 80Q-30 62-40 50Q-22 44-4 38Z')] },
+  lats:     { n: 'หลังกว้าง (ปีกหลัง)',
+              b: [mir(PG('M-33 68Q-23 72-12 90Q-10 109-15 122Q-27 120-32 101Q-36 84-33 68Z'))] },
+  lowback:  { n: 'หลังส่วนล่าง', b: [R(-11, 108, 22, 24, 6)] },
+  biceps:   { n: 'ไบเซป (ต้นแขนหน้า)', f: [mir(cap(-44, 68, 6.2, -50, 102, 5.6))] },
+  triceps:  { n: 'ไตรเซป (ต้นแขนหลัง)', b: [mir(cap(-46, 68, 6.2, -51, 102, 5.6))] },
+  forearm:  { n: 'ปลายแขน', f: [mir(cap(-52, 113, 5.8, -58, 152, 4.2))], b: [mir(cap(-52, 113, 5.8, -58, 152, 4.2))] },
+  delt:     { n: 'ไหล่', f: [mir(E(-41, 57, 10.5, 15))], b: [mir(E(-41, 57, 10.5, 15))] },
+  quad:     { n: 'ต้นขาหน้า', f: [mir(cap(-14, 174, 10.5, -15, 208, 8))] },
+  adductor: { n: 'ต้นขาด้านใน', f: [mir(cap(-4.5, 172, 4.2, -7.5, 205, 3.6))], b: [mir(cap(-4.5, 177, 4, -7.5, 206, 3.5))] },
+  hams:     { n: 'ต้นขาหลัง', b: [mir(cap(-14, 180, 10.5, -15, 208, 8.3))] },
+  glutes:   { n: 'ก้น', b: [mir(PG('M-1 134Q-14 128-29 139Q-35 153-27 169Q-12 173-1 165Z'))] },
+  abductor: { n: 'สะโพกด้านข้าง', f: [mir(E(-26, 160, 5.2, 13))], b: [mir(E(-31, 144, 4.8, 9))] },
+  calf:     { n: 'น่อง', f: [mir(cap(-17, 225, 7.5, -16, 257, 5))], b: [mir(cap(-15, 227, 8.5, -15, 258, 5.5))] },
+};
+const BASE = [
+  E(0, 16, 11, 14), R(-6, 27, 12, 15, 3),
+  PG('M-40 49Q-46 64-35 92Q-28 112-25 126Q-33 140-32 164L32 164Q33 140 25 126Q28 112 35 92Q46 64 40 49Q20 40 0 42Q-20 40-40 49Z'),
+  mir(cap(-40, 52, 10, -52, 108, 8.5)), mir(cap(-52, 108, 8, -59, 160, 5.5)), mir(E(-61, 172, 5, 9)),
+  mir(cap(-13, 168, 16, -15, 215, 11)), mir(cap(-15, 215, 10.5, -15, 266, 6.5)), mir(E(-16, 281, 9, 5)),
+].join('');
+// คนหนึ่งตัว: พื้นตัว + โซนกล้ามเนื้อทุกโซนของด้านนั้น (extra ใช้ใส่ class/ข้อมูลให้โซนในแผนที่แตะได้)
+function body(view, zoneAttrs) {
+  const zones = Object.keys(ZONES).filter((id) => ZONES[id][view]).map((id) => {
+    const attrs = zoneAttrs ? zoneAttrs(id) : `style='fill:var(--m-${id},var(--zone))'`;
+    return `<g ${attrs}>${ZONES[id][view].join('')}</g>`;
+  }).join('');
+  return `<g style='fill:var(--base)'>${BASE}</g>${zones}`;
+}
+const CAP = "style='font:11px Sarabun,system-ui,sans-serif;fill:var(--muted)' text-anchor='middle'";
+// สัญลักษณ์ที่ใช้ซ้ำในการ์ดท่า (ภาพเล็ก ไม่มีป้ายชื่อ)
+try { $('bm-defs').innerHTML = `<symbol id='bm' viewBox='0 0 270 306'><g style='stroke:var(--card);stroke-width:0.8'><g transform='translate(68 6) scale(0.95)'>${body('f')}</g><g transform='translate(202 6) scale(0.95)'>${body('b')}</g></g><text x='68' y='300' ${CAP}>ด้านหน้า</text><text x='202' y='300' ${CAP}>ด้านหลัง</text></symbol>`; } catch (e) { /* ภาพกล้ามเนื้อเล็กไม่ขึ้น แต่ส่วนอื่นยังใช้งานได้ */ }
+
+const zoneNames = (ids) => ids.map((id) => ZONES[id].n).join(', ');
+function bodyMap(e) {
+  // กล้ามเนื้อรองตั้งก่อน กล้ามเนื้อหลักตั้งทีหลัง ถ้าซ้ำกันสีหลักจะชนะ
+  const vars = e.sec.map((id) => `--m-${id}:var(--s)`).concat(e.main.map((id) => `--m-${id}:var(--p)`)).join(';');
+  return `<svg class='bm' viewBox='0 0 270 306' style='${vars}' role='img' aria-label='ภาพกล้ามเนื้อที่ใช้: ${zoneNames(e.main)}'><use href='#bm' width='270' height='306'/></svg>`
+    + `<p class='legend'><span class='dot p'></span>หลัก: ${zoneNames(e.main)}${e.sec.length ? `<br><span class='dot s'></span>รอง: ${zoneNames(e.sec)}` : ''}</p>`;
+}
+/* ===== Muscle Map: แตะกล้ามเนื้อบนภาพ เพื่อดูหน้าที่และท่าฝึก ===== */
+const FUNC = {
+  chest: 'ทำหน้าที่ดันแขนไปข้างหน้าและดึงแขนเข้าหาลำตัว เป็นกล้ามเนื้อหลักของการดัน เช่น ดันอก วิดพื้น',
+  abs: 'ช่วยให้ลำตัวมั่นคง งอและบิดลำตัว และช่วยป้องกันไม่ให้หลังแอ่นเกินไปตอนยกของหนัก',
+  traps: 'ยกและดึงสะบักเข้าหากัน พยุงคอและไหล่ ช่วยให้ท่าทางของหลังส่วนบนตั้งตรง',
+  lats: 'ดึงแขนลงและเข้าหาลำตัว ใช้มากในการดึงข้อ พายเรือ และดึงของเข้าหาตัว เป็นกล้ามเนื้อที่ทำให้หลังกว้าง',
+  lowback: 'พยุงกระดูกสันหลังและช่วยยืดลำตัวขึ้นจากท่าก้ม สำคัญต่อการทรงท่าและการยกของจากพื้น',
+  biceps: 'งอข้อศอก และช่วยหมุนปลายแขนให้ฝ่ามือหงายขึ้น ใช้ทุกครั้งที่ดึงหรือยกของเข้าหาตัว',
+  triceps: 'เหยียดข้อศอกให้แขนตรง ช่วยทุกท่าที่ดันของออกจากตัว มีขนาดใหญ่กว่าไบเซป',
+  forearm: 'ควบคุมการกำมือและการงอเหยียดข้อมือ แรงกำที่ดีช่วยให้ยกและดึงของหนักได้',
+  delt: 'ยกแขนไปข้างหน้า ด้านข้าง และไปด้านหลัง ช่วยให้หัวไหล่เคลื่อนไหวได้หลายทิศทางและมั่นคง',
+  quad: 'เหยียดเข่าและช่วยงอสะโพก ใช้ในการลุกยืน เดินขึ้นบันได วิ่ง และกระโดด',
+  hams: 'งอเข่าและช่วยเหยียดสะโพก ช่วยควบคุมการเคลื่อนไหวของสะโพกและเข่าตอนวิ่งหรือก้มตัว',
+  glutes: 'เหยียดสะโพกเพื่อดันตัวไปข้างหน้า ใช้ตอนลุกยืน ก้าวขึ้นบันได และช่วยให้เชิงกรานมั่นคง',
+  calf: 'เขย่งปลายเท้าและช่วยผลักตัวตอนเดิน วิ่ง และกระโดด',
+  obliques: 'บิดและเอียงลำตัวไปด้านข้าง และช่วยต้านไม่ให้ลำตัวหมุนตอนยกของหรือก้าวเดิน ทำงานร่วมกับกล้ามเนื้อหน้าท้อง',
+  abductor: 'ยกขาออกด้านข้างและช่วยให้เชิงกรานมั่นคงตอนยืนขาเดียว เดิน และวิ่ง (กลุ่มกล้ามเนื้อสะโพกด้านข้าง เช่น กลูเทียสมีเดียส)',
+  adductor: 'หุบขาเข้าหากันและช่วยพยุงต้นขาด้านใน มีบทบาทตอนก้าวข้าง เตะ และทรงตัว',
+};
+let selected = null; // กล้ามเนื้อที่เลือกอยู่ (รหัสโซน) หรือ null
+
+// ป้ายชื่อ: [โซน, ข้อความ, ด้าน (l ซ้าย / r ขวา), ความสูงของป้าย, จุดที่เส้นชี้ x, y] พิกัดจุดชี้เป็นพิกัดตัวคน
+const MAP_LABELS = {
+  f: [['chest', 'อก', 'l', 64, -22, 66], ['abs', 'หน้าท้อง', 'l', 98, -6, 100], ['obliques', 'เอวข้าง', 'l', 128, -20, 116],
+      ['abductor', 'สะโพกข้าง', 'l', 160, -26, 160], ['quad', 'ต้นขาหน้า', 'l', 204, -14, 190],
+      ['delt', 'ไหล่', 'r', 50, 41, 55], ['biceps', 'ไบเซป', 'r', 84, 47, 84], ['forearm', 'ปลายแขน', 'r', 128, 55, 132],
+      ['adductor', 'ขาด้านใน', 'r', 180, 6, 188], ['calf', 'น่อง', 'r', 236, 17, 240]],
+  b: [['traps', 'หลังบน', 'r', 40, 14, 54], ['lats', 'หลังกว้าง', 'r', 72, 24, 86], ['triceps', 'ไตรเซป', 'r', 100, 48, 86],
+      ['lowback', 'หลังล่าง', 'r', 128, 10, 118], ['glutes', 'ก้น', 'r', 158, 22, 150], ['hams', 'ต้นขาหลัง', 'r', 196, 17, 192],
+      ['calf', 'น่อง', 'r', 238, 17, 242]],
+};
+function mapSVG() {
+  const S = 0.9, OY = 8, CX = { f: 124, b: 302 };
+  const X = (view, x) => n1(CX[view] + S * x);
+  const Y = (y) => n1(OY + S * y);
+  const fig = (view) => `<g transform='translate(${CX[view]} ${OY}) scale(${S})'>${body(view, (id) =>
+    `class='zone' data-z='${id}' tabindex='0' role='button' aria-pressed='false' aria-label='${ZONES[id].n}'`)}</g>`;
+  const labels = (view) => MAP_LABELS[view].map(([id, text, side, ly, px, py]) => {
+    const left = side === 'l';
+    const tx = view === 'f' ? (left ? 62 : 186) : 366;
+    const lx = view === 'f' ? (left ? 65 : 182) : 362;
+    const y = Y(ly);
+    return `<g class='lbl' data-z='${id}' aria-hidden='true'><rect x='${left ? 0 : tx - 3}' y='${y - 10}' width='${left ? 66 : 56}' height='20' style='fill:transparent'/><line x1='${lx}' y1='${y}' x2='${X(view, px)}' y2='${Y(py)}'/><circle cx='${X(view, px)}' cy='${Y(py)}' r='2'/><text x='${tx}' y='${y + 4.5}' text-anchor='${left ? 'end' : 'start'}'>${text}</text></g>`;
+  }).join('');
+  return `<svg class='bm mm' id='mm-svg' viewBox='0 0 424 304' role='group' aria-label='แผนที่กล้ามเนื้อ'><g style='stroke:var(--card);stroke-width:1'>${fig('f')}${fig('b')}</g>${labels('f')}${labels('b')}<text x='124' y='298' ${CAP}>ด้านหน้า</text><text x='302' y='298' ${CAP}>ด้านหลัง</text></svg>`;
+}
+
+// การ์ดท่าออกกำลังกาย (กดกางดูภาพกล้ามเนื้อและขั้นตอน)
+const exCard = (e) => `<details class='panel ex'><summary><span class='name'>${e.name}</span><span class='meta'>${e.muscle}, ${e.gear}</span></summary><div class='body'>${bodyMap(e)}<ol>${e.steps.map((st) => `<li>${st}</li>`).join('')}</ol><div class='tip'>${e.tip}</div></div></details>`;
+
+function renderInfo() {
+  const box = $('mm-info');
+  if (!selected) {
+    box.innerHTML = "<p class='empty'>แตะกล้ามเนื้อบนภาพ เช่น อก หลัง ขา เพื่อดูหน้าที่และท่าฝึก</p>";
+    return;
+  }
+  const part = (title, list, kind) => `<h3 class='mm-h'><span class='dot ${kind}'></span>${title} (${list.length} ท่า)</h3>`
+    + (list.length ? list.map(exCard).join('') : "<p class='empty'>ยังไม่มีท่าในกลุ่มนี้ (ลองเปลี่ยนตัวกรองอุปกรณ์)</p>");
+  box.innerHTML = `<section class='panel result'><h2 class='mm-name'>${ZONES[selected].n}</h2><p style='margin:0'>${FUNC[selected]}</p></section>`
+    + part('ท่าที่ใช้เป็นกล้ามเนื้อหลัก', EXERCISES.filter((e) => gearOk(e) && e.main.includes(selected)), 'p')
+    + part('ท่าที่ใช้เป็นกล้ามเนื้อรอง', EXERCISES.filter((e) => gearOk(e) && e.sec.includes(selected)), 's');
+}
+
+function selectMuscle(id) {
+  selected = selected === id ? null : id; // แตะซ้ำเพื่อยกเลิก
+  document.querySelectorAll('#mm-svg [data-z]').forEach((g) => {
+    const on = g.dataset.z === selected;
+    g.classList.toggle('sel', on);
+    g.setAttribute('aria-pressed', String(on));
+  });
+  renderInfo();
+  // ถ้าผลอยู่ใต้จอ ให้เลื่อนลงมาให้เห็น แต่ยังเหลือภาพกล้ามเนื้อให้แตะต่อได้
+  const r = $('mm-info').getBoundingClientRect(); // ลิ้นชักเลื่อนในกล่อง app-scroll
+  if (selected && r.top > window.innerHeight * 0.6) {
+    const calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    $('app-scroll').scrollBy({ top: r.top - window.innerHeight * 0.45, behavior: calm ? 'auto' : 'smooth' });
+  }
+}
+$('mm-wrap').addEventListener('click', (ev) => {
+  const g = ev.target.closest('[data-z]');
+  if (g) selectMuscle(g.dataset.z);
+});
+$('mm-wrap').addEventListener('keydown', (ev) => {
+  const g = ev.target.closest('.zone');
+  if (g && (ev.key === 'Enter' || ev.key === ' ')) { ev.preventDefault(); selectMuscle(g.dataset.z); }
+});
+
+// ค้นหาท่าด้วยชื่อ (แสดงเฉพาะตอนมีคำค้น)
+function renderExercises() {
+  const q = $('ex-search').value.trim().toLowerCase();
+  if (!q) { $('ex-list').innerHTML = ''; return; }
+  const list = EXERCISES.filter((e) =>
+    gearOk(e) && (e.name + e.muscle + e.gear + zoneNames(e.main.concat(e.sec))).toLowerCase().includes(q));
+  $('ex-list').innerHTML = list.length ? list.map(exCard).join('')
+    : "<p class='empty'>ไม่พบท่าที่ค้นหา ลองเปลี่ยนคำค้น</p>";
+}
+$('ex-search').addEventListener('input', renderExercises);
+
+// ตัวกรองอุปกรณ์: ใช้กับทั้งรายการตามกล้ามเนื้อและผลการค้นหา
+const GEARS = {
+  'ทั้งหมด': () => true,
+  'เคเบิล': (g) => g.includes('เคเบิล'),
+  'เครื่อง': (g) => g.includes('เครื่อง') && !g.includes('เคเบิล'),
+  'ดัมเบล/บาร์เบล': (g) => g.includes('ดัมเบล') || g.includes('บาร์เบล'),
+  'น้ำหนักตัว': (g) => g.includes('น้ำหนักตัว'),
+};
+let gearFilter = 'ทั้งหมด';
+const gearOk = (e) => GEARS[gearFilter](e.gear);
+function drawGear() {
+  $('gear-chips').innerHTML = Object.keys(GEARS).map((k) =>
+    `<button class='chip' type='button' aria-pressed='${k === gearFilter}'>${k}</button>`).join('');
+}
+$('gear-chips').addEventListener('click', (ev) => {
+  const b = ev.target.closest('.chip');
+  if (!b) return;
+  gearFilter = b.textContent;
+  drawGear();
+  renderInfo();
+  renderExercises();
+});
+drawGear();
+
+try { $('mm-wrap').innerHTML = mapSVG(); } catch (e) { /* แผนที่ไม่ขึ้น แต่ค้นหาท่าได้ */ }
+renderInfo();
+
+
+/* ===== ค่าที่จำไว้ในเครื่อง (ไม่มีบัญชีผู้ใช้) ===== */
+const KEY = 'fitapp:v1';
+const DAYS = ['จันทร์', 'อังคาร', 'พุธ', 'พฤหัสบดี', 'ศุกร์', 'เสาร์', 'อาทิตย์'];
+const FOCUS = ['พัก', 'อก', 'หลัง', 'ขา', 'ไหล่และแขน', 'แกนกลาง', 'คาร์ดิโอ', 'ทั้งตัว'];
+const DEFAULT_PLAN = ['อก', 'หลัง', 'พัก', 'ขา', 'ไหล่และแขน', 'คาร์ดิโอ', 'พัก'];
+function loadPrefs() { try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch (e) { return {}; } }
+const saved = loadPrefs();
+let profile = saved.profile && typeof saved.profile === 'object' ? saved.profile : {};
+let plan = Array.isArray(saved.plan) && saved.plan.length === 7 ? saved.plan : DEFAULT_PLAN.slice();
+let session = null; // ถ้าล็อกอินอยู่: { access_token, refresh_token, expires_at, user: { id, email } }
+let guest = false;  // เลือกใช้แบบไม่ล็อกอิน
+let dirty = false, saveTimer = 0;
+function savePrefs() {
+  if (session) { dirty = true; clearTimeout(saveTimer); saveTimer = setTimeout(pushRemote, 700); return; }
+  try { localStorage.setItem(KEY, JSON.stringify({ profile, plan })); } catch (e) { /* เก็บไม่ได้ก็ข้ามไป */ }
+}
+const saveVault = savePrefs; // โค้ดรูปโปรไฟล์เรียกชื่อนี้
+
+/* ===== ตารางออกกำลังกาย ===== */
+function renderSchedule() {
+  $('sch-list').innerHTML = DAYS.map((d, i) =>
+    `<div class='row'><label for='day-${i}'>${d}</label><select id='day-${i}' data-i='${i}'>${FOCUS.map((f) => `<option${f === plan[i] ? ' selected' : ''}>${f}</option>`).join('')}</select></div>`).join('');
+}
+$('sch-list').addEventListener('change', (ev) => {
+  const i = ev.target.dataset.i;
+  if (i === undefined) return;
+  plan[i] = ev.target.value;
+  savePrefs();
+  renderHome();
+});
+
+/* ===== โปรไฟล์ ===== */
+const P_FIELDS = ['name', 'sex', 'age', 'weight', 'height'];
+function fillProfile() {
+  P_FIELDS.forEach((f) => { if (profile[f]) $('p-' + f).value = profile[f]; });
+  ['sex', 'age', 'weight', 'height'].forEach((f) => { if (profile[f]) $(f).value = profile[f]; });
+  calculate();
+}
+$('p-save').addEventListener('click', () => {
+  P_FIELDS.forEach((f) => { profile[f] = $('p-' + f).value; });
+  savePrefs();
+  fillProfile();
+  renderHome();
+  $('p-msg').textContent = 'บันทึกแล้ว';
+});
+
+/* ===== รูปโปรไฟล์: ย่อเป็นสี่เหลี่ยมจัตุรัส 320px แล้วเก็บเป็นข้อความรูป (data URL) ในห้องนิรภัยที่เข้ารหัส ===== */
+const SILH = "<svg viewBox='0 0 24 24' aria-hidden='true'><circle cx='12' cy='8' r='4'/><path d='M4 21c0-4 4-6 8-6s8 2 8 6'/></svg>";
+function renderAvatar() {
+  const ph = typeof profile.photo === 'string' && profile.photo.startsWith('data:image/') ? profile.photo : '';
+  ['p-avatar', 'home-avatar'].forEach((id) => {
+    const el = $(id);
+    el.style.backgroundImage = ph ? `url("${ph}")` : '';
+    el.innerHTML = ph ? '' : SILH;
+  });
+  $('p-photo-del').hidden = !ph;
+}
+function viaImg(file) {
+  return new Promise((ok, fail) => {
+    const u = URL.createObjectURL(file);
+    const im = new Image();
+    im.onload = () => { URL.revokeObjectURL(u); ok(im); };
+    im.onerror = () => { URL.revokeObjectURL(u); fail(new Error('อ่านรูปไม่ได้')); };
+    im.src = u;
+  });
+}
+async function toAvatar(file) {
+  const src = window.createImageBitmap ? await createImageBitmap(file).catch(() => viaImg(file)) : await viaImg(file);
+  const w = src.naturalWidth || src.width, h = src.naturalHeight || src.height, m = Math.min(w, h), S = 320;
+  const c = document.createElement('canvas');
+  c.width = c.height = S;
+  c.getContext('2d').drawImage(src, (w - m) / 2, (h - m) / 2, m, m, 0, 0, S, S); // ตัดตรงกลางเป็นสี่เหลี่ยมจัตุรัส
+  return c.toDataURL('image/jpeg', 0.85);
+}
+$('p-photo').addEventListener('change', async (ev) => {
+  const f = ev.target.files && ev.target.files[0];
+  ev.target.value = '';
+  const msg = (t) => { $('p-photo-msg').textContent = t; };
+  if (!f) return;
+  if (!f.type.startsWith('image/')) return msg('เลือกไฟล์รูปภาพเท่านั้น');
+  if (f.size > 20 * 1024 * 1024) return msg('ไฟล์ใหญ่เกินไป (เกิน 20 MB)');
+  try {
+    profile.photo = await toAvatar(f);
+    await saveVault();
+    renderHome();
+    msg('บันทึกรูปแล้ว (เข้ารหัสในเครื่องนี้)');
+  } catch (e) {
+    msg('อ่านรูปนี้ไม่ได้ ลองรูปอื่น (JPG หรือ PNG)');
+  }
+});
+$('p-photo-del').addEventListener('click', async () => {
+  delete profile.photo;
+  await saveVault();
+  renderHome();
+  $('p-photo-msg').textContent = 'ลบรูปแล้ว';
+});
+
+/* ===== ข่าวและงานวิจัย (ข้อมูลที่รวบรวมไว้ล่วงหน้า เพิ่มข่าวได้โดยคัดลอกบล็อกหนึ่งอัน) ===== */
+const NEWS = [
+  { tag: 'แนวทางใหม่', date: '16 มี.ค. 2026', title: 'ACSM อัปเดตแนวทางการเล่นเวทครั้งใหญ่ในรอบ 17 ปี',
+    text: 'สรุปจากงานวิจัยทบทวน 137 ชิ้น ผู้เข้าร่วมกว่า 30,000 คน ใจความหลักคือเล่นเวทเท่าไรก็ดีกว่าไม่เล่นเลย และโปรแกรมที่ดีที่สุดคือโปรแกรมที่คุณทำต่อเนื่องได้',
+    src: 'EurekAlert', url: 'https://www.eurekalert.org/news-releases/1119943' },
+  { tag: 'งานวิจัย', date: '2 มิ.ย. 2026', title: 'เล่นเวท 90–120 นาทีต่อสัปดาห์ สัมพันธ์กับอายุที่ยืนขึ้น',
+    text: 'งานวิจัยจากฮาร์วาร์ดในวารสาร BJSM พบว่าช่วงนี้สัมพันธ์กับความเสี่ยงเสียชีวิตลดลงราว 13% และผลดียิ่งชัดเมื่อรวมกับแอโรบิก แต่เกิน 120 นาทีไม่ได้ลดเพิ่ม (เป็นงานสังเกตการณ์ ยืนยันเหตุและผลไม่ได้)',
+    src: 'ETV Bharat', url: 'https://www.etvbharat.com/en/health/resistance-training-longer-life-study-fitness-enn26061801698' },
+  { tag: 'งานวิจัย', date: 'ก.ค. 2026', title: 'เวทเทรนนิ่งปลุกระบบซ่อมแซมกล้ามเนื้อของร่างกาย',
+    text: 'งานวิจัยใน Nature Communications พบว่าการเล่นเวทกระตุ้นเครือข่ายโปรตีนที่ตรวจจับและกำจัดเส้นใยกล้ามเนื้อที่เสียหาย แล้วสร้างเส้นใยใหม่แทน ความหนักและระยะเวลาการฝึกมีผลต่อระบบนี้',
+    src: 'ETV Bharat', url: 'https://www.etvbharat.com/en/lifestyle/resistance-training-in-women-muscles-enn26073003619' },
+  { tag: 'งานวิจัย', date: 'ก.พ. 2026', title: 'เล่นเวทอาจช่วยชะลอความเสื่อมของสมอง',
+    text: 'การทดลองแบบสุ่มในวารสาร GeroScience พบว่าผู้สูงอายุที่เล่นเวทระดับปานกลางถึงหนัก มีสมองที่ดูอ่อนกว่าวัยราว 1.4–2.3 ปีในแบบประเมินอายุสมอง',
+    src: 'Medical Dialogues', url: 'https://medicaldialogues.in/amp/mdtv/neurology-neurosurgery/videos/regular-weight-training-may-slow-brain-ageing-study-finds-164759' },
+  { tag: 'โภชนาการ', date: '2026', title: 'กินโปรตีนสูงมาก ไม่ได้ได้กล้ามเนื้อมากขึ้นเสมอไป',
+    text: 'การทดลอง 10 สัปดาห์ในผู้ใหญ่วัยกลางคน 50 คน พบว่ากลุ่มกินโปรตีนสูงไม่ได้แข็งแรงขึ้นหรือมีมวลกล้ามเนื้อเพิ่มมากกว่ากลุ่มกินโปรตีนระดับปานกลางระหว่างฝึกเวท ผลของโปรตีนยังเป็นเรื่องที่นักวิจัยถกเถียงกันอยู่',
+    src: 'University of Illinois', url: 'https://news.illinois.edu/more-protein-doesnt-mean-more-strength-in-resistance-trained-middle-aged-adults/' },
+  { tag: 'โภชนาการ', date: 'AJCN 2026', title: 'สายมังสวิรัติก็สร้างกล้ามเนื้อได้ ถ้าโปรตีนพอและเล่นเวท',
+    text: 'การทดลอง 12 สัปดาห์เทียบคนกินมังสวิรัติกับคนกินเนื้อสัตว์ พบว่าความแข็งแรงของขาที่เพิ่มขึ้นไม่ต่างกันอย่างมีนัยสำคัญ เมื่อได้รับโปรตีนเพียงพอและฝึกเวทควบคู่',
+    src: 'ScienceAlert', url: 'https://www.sciencealert.com/?p=223313' },
+];
+function renderNews() {
+  $('news-list').innerHTML = NEWS.map((n) =>
+    `<article class='panel news'><div class='tag'>${n.tag}, ${n.date}</div><h3>${n.title}</h3><p>${n.text}</p><a href='${n.url}' target='_blank' rel='noopener noreferrer'>อ่านต่อที่ ${n.src}</a></article>`).join('');
+}
+
+
+/* ===== หน้าแรกของแอป ===== */
+function renderHome() {
+  renderAvatar();
+  const name = (profile.name || '').trim();
+  $('home-hello').textContent = name ? 'สวัสดี ' + name : 'สวัสดี';
+  const today = plan[(new Date().getDay() + 6) % 7]; // getDay: 0 = อาทิตย์ จึงขยับให้จันทร์เป็นช่องแรก
+  $('home-today').textContent = today === 'พัก' ? 'วันนี้พักผ่อน' : 'วันนี้เล่น: ' + today;
+}
+
+/* ===== สลับหน้าในแอป (เลื่อนซ้าย/ขวาตามลำดับแท็บ) ===== */
+const PAGES = { home: 'view-home', search: 'view-exercises', calc: 'view-calc', schedule: 'view-schedule', profile: 'view-profile' };
+const ORDER = Object.keys(PAGES);
+let page = 'home';
+function movePill() {
+  const act = document.querySelector('.tabbar button[aria-current="page"]');
+  if (!act || !act.offsetWidth) return;
+  $('tab-pill').style.width = act.offsetWidth + 'px';
+  $('tab-pill').style.transform = `translateX(${act.offsetLeft - 6}px)`;
+}
+function go(p) {
+  if (!session && !guest) { if (PAGES[p]) page = p; showAuth(); return; }
+  if (!PAGES[p]) p = 'home';
+  $('view-auth').hidden = true;
+  const dir = ORDER.indexOf(p) < ORDER.indexOf(page) ? 'left' : 'right';
+  Object.keys(PAGES).forEach((k) => { const el = $(PAGES[k]); el.dataset.dir = dir; el.hidden = k !== p; });
+  page = p;
+  document.querySelectorAll('.tabbar [data-page]').forEach((b) => {
+    if (b.dataset.page === p) b.setAttribute('aria-current', 'page'); else b.removeAttribute('aria-current');
+  });
+  movePill();
+  if (p === 'home') renderHome();
+  $('app-scroll').scrollTo(0, 0);
+}
+document.querySelectorAll('.tabbar [data-page]').forEach((b) => b.addEventListener('click', () => go(b.dataset.page)));
+$('app-drawer').addEventListener('click', (ev) => { const b = ev.target.closest('[data-go]'); if (b) go(b.dataset.go); });
+window.addEventListener('fitapp:open', movePill);
+window.addEventListener('resize', movePill);
+
+
+/* ===== บัญชีผู้ใช้จริงด้วย Supabase =====
+   หลังสร้างโปรเจกต์ Supabase ให้ใส่ 2 ค่านี้ (anon key เป็นกุญแจสาธารณะ ใส่ในเว็บได้ ห้ามใส่ service_role เด็ดขาด)
+   ถ้าเว้นว่างไว้ แอปจะทำงานแบบไม่ต้องล็อกอิน จำข้อมูลไว้ในเครื่องเท่านั้น */
+const SUPABASE_URL = '';
+const SUPABASE_ANON_KEY = '';
+const REQUIRE_LOGIN = false; // true = ต้องล็อกอินก่อนใช้แอป (ซ่อนปุ่ม "ใช้งานแบบไม่ล็อกอิน")
+const AUTH_ENABLED = !!(SUPABASE_URL && SUPABASE_ANON_KEY);
+const AUTH_URL = SUPABASE_URL.replace(/\/+$/, '');
+const SESS_KEY = 'fitapp:session';
+const CALC_DEFAULTS = { sex: 'male', age: 25, weight: 65, height: 170 };
+let authMode = 'login', recoveryToken = null, sessionRemember = true, refreshing = null;
+let pendingMuscle = null, pendingPlan = null;
+
+function stores() { const o = []; try { o.push(localStorage); } catch (e) {} try { o.push(sessionStorage); } catch (e) {} return o; }
+function saveSession(remember) {
+  stores().forEach((st) => { try { st.removeItem(SESS_KEY); } catch (e) {} });
+  try { (remember ? localStorage : sessionStorage).setItem(SESS_KEY, JSON.stringify({ s: session, remember })); } catch (e) {}
+}
+function readSession() {
+  for (const st of stores()) { try { const v = JSON.parse(st.getItem(SESS_KEY)); if (v && v.s && v.s.refresh_token) return v; } catch (e) {} }
+  return null;
+}
+function clearSession() { stores().forEach((st) => { try { st.removeItem(SESS_KEY); } catch (e) {} }); session = null; }
+
+async function api(path, opts) {
+  opts = opts || {};
+  const headers = Object.assign({ apikey: SUPABASE_ANON_KEY, 'Content-Type': 'application/json' }, opts.headers || {});
+  if (opts.token) headers.Authorization = 'Bearer ' + opts.token;
+  const res = await fetch(AUTH_URL + path, { method: opts.method || 'GET', headers, body: opts.body ? JSON.stringify(opts.body) : undefined });
+  let data = null;
+  try { data = await res.json(); } catch (e) { /* ไม่มีเนื้อหา */ }
+  if (!res.ok) {
+    const err = new Error((data && (data.msg || data.error_description || data.message)) || ('HTTP ' + res.status));
+    err.status = res.status; err.code = data && (data.error_code || data.code || data.error);
+    throw err;
+  }
+  return data;
+}
+function startSession(d, remember) {
+  const exp = d.expires_at || Math.floor(Date.now() / 1000) + (d.expires_in || 3600);
+  session = { access_token: d.access_token, refresh_token: d.refresh_token, expires_at: exp, user: { id: d.user.id, email: d.user.email } };
+  sessionRemember = remember;
+  saveSession(remember);
+}
+function refreshSession() {
+  if (!refreshing) {
+    refreshing = api('/auth/v1/token?grant_type=refresh_token', { method: 'POST', body: { refresh_token: session.refresh_token } })
+      .then((d) => startSession(d, sessionRemember)).finally(() => { refreshing = null; });
+  }
+  return refreshing;
+}
+async function fresh() { if (session && session.expires_at - Date.now() / 1000 < 60) await refreshSession(); }
+async function rest(path, opts) {
+  opts = opts || {};
+  await fresh();
+  try { return await api(path, Object.assign({}, opts, { token: session.access_token })); }
+  catch (e) {
+    if (e.status === 401) { await refreshSession(); return api(path, Object.assign({}, opts, { token: session.access_token })); }
+    throw e;
+  }
+}
+
+/* ข้อมูลของบัญชี: ตาราง user_data (1 แถวต่อผู้ใช้ เก็บโปรไฟล์ ตาราง และรูปใน data) */
+function setSync(t) { const el = $('sync-msg'); if (el) el.textContent = t; }
+async function pullRemote() {
+  const rows = await rest('/rest/v1/user_data?select=data&limit=1');
+  if (Array.isArray(rows) && rows.length) {
+    const d = rows[0].data || {};
+    profile = d.profile && typeof d.profile === 'object' ? d.profile : {};
+    plan = Array.isArray(d.plan) && d.plan.length === 7 ? d.plan : DEFAULT_PLAN.slice();
+  } else {
+    dirty = true; await pushRemote();                 // บัญชีใหม่: ย้ายข้อมูลที่จำไว้ในเครื่องขึ้นไปเก็บในบัญชี
+    if (!dirty) { try { localStorage.removeItem(KEY); } catch (e) {} }
+  }
+  fillProfile(); renderSchedule(); renderHome();
+}
+async function pushRemote() {
+  if (!session || !dirty) return;
+  dirty = false;
+  try {
+    await rest('/rest/v1/user_data?on_conflict=user_id', { method: 'POST', headers: { Prefer: 'resolution=merge-duplicates,return=minimal' },
+      body: { user_id: session.user.id, data: { profile, plan }, updated_at: new Date().toISOString() } });
+    setSync('ซิงก์ข้อมูลแล้ว');
+  } catch (e) { dirty = true; setSync('ซิงก์ไม่สำเร็จ จะลองใหม่เมื่อมีการแก้ไขครั้งถัดไป'); }
+}
+document.addEventListener('visibilitychange', () => { if (document.hidden) pushRemote(); });
+
+function resetLocalState() {
+  profile = {}; plan = DEFAULT_PLAN.slice(); dirty = false; clearTimeout(saveTimer);
+  P_FIELDS.forEach((f) => { $('p-' + f).value = f === 'sex' ? 'male' : ''; });
+  Object.keys(CALC_DEFAULTS).forEach((k) => { $(k).value = CALC_DEFAULTS[k]; });
+  $('p-msg').textContent = '';
+  calculate(); renderSchedule(); renderHome();
+}
+function renderAccount() {
+  const box = $('acct');
+  box.hidden = false;
+  $('acct-text').textContent = session ? 'เข้าสู่ระบบอยู่ในชื่อ ' + session.user.email
+    : (AUTH_ENABLED ? 'ใช้งานแบบไม่ล็อกอิน ข้อมูลอยู่เฉพาะเครื่องนี้' : 'โหมดตัวอย่าง: ยังไม่ได้เชื่อมต่อระบบบัญชี ข้อมูลอยู่เฉพาะเครื่องนี้');
+  $('acct-logout').hidden = !session; $('acct-login').hidden = !!session; $('sync-msg').hidden = !session;
+}
+
+/* หน้าล็อกอิน / สมัคร / ตั้งรหัสผ่านใหม่ */
+function setAuthMode(m) {
+  authMode = m;
+  $('auth-title').textContent = m === 'login' ? 'เข้าสู่ระบบ' : 'สมัครสมาชิก';
+  $('auth-sub').textContent = m === 'login' ? 'เข้าสู่ระบบเพื่อบันทึกข้อมูลและใช้ได้ทุกเครื่อง' : 'สร้างบัญชีด้วยอีเมลและรหัสผ่าน';
+  $('a-submit').textContent = m === 'login' ? 'เข้าสู่ระบบ' : 'สมัครสมาชิก';
+  $('a-switch').textContent = m === 'login' ? 'ยังไม่มีบัญชี? สมัครใหม่' : 'มีบัญชีแล้ว? เข้าสู่ระบบ';
+  $('a-pass').autocomplete = m === 'login' ? 'current-password' : 'new-password';
+  $('a-forgot').hidden = m !== 'login';
+  $('a-msg').textContent = '';
+}
+function showAuth(msg) {
+  Object.keys(PAGES).forEach((k) => { $(PAGES[k]).hidden = true; });
+  $('view-auth').hidden = false;
+  $('auth-form').hidden = !!recoveryToken; $('reset-form').hidden = !recoveryToken;
+  $('app-tabbar').hidden = true;
+  $('a-guest').hidden = REQUIRE_LOGIN && AUTH_ENABLED;
+  $('demo-note').hidden = AUTH_ENABLED;
+  if (msg) $('a-msg').textContent = msg;
+}
+function enterApp() {
+  $('app-tabbar').hidden = false;
+  renderAccount();
+  go(page);
+  applyPendingNav();
+}
+/* คำสั่งจากหน้าเว็บหลัก (ปุ่มในการ์ดท่า / โปรแกรมฝึก / เครื่องมือ) ถ้ายังไม่ล็อกอินจะจำไว้แล้วทำหลังเข้าแอป */
+function applyPendingNav() {
+  if (pendingPlan) { plan = pendingPlan; pendingPlan = null; savePrefs(); renderSchedule(); renderHome(); go('schedule'); }
+  if (pendingMuscle) { const id = pendingMuscle; pendingMuscle = null; go('search'); if (selected !== id) selectMuscle(id); }
+}
+window.__fitapp = {
+  go: (p) => { if (PAGES[p]) page = p; go(p); },
+  showMuscle: (id) => { if (!ZONES[id]) return; pendingMuscle = id; if (session || guest) applyPendingNav(); else { page = 'search'; showAuth(); } },
+  applyPlan: (arr) => {
+    if (!Array.isArray(arr) || arr.length !== 7 || !arr.every((x) => FOCUS.includes(x))) return;
+    pendingPlan = arr.slice(); if (session || guest) applyPendingNav(); else { page = 'schedule'; showAuth(); }
+  },
+};
+function authError(e) {
+  if (!e.status) return 'เชื่อมต่อเซิร์ฟเวอร์ไม่ได้ ตรวจอินเทอร์เน็ต หรือเปิดเว็บจากลิงก์ที่โฮสต์จริง (หน้าตัวอย่างของ Claude บล็อกการเชื่อมต่อภายนอก)';
+  const c = String(e.code || '');
+  if (c === 'invalid_credentials') return 'อีเมลหรือรหัสผ่านไม่ถูกต้อง';
+  if (c === 'email_not_confirmed') return 'ยังไม่ได้ยืนยันอีเมล กรุณาตรวจกล่องจดหมายแล้วกดลิงก์ยืนยัน';
+  if (c === 'user_already_exists' || c === 'email_exists') return 'อีเมลนี้สมัครไว้แล้ว ลองเข้าสู่ระบบแทน';
+  if (c === 'weak_password') return 'รหัสผ่านง่ายเกินไป ลองใช้รหัสที่ยาวและเดายากขึ้น';
+  if (e.status === 429 || /rate_limit/.test(c)) return 'ลองบ่อยเกินไป กรุณารอสักครู่แล้วลองใหม่';
+  return 'ทำรายการไม่สำเร็จ (' + (e.message || e.status) + ')';
+}
+async function afterLogin() { guest = false; await pullRemote(); enterApp(); }
+
+$('a-switch').addEventListener('click', () => setAuthMode(authMode === 'login' ? 'register' : 'login'));
+$('auth-form').addEventListener('submit', async (ev) => {
+  ev.preventDefault();
+  const email = $('a-email').value.trim(), pass = $('a-pass').value, remember = $('a-remember').checked;
+  const msg = (t) => { $('a-msg').textContent = t; };
+  if (!AUTH_ENABLED) return msg('โหมดตัวอย่าง: ยังไม่ได้เชื่อมต่อ Supabase จึงยังล็อกอินจริงไม่ได้ กด "ใช้งานแบบไม่ล็อกอินก่อน" เพื่อลองแอป');
+  if (!/^\S+@\S+\.\S+$/.test(email)) return msg('กรอกอีเมลให้ถูกต้อง');
+  if (pass.length < 8) return msg('รหัสผ่านต้องมีอย่างน้อย 8 ตัวอักษร');
+  $('a-submit').disabled = true; msg('กำลังตรวจสอบ...');
+  try {
+    if (authMode === 'register') {
+      const d = await api('/auth/v1/signup', { method: 'POST', body: { email, password: pass } });
+      if (d && d.access_token) { startSession(d, remember); $('a-pass').value = ''; msg(''); await afterLogin(); }
+      else { setAuthMode('login'); msg('สมัครแล้ว กรุณาตรวจอีเมลเพื่อกดลิงก์ยืนยัน แล้วกลับมาเข้าสู่ระบบ'); }
+    } else {
+      const d = await api('/auth/v1/token?grant_type=password', { method: 'POST', body: { email, password: pass } });
+      startSession(d, remember); $('a-pass').value = ''; msg(''); await afterLogin();
+    }
+  } catch (e) { if (session && !e.status) { clearSession(); } msg(authError(e)); }
+  finally { $('a-submit').disabled = false; }
+});
+$('a-forgot').addEventListener('click', async () => {
+  const email = $('a-email').value.trim(), msg = (t) => { $('a-msg').textContent = t; };
+  if (!AUTH_ENABLED) return msg('โหมดตัวอย่าง: ยังไม่ได้เชื่อมต่อ Supabase จึงยังล็อกอินจริงไม่ได้ กด "ใช้งานแบบไม่ล็อกอินก่อน" เพื่อลองแอป');
+  if (!/^\S+@\S+\.\S+$/.test(email)) return msg('กรอกอีเมลก่อน แล้วกด "ลืมรหัสผ่าน?" อีกครั้ง');
+  try { await api('/auth/v1/recover', { method: 'POST', body: { email } }); msg('ถ้ามีบัญชีนี้ ระบบส่งลิงก์ตั้งรหัสผ่านใหม่ไปที่อีเมลแล้ว'); }
+  catch (e) { msg(authError(e)); }
+});
+$('reset-form').addEventListener('submit', async (ev) => {
+  ev.preventDefault();
+  const np = $('r-pass').value, msg = (t) => { $('r-msg').textContent = t; };
+  if (np.length < 8) return msg('รหัสผ่านต้องมีอย่างน้อย 8 ตัวอักษร');
+  try {
+    await api('/auth/v1/user', { method: 'PUT', token: recoveryToken, body: { password: np } });
+    recoveryToken = null; $('r-pass').value = ''; msg(''); setAuthMode('login');
+    showAuth('ตั้งรหัสผ่านใหม่แล้ว เข้าสู่ระบบด้วยรหัสใหม่ได้เลย');
+  } catch (e) { msg(authError(e)); }
+});
+$('a-guest').addEventListener('click', () => {
+  guest = true;
+  const g = loadPrefs();
+  profile = g.profile && typeof g.profile === 'object' ? g.profile : {};
+  plan = Array.isArray(g.plan) && g.plan.length === 7 ? g.plan : DEFAULT_PLAN.slice();
+  fillProfile(); renderSchedule(); enterApp();
+});
+$('acct-login').addEventListener('click', () => { guest = false; showAuth(); });
+$('acct-logout').addEventListener('click', async () => {
+  await pushRemote();
+  try { await api('/auth/v1/logout', { method: 'POST', token: session.access_token }); } catch (e) { /* ออกจากระบบฝั่งเครื่องต่อไป */ }
+  clearSession(); resetLocalState(); page = 'home'; showAuth('ออกจากระบบแล้ว');
+});
+
+function openDrawerLater() {
+  const open = () => window.__lumora && window.__lumora.open();
+  if (document.readyState === 'complete') setTimeout(open, 1600); else addEventListener('load', () => setTimeout(open, 1600));
+}
+async function boot() {
+  fillProfile(); renderSchedule(); renderNews();
+  setAuthMode('login');
+  if (!AUTH_ENABLED) { showAuth(); return; }
+  // ลิงก์จากอีเมล (ยืนยันอีเมล / ตั้งรหัสผ่านใหม่) จะพาโทเคนมาใน # ของ URL
+  const h = location.hash.replace(/^#/, '');
+  if (/access_token=/.test(h)) {
+    const hp = new URLSearchParams(h);
+    history.replaceState(null, '', location.pathname + location.search);
+    if (hp.get('type') === 'recovery') { recoveryToken = hp.get('access_token'); showAuth(); openDrawerLater(); return; }
+    try {
+      const u = await api('/auth/v1/user', { token: hp.get('access_token') });
+      startSession({ access_token: hp.get('access_token'), refresh_token: hp.get('refresh_token'), expires_in: Number(hp.get('expires_in')) || 3600, user: u }, true);
+      await pullRemote(); enterApp(); openDrawerLater(); return;
+    } catch (e) { clearSession(); }
+  }
+  const stored = readSession();
+  if (stored) {
+    session = stored.s; sessionRemember = !!stored.remember;
+    try { await fresh(); await pullRemote(); enterApp(); return; }
+    catch (e) { if (e.status) { clearSession(); } else { session = null; showAuth('เชื่อมต่อเซิร์ฟเวอร์ไม่ได้ ลองใหม่อีกครั้ง'); return; } }
+  }
+  showAuth();
+}
+boot();
+
+</script>
+<script>
+(function () {
+  var q = function (s, r) { return (r || document).querySelector(s); };
+  var qa = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+  var root = document.documentElement;
+  /* ---- การ์ดท่ายอดนิยม: ใช้ข้อมูลท่าและรูปร่างกายชุดเดียวกับ Fit App ---- */
+  (function renderExerciseCards() {
+    var grid = document.getElementById('xgrid');
+    if (!grid || typeof EXERCISES === 'undefined') return;
+    var CFG = [
+      { p: 'ดันอกบาร์เบล', en: 'Bench Press', meta: 'Chest — Barbell', th: 'ท่าดันพื้นฐานสำหรับอก มีไหล่และไตรเซปช่วย', tags: ['Barbell', 'Chest', 'Compound'] },
+      { p: 'สควอต (Squat)', en: 'Squat', meta: 'Legs — Barbell', th: 'ท่าสำหรับขาและก้น เน้นต้นขาหน้า ใช้แกนกลางช่วยทรงตัว', tags: ['Barbell', 'Legs', 'Compound'] },
+      { p: 'เดดลิฟต์', en: 'Deadlift', meta: 'Back — Barbell', th: 'ยกน้ำหนักจากพื้น ใช้ก้น ต้นขาหลัง และหลังล่างเป็นหลัก', tags: ['Barbell', 'Back', 'Compound'] },
+      { p: 'ดึงข้อ (Pull-up)', en: 'Pull-up', meta: 'Back — Bodyweight', th: 'ดึงตัวขึ้นบาร์ เน้นหลังกว้างและไบเซป', tags: ['Bodyweight', 'Back', 'Compound'] },
+      { p: 'ดัมเบลช็อลเดอร์เพรส', en: 'Shoulder Press', meta: 'Shoulders — Dumbbell', th: 'ดันดัมเบลเหนือศีรษะ เน้นไหล่ มีไตรเซปช่วย', tags: ['Dumbbell', 'Shoulders'] },
+      { p: 'แพลงก์', en: 'Plank', meta: 'Core — Bodyweight', th: 'ท่าค้างสำหรับแกนกลาง ไม่ต้องใช้อุปกรณ์', tags: ['Bodyweight', 'Core'] }
+    ];
+    var html = '';
+    CFG.forEach(function (c, i) {
+      var e = EXERCISES.find(function (x) { return x.name.indexOf(c.p) === 0; });
+      if (!e) return;
+      var vars = e.sec.map(function (id) { return '--m-' + id + ':var(--s)'; }).concat(e.main.map(function (id) { return '--m-' + id + ':var(--p)'; })).join(';');
+      var names = e.main.map(function (id) { return ZONES[id].n; }).join(', ');
+      html += '<li class="rv" style="--rd:' + (i * 90) + 'ms;--ry:48px"><button class="card xcard" data-act="muscle:' + e.main[0] + '" aria-label="' + c.en + ' — กล้ามเนื้อหลัก: ' + names + ' เปิดใน Fit App">' +
+        '<div class="meta"><span>' + c.meta + '</span><span class="bdg"><svg class="ic"><use href="#i-up"/></svg></span></div>' +
+        '<div class="fig"><svg viewBox="0 0 270 306" style="' + vars + '" aria-hidden="true"><use href="#bm" width="270" height="306"/></svg></div>' +
+        '<div class="bt"><h3>' + c.en + '</h3><p>' + c.th + '</p><div class="tags">' + c.tags.map(function (t) { return '<span class="tagc">' + t + '</span>'; }).join('') + '</div></div></button></li>';
+    });
+    grid.innerHTML = html;
+    var n = document.getElementById('ex-count');
+    if (n) n.textContent = (Math.floor(EXERCISES.length / 10) * 10) + '+';
+  })();
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---- adaptive grid: ขยายเกิน 1920px ---- */
+  function applyAdaptiveGrid() {
+    var FONT_BASE = 16, baseWidth = 1920, coef = 0.6666, w = window.innerWidth;
+    var widthReduction = ((baseWidth - w) / baseWidth) * 100;
+    var size = FONT_BASE - (FONT_BASE * (widthReduction * coef)) / 100;
+    if (size > FONT_BASE) root.style.fontSize = size + 'px'; else root.style.removeProperty('font-size');
+  }
+  applyAdaptiveGrid(); addEventListener('resize', applyAdaptiveGrid);
+
+  /* ---- scroll lock + Lenis (ถ้าโหลดจาก CDN ไม่ได้ ก็เลื่อนแบบปกติ) ---- */
+  var lenis = null, locks = 0;
+  function stopScroll() {
+    if (locks++ === 0) { if (lenis) lenis.stop(); root.style.position = 'relative'; root.style.overflow = 'hidden'; root.style.height = '100%'; }
+  }
+  function startScroll() {
+    locks = Math.max(0, locks - 1);
+    if (locks === 0) { if (lenis) lenis.start(); ['position', 'overflow', 'height'].forEach(function (p) { root.style.removeProperty(p); }); }
+  }
+  try { history.scrollRestoration = 'manual'; } catch (e) {}
+  window.scrollTo(0, 0);
+  try {
+    import('https://cdn.jsdelivr.net/npm/lenis@1.3.23/dist/lenis.mjs').then(function (m) {
+      var L = m.default || m.Lenis;
+      lenis = new L({ smoothWheel: true });
+      if (locks > 0) lenis.stop();
+      var raf = function (t) { lenis.raf(t); requestAnimationFrame(raf); };
+      requestAnimationFrame(raf);
+    }).catch(function () {});
+  } catch (e) {}
+  function scrollToId(id) {
+    var el = document.getElementById(id); if (!el) return;
+    if (lenis) lenis.scrollTo(el, { offset: 0 }); else el.scrollIntoView({ behavior: 'smooth' });
+  }
+
+  /* ---- reveal ---- */
+  var io = ('IntersectionObserver' in window) ? new IntersectionObserver(function (es) {
+    es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.15, rootMargin: '0px 0px -5% 0px' }) : null;
+  // แบ่งคำสำหรับ word reveal
+  qa('.words').forEach(function (el) {
+    var i = 0;
+    (function split(node) {
+      Array.prototype.slice.call(node.childNodes).forEach(function (n) {
+        if (n.nodeType === 3) {
+          var frag = document.createDocumentFragment();
+          n.textContent.split(/(\s+)/).forEach(function (t) {
+            if (!t) return;
+            if (/^\s+$/.test(t)) { frag.appendChild(document.createTextNode(' ')); return; }
+            var s = document.createElement('span'); s.className = 'w'; s.style.setProperty('--i', i++); s.textContent = t; frag.appendChild(s);
+          });
+          node.replaceChild(frag, n);
+        } else if (n.nodeType === 1) split(n);
+      });
+    })(el);
+  });
+  qa('.rv:not(.g), .lines:not(.g), .words').forEach(function (el) { if (io) io.observe(el); else el.classList.add('in'); });
+
+  /* ---- loader ---- */
+  var loader = q('#loader'), fill = q('#ld-fill'), num = q('#ld-num');
+  var ready = false;
+  function finish() {
+    if (ready) return; ready = true;
+    root.classList.add('ready');
+    if (loader && loader.parentNode) loader.parentNode.removeChild(loader);
+    qa('.g').forEach(function (el) { el.classList.add('in'); });
+    startScroll();
+  }
+  stopScroll();
+  var FILL = 1300, t0 = null;
+  var ease = function (t) { return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; };
+  function step(ts) {
+    if (t0 === null) t0 = ts;
+    var t = Math.min((ts - t0) / FILL, 1), p = Math.round(ease(t) * 100);
+    fill.style.width = p + '%'; num.textContent = String(p).padStart(3, '0');
+    if (t < 1) requestAnimationFrame(step);
+    else { loader.classList.add('out'); setTimeout(finish, 800); }
+  }
+  requestAnimationFrame(step);
+
+  /* ---- live clock ---- */
+  var MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  function tick() {
+    var d = new Date(), h = d.getHours(), m = String(d.getMinutes()).padStart(2, '0');
+    var t = ((h % 12) || 12) + ':' + m + (h < 12 ? 'am' : 'pm');
+    q('#clk-t').textContent = t;
+    q('#clk-d').textContent = d.getDate() + ' ' + MONTHS[d.getMonth()] + ', ' + d.getFullYear();
+    q('#nm-t').textContent = ' — ' + t;
+  }
+  tick(); setInterval(tick, 1000);
+
+  /* ---- hero card carousel ---- */
+  var ITEMS = [
+    { cap: 'Muscle Map', title: 'Know every muscle.' },
+    { cap: 'Calculator', title: 'Plan your fuel.' },
+    { cap: 'Planner', title: 'Train all week.' }
+  ];
+  var ci = 0, slot = q('#hc-slot'), dots = qa('#hc-dots i');
+  function showItem(step) {
+    ci = (ci + step + ITEMS.length) % ITEMS.length;
+    q('#hc-cap').textContent = ITEMS[ci].cap; q('#hc-title').textContent = ITEMS[ci].title;
+    dots.forEach(function (d, i) { d.classList.toggle('on', i === ci); });
+    slot.style.setProperty('--sd', step >= 0 ? 1 : -1);
+    slot.classList.remove('swap'); void slot.offsetWidth; slot.classList.add('swap');
+  }
+  q('#hc-row').addEventListener('click', function () { showItem(1); });
+  q('#hc-next').addEventListener('click', function (e) { e.stopPropagation(); showItem(1); });
+  q('#hc-prev').addEventListener('click', function (e) { e.stopPropagation(); showItem(-1); });
+
+  /* ---- overlays: menu / modal / app drawer ---- */
+  var navm = q('#navm'), modal = q('#modal'), drawer = q('#app-drawer'), back = q('#d-back'), sideTab = q('#side-tab');
+  var open = { nav: false, modal: false, drawer: false };
+  function setNav(v) {
+    if (open.nav === v) return; open.nav = v; navm.classList.toggle('open', v); v ? stopScroll() : startScroll();
+    if (v) q('#menu-close').focus();
+  }
+  function setModal(v) {
+    if (open.modal === v) return; open.modal = v; modal.classList.toggle('open', v); v ? stopScroll() : startScroll();
+    if (v) { setTimeout(function () { var i = q('#m-form input'); if (i && !q('#m-form-wrap').hidden) i.focus(); }, 60); }
+    else setTimeout(resetModal, 300);
+  }
+  function setDrawer(v) {
+    if (open.drawer === v) return; open.drawer = v;
+    drawer.classList.toggle('open', v); back.classList.toggle('open', v); sideTab.classList.toggle('hide', v);
+    drawer.inert = !v; v ? stopScroll() : startScroll();
+    if (v) { window.dispatchEvent(new Event('fitapp:open')); setTimeout(function () { q('#d-close').focus(); }, 60); }
+    else sideTab.focus();
+  }
+  function resetModal() { q('#m-form').reset(); q('#m-form-wrap').hidden = false; q('#m-ok').hidden = true; q('#m-send').firstChild.textContent = 'Send request'; }
+  document.addEventListener('keydown', function (e) {
+    if (e.key !== 'Escape') return;
+    if (open.modal) setModal(false); else if (open.nav) setNav(false); else if (open.drawer) setDrawer(false);
+  });
+  q('#menu-open').addEventListener('click', function () { setNav(true); });
+  q('#menu-close').addEventListener('click', function () { setNav(false); });
+  q('#m-close').addEventListener('click', function () { setModal(false); });
+  q('#m-done').addEventListener('click', function () { setModal(false); });
+  modal.addEventListener('click', function (e) { if (e.target === modal) setModal(false); });
+  q('#m-panel').addEventListener('click', function (e) { e.stopPropagation(); });
+  sideTab.addEventListener('click', function () { setDrawer(true); });
+  q('#d-close').addEventListener('click', function () { setDrawer(false); });
+  back.addEventListener('click', function () { setDrawer(false); });
+  q('#m-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    q('#m-send').firstChild.textContent = 'Sending…';
+    setTimeout(function () { q('#m-form-wrap').hidden = true; q('#m-ok').hidden = false; }, 700); // ไม่ได้ส่งข้อมูลไปที่ไหน (stub)
+  });
+  // ปุ่ม/ลิงก์ที่มี data-act
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest('[data-act]'); if (!b) return;
+    var act = b.getAttribute('data-act'), fromNav = false;
+    if (act.indexOf('nav:') === 0) { fromNav = true; act = act.slice(4); setNav(false); }
+    if (act === 'app' || act.indexOf('app:') === 0) {      // ปุ่ม Let's Train / Start Training / ลิงก์เครื่องมือ เปิด Fit App
+      setDrawer(true); var pg = act.slice(4);
+      if (pg && window.__fitapp) window.__fitapp.go(pg);
+      return;
+    }
+    if (act.indexOf('muscle:') === 0) { setDrawer(true); if (window.__fitapp) window.__fitapp.showMuscle(act.slice(7)); return; }
+    if (act === 'plan') { setDrawer(true); if (window.__fitapp) window.__fitapp.applyPlan((b.getAttribute('data-plan') || '').split(',')); return; }
+    if (act === 'contact') { setModal(true); return; }
+    if (act.indexOf('scroll:') === 0) {
+      var id = act.slice(7);
+      if (fromNav) setTimeout(function () { scrollToId(id); }, 60); else scrollToId(id);
+    }
+  });
+
+  /* ---- ภาพสำรองสำหรับ hero (ถ้าโหลดรูปจากเซิร์ฟเวอร์ไม่ได้ จะวาดฉากเองด้วย canvas) ---- */
+  function makeScene(mode) {
+    var w = 1600, h = 1000, c = document.createElement('canvas'); c.width = w; c.height = h; var g = c.getContext('2d');
+    var P = mode === 'a'
+      ? { sky: ['#efeeec', '#d9d8d6'], floor: ['#cfcfcf', '#b5b5b5'], arch: '#f7f6f4', arch2: '#e4e3e1', orb: ['#ffffff', '#d0d0d0'], shade: 'rgba(0,0,0,.14)', metal: '#c3c3c1', plate: '#a8a8a6', dark: '#8a8a88', rack: '#d6d5d3' }
+      : { sky: ['#3a2216', '#12100f'], floor: ['#2a1a12', '#0a0a0a'], arch: '#cf8047', arch2: '#97501f', orb: ['#ffd9b0', '#b15f2c'], shade: 'rgba(0,0,0,.4)', metal: '#f0b17f', plate: '#b15f2c', dark: '#6e3512', rack: '#9a5224' };
+    var gr = g.createLinearGradient(0, 0, 0, h * 0.72); gr.addColorStop(0, P.sky[0]); gr.addColorStop(1, P.sky[1]); g.fillStyle = gr; g.fillRect(0, 0, w, h);
+    gr = g.createLinearGradient(0, h * 0.72, 0, h); gr.addColorStop(0, P.floor[0]); gr.addColorStop(1, P.floor[1]); g.fillStyle = gr; g.fillRect(0, h * 0.72, w, h * 0.28);
+    function arch(x, y, aw, ah, col) { g.fillStyle = col; g.beginPath(); g.moveTo(x, y + ah); g.lineTo(x, y + aw / 2); g.arc(x + aw / 2, y + aw / 2, aw / 2, Math.PI, 0); g.lineTo(x + aw, y + ah); g.closePath(); g.fill(); }
+    function rr(x, y, rw, rh, r, col) { g.fillStyle = col; g.beginPath(); g.moveTo(x + r, y); g.arcTo(x + rw, y, x + rw, y + rh, r); g.arcTo(x + rw, y + rh, x, y + rh, r); g.arcTo(x, y + rh, x, y, r); g.arcTo(x, y, x + rw, y, r); g.closePath(); g.fill(); }
+    arch(150, 130, 300, 590, P.arch2); arch(520, 90, 340, 630, P.arch); arch(930, 150, 300, 570, P.arch2);
+    var og = g.createRadialGradient(1270, 300, 20, 1270, 330, 200); og.addColorStop(0, P.orb[0]); og.addColorStop(1, P.orb[1]);
+    g.fillStyle = og; g.beginPath(); g.arc(1270, 330, 150, 0, 7); g.fill();
+    // เงาบนพื้น
+    g.fillStyle = P.shade;
+    [[300, 760, 260], [690, 770, 300], [1080, 760, 250], [1270, 790, 170], [820, 835, 330]].forEach(function (s) { g.beginPath(); g.ellipse(s[0], s[1], s[2], 26, 0, 0, 7); g.fill(); });
+    // แร็คบาร์เบล: เสา 2 ต้น + ตะขอ + บาร์ + แผ่นน้ำหนัก
+    rr(468, 330, 34, 400, 6, P.rack); rr(1098, 330, 34, 400, 6, P.rack);
+    rr(450, 320, 70, 22, 8, P.rack); rr(1080, 320, 70, 22, 8, P.rack);
+    rr(500, 452, 56, 14, 5, P.dark); rr(1044, 452, 56, 14, 5, P.dark);
+    rr(250, 438, 1100, 16, 8, P.metal);
+    [[300, 250, 36, P.plate], [336, 210, 30, P.dark], [366, 170, 26, P.plate]].forEach(function (p) { rr(p[0], 446 - p[1] / 2 + 0, p[2], p[1], 8, p[3]); rr(1600 - p[0] - p[2], 446 - p[1] / 2, p[2], p[1], 8, p[3]); });
+    rr(262, 424, 26, 44, 5, P.metal); rr(1312, 424, 26, 44, 5, P.metal);
+    // ม้านั่ง
+    rr(640, 660, 360, 44, 18, P.dark); rr(690, 704, 26, 70, 4, P.rack); rr(930, 704, 26, 70, 4, P.rack); rr(670, 770, 90, 12, 4, P.rack); rr(900, 770, 90, 12, 4, P.rack);
+    // ชั้นดัมเบลด้านขวา
+    rr(1190, 590, 330, 14, 4, P.rack); rr(1190, 700, 330, 14, 4, P.rack); rr(1200, 590, 14, 140, 4, P.rack); rr(1496, 590, 14, 140, 4, P.rack);
+    [590, 700].forEach(function (y) { for (var i = 0; i < 5; i++) { var x = 1228 + i * 58; rr(x, y - 40, 14, 40, 4, P.plate); rr(x + 38, y - 40, 14, 40, 4, P.plate); rr(x + 12, y - 25, 28, 8, 3, P.metal); } });
+    // เคตเทิลเบลบนพื้น
+    [[170, 735, 46], [250, 755, 36]].forEach(function (k) { g.fillStyle = P.plate; g.beginPath(); g.arc(k[0], k[1], k[2], 0, 7); g.fill(); g.strokeStyle = P.plate; g.lineWidth = 12; g.beginPath(); g.arc(k[0], k[1] - k[2] * 0.85, k[2] * 0.55, Math.PI, 0); g.stroke(); });
+    // แผ่นน้ำหนักวางพิงพื้น
+    g.fillStyle = P.dark; g.beginPath(); g.arc(1120, 800, 70, 0, 7); g.fill(); g.fillStyle = P.sky[1]; g.beginPath(); g.arc(1120, 800, 14, 0, 7); g.fill();
+    return c.toDataURL('image/jpeg', 0.9);
+  }
+
+
+  /* ---- LiquidReveal: ลากเมาส์/นิ้วแล้วภาพที่สองค่อยๆ ปรากฏเป็นรอยพู่กัน ---- */
+  (function liquid() {
+    var wrap = q('#lq'), img = q('#lq-img'), cv = q('canvas', wrap);
+    // ภาพที่ "แสดงเสมอ" = after.jpg   ภาพที่ "ถูกวาดตามรอยเมาส์" = before.jpg  (ตามสเปก ห้ามสลับ)
+    img.src = makeScene('a');   // ภาพที่แสดงเสมอ (โทนเทา)
+    if (reduce) { cv.parentNode.removeChild(cv); return; }
+    var ctx = cv.getContext('2d'), dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var BRUSH = 143, DECAY = 0.016, radius = BRUSH * dpr;
+    var W = 0, H = 0, cover = null, brush = null, bctx = null, loaded = false, points = [], last = null, idle = 0, rafId = 0;
+    var after = new Image();
+    after.onload = function () { loaded = true; build(); };
+    after.src = makeScene('b');   // ภาพที่ถูกวาดตามรอยเมาส์ (โทนส้ม)
+    function build() {
+      var r = wrap.getBoundingClientRect();
+      W = Math.max(1, Math.round(r.width * dpr)); H = Math.max(1, Math.round(r.height * dpr));
+      cv.width = W; cv.height = H; cv.style.width = r.width + 'px'; cv.style.height = r.height + 'px';
+      if (!loaded) return;
+      cover = document.createElement('canvas'); cover.width = W; cover.height = H;
+      var iw = after.naturalWidth, ih = after.naturalHeight, s = Math.max(W / iw, H / ih), dw = iw * s, dh = ih * s;
+      cover.getContext('2d').drawImage(after, (W - dw) / 2, (H - dh) / 2, dw, dh);
+      var d = Math.ceil(radius * 2); brush = document.createElement('canvas'); brush.width = brush.height = d; bctx = brush.getContext('2d');
+    }
+    if ('ResizeObserver' in window) new ResizeObserver(build).observe(wrap); else addEventListener('resize', build);
+    function stamp(x, y) {
+      var d = brush.width, c = d / 2;
+      bctx.globalCompositeOperation = 'source-over'; bctx.clearRect(0, 0, d, d);
+      var gr = bctx.createRadialGradient(c, c, 0, c, c, c);
+      gr.addColorStop(0, 'rgba(255,255,255,1)'); gr.addColorStop(0.55, 'rgba(255,255,255,.82)'); gr.addColorStop(1, 'rgba(255,255,255,0)');
+      bctx.fillStyle = gr; bctx.fillRect(0, 0, d, d);
+      bctx.globalCompositeOperation = 'source-in';
+      bctx.drawImage(cover, x - c, y - c, d, d, 0, 0, d, d);
+      ctx.globalCompositeOperation = 'source-over'; ctx.drawImage(brush, x - c, y - c);
+    }
+    function loop() {
+      rafId = 0;
+      if (points.length) idle = 0; else { idle++; if (idle > 120) return; }
+      var drawing = points.length > 0;
+      var fade = drawing ? DECAY : Math.min(DECAY + idle * 0.004, 0.5);
+      ctx.globalCompositeOperation = 'destination-out'; ctx.fillStyle = 'rgba(0,0,0,' + fade + ')'; ctx.fillRect(0, 0, W, H);
+      ctx.globalCompositeOperation = 'source-over';
+      if (drawing && brush) { points.forEach(function (p) { stamp(p[0], p[1]); }); points.length = 0; }
+      if (idle === 120) ctx.clearRect(0, 0, W, H);
+      rafId = requestAnimationFrame(loop);
+    }
+    addEventListener('pointermove', function (e) {
+      if (!loaded || !brush) return;
+      var r = cv.getBoundingClientRect(), x = (e.clientX - r.left) * dpr, y = (e.clientY - r.top) * dpr;
+      if (x < -radius || y < -radius || x > W + radius || y > H + radius) { last = null; return; }
+      if (last) {
+        var dx = x - last[0], dy = y - last[1], dist = Math.hypot(dx, dy), stp = Math.max(radius * 0.3, 1), n = Math.min(Math.ceil(dist / stp), 60);
+        for (var i = 1; i <= n; i++) points.push([last[0] + dx * i / n, last[1] + dy * i / n]);
+      } else points.push([x, y]);
+      last = [x, y]; idle = 0;
+      if (!rafId) rafId = requestAnimationFrame(loop);
+    }, { passive: true });
+    window.__liquid = { canvas: cv };
+  })();
+
+  /* ---- สัญญาณสำหรับแอปในลิ้นชัก ---- */
+  window.__lumora = { open: function () { setDrawer(true); }, close: function () { setDrawer(false); } };
+})();
+
+</script>
+</body>
+</html>
