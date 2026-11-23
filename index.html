@@ -402,6 +402,67 @@ button.card{display:flex;flex-direction:column;justify-content:flex-start;align-
 .view .chk input{width:auto;accent-color:#b15f2c}
 .auth-actions{display:flex;flex-wrap:wrap;align-items:center;gap:.2rem .6rem;margin-top:.4rem}
 #a-submit{width:100%;padding:.85rem 1.4rem}
+/* ===== แผนที่กล้ามเนื้อธีมมืด (ตามภาพตัวอย่าง) ===== */
+#mm-wrap{background:#14141a;--card:#14141a;--base:#4b4b55;--muted:rgba(255,255,255,.4)}
+.mm .zone{fill:var(--gc,var(--zone));stroke:#14141a;stroke-width:1.2}
+.mm .zone:hover{fill:var(--gc,var(--zone));filter:brightness(1.18)}
+.mm .zone:focus-visible{filter:brightness(1.25)}
+.mm .zone.sel{fill:var(--gc,var(--zone));stroke:#fff;stroke-width:1.6;filter:drop-shadow(0 0 5px rgba(255,255,255,.55)) brightness(1.15)}
+.lbl text{font:500 13.5px Onest,Sarabun,sans-serif;fill:rgba(255,255,255,.62);stroke:none}
+.lbl text.rk{font:600 9.5px Onest,Sarabun,sans-serif;letter-spacing:.04em;text-transform:uppercase}
+.lbl .ul,.lbl .dg{fill:none;stroke:rgba(255,255,255,.3);stroke-width:.9}
+.lbl circle{fill:rgba(255,255,255,.55)}
+.lbl.sel text{fill:#fff;font-weight:700}.lbl.sel .ul,.lbl.sel .dg{stroke:#e5322d;stroke-width:1.4}.lbl.sel circle{fill:#e5322d}
+/* ===== หน้าฝึก: ปุ่มสลับ ตาราง กราฟ แรงค์ ===== */
+.seg{display:flex;gap:.3rem;background:#f1f0ee;border-radius:9999px;padding:.25rem;margin-bottom:1rem}
+.seg button{flex:1;padding:.55rem 0;border-radius:9999px;font-size:.88rem;font-weight:500;color:rgba(17,17,17,.6);transition:background .25s,color .25s}
+.seg button[aria-pressed=true]{background:#0a0a0a;color:#fff}
+.t-row{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-top:.9rem}
+.rest-top{display:flex;align-items:baseline;justify-content:space-between;font-size:.88rem;color:rgba(17,17,17,.6);margin-bottom:.5rem}
+.rest-top b{font-size:1.7rem;color:#111;font-variant-numeric:tabular-nums}
+.rk-bar{height:.45rem;border-radius:9999px;background:rgba(17,17,17,.1);overflow:hidden;margin:.3rem 0}
+.rk-bar i{display:block;height:100%;border-radius:9999px;transition:width .4s ease}
+.rest-btns{display:flex;flex-wrap:wrap;align-items:center;gap:.4rem;margin-top:.6rem;font-size:.82rem;color:rgba(17,17,17,.6)}
+.rest-btns button[data-rest]{border:1px solid var(--line);background:#fff;border-radius:9999px;padding:.3rem .8rem;font-size:.82rem;color:#111}
+.rest-btns button[aria-pressed=true]{background:#0a0a0a;color:#fff;border-color:#0a0a0a}
+.srow2{display:grid;grid-template-columns:4.2rem 1fr auto;gap:.5rem;align-items:center;padding:.45rem 0;border-top:1px solid var(--line)}
+.srow2:first-of-type{border-top:0}
+.srow2 .sn{font-size:.8rem;color:rgba(17,17,17,.5)}
+.srow2 .sv2{display:flex;flex-wrap:wrap;align-items:baseline;gap:.2rem .6rem;font-size:.95rem}
+.srow2 small{color:rgba(17,17,17,.5);font-size:.78rem}
+.srow2 .x{font-size:.78rem;color:rgba(17,17,17,.5);border:1px solid var(--line);border-radius:9999px;padding:.2rem .65rem;background:#fff}
+.pr{display:inline-block;background:#b15f2c;color:#fff;border-radius:9999px;padding:.05rem .55rem;font-size:.72rem;font-weight:600}
+.chart{display:block;width:100%;height:auto;margin:.4rem 0}
+.chart .gl{stroke:rgba(17,17,17,.12);stroke-width:1}
+.chart .ax{font:10px Onest,Sarabun,sans-serif;fill:rgba(17,17,17,.5)}
+.hist{margin-top:.4rem}
+.h-r{display:grid;grid-template-columns:5rem 1fr auto;gap:.5rem;align-items:baseline;padding:.4rem 0;border-top:1px solid var(--line);font-size:.88rem}
+.h-r:first-child{border-top:0}.h-r small{color:rgba(17,17,17,.5)}
+.cmp-r{display:grid;grid-template-columns:5.5rem auto 1fr auto;gap:.5rem;align-items:baseline;padding:.3rem 0;font-size:.88rem}
+.cmp-r b{font-size:1.05rem}.cmp-r small{color:rgba(17,17,17,.5);font-size:.76rem}
+.cmp-r i{font-style:normal;font-size:.8rem;font-weight:600;color:rgba(17,17,17,.5)}.cmp-r i.up{color:#2f8f5b}.cmp-r i.dn{color:#c0392b}
+.tier{display:inline-block;border-radius:9999px;padding:.12rem .7rem;font-size:.75rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;background:color-mix(in srgb,var(--tc) 22%,#fff);color:color-mix(in srgb,var(--tc) 55%,#000);border:1px solid color-mix(in srgb,var(--tc) 60%,#fff)}
+.rk-row{display:flex;gap:.7rem;align-items:flex-start;padding:.7rem 0;border-top:1px solid var(--line)}
+.gdot{width:.8rem;height:.8rem;border-radius:50%;margin-top:.35rem;flex:none}
+.rk-main{flex:1;min-width:0}.rk-top{display:flex;align-items:center;justify-content:space-between;gap:.6rem}
+.rk-main small,#mm-rank small{color:rgba(17,17,17,.55);font-size:.8rem}
+
+/* ===== ไอคอนตราแรงค์ + การ์ดแรงค์รวม ===== */
+.tic{display:inline-block;flex:none;width:1.3rem;height:1.3rem;vertical-align:middle;overflow:visible}
+.tic.sm{width:1.15rem;height:1.15rem}.tic.md{width:2.2rem;height:2.2rem}.tic.lg{width:3rem;height:3rem}.tic.xl{width:5.6rem;height:5.6rem}
+.tic.g{filter:drop-shadow(0 0 3px color-mix(in srgb,var(--tc) 70%,transparent))}
+.tier{display:inline-flex;align-items:center;gap:.3rem;padding-left:.35rem}
+.rank-card{display:flex;align-items:center;gap:1rem;background:linear-gradient(135deg,color-mix(in srgb,var(--tc) 20%,#fff),#f1f0ee 70%);border:1px solid color-mix(in srgb,var(--tc) 45%,#fff)}
+.rc-icon{flex:none;display:grid;place-items:center}
+.rc-body{flex:1;min-width:0}
+.rc-name{font-size:2rem;font-weight:700;letter-spacing:-.02em;line-height:1.1;text-transform:uppercase}
+.ladder{display:flex;justify-content:space-between;gap:.2rem;margin:.2rem 0 .8rem;padding:.5rem .6rem;background:#f1f0ee;border-radius:1rem}
+.lad{display:grid;place-items:center;border-radius:.8rem;padding:.15rem}
+.lad.lock{opacity:.32;filter:grayscale(.85)}.lad.cur{background:#fff;box-shadow:0 0 0 2px #0a0a0a}
+.rc-chips{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:.2rem}
+.mchip2{display:inline-flex;align-items:center;gap:.3rem;background:#f1f0ee;border-radius:9999px;padding:.25rem .75rem .25rem .4rem;font-size:.82rem}
+.rk-row{align-items:center}
+.rk-top .tier{flex:none}
 
 </style>
 </head>
@@ -536,6 +597,7 @@ button.card{display:flex;flex-direction:column;justify-content:flex-start;align-
     <li class="rv" style="--rd:80ms"><button class="srow" data-act="app:calc"><div class="srow-in"><span class="n">02</span><h3>Calorie & Protein Calculator</h3><p>ประเมินแคลอรี่และโปรตีนต่อวันตามร่างกายและเป้าหมายของคุณ</p><span class="bd"><svg class="ic"><use href="#i-up"/></svg></span></div></button></li>
     <li class="rv" style="--rd:160ms"><button class="srow" data-act="app:schedule"><div class="srow-in"><span class="n">03</span><h3>Weekly Planner</h3><p>จัดตารางฝึกรายสัปดาห์ แล้วดูแผนของวันนี้ได้ทันที</p><span class="bd"><svg class="ic"><use href="#i-up"/></svg></span></div></button></li>
     <li class="rv" style="--rd:240ms"><button class="srow" data-act="app:search"><div class="srow-in"><span class="n">04</span><h3>Exercise Library</h3><p>ท่าออกกำลังกายกว่า 60 ท่า ทั้งเครื่อง เคเบิล ดัมเบล บาร์เบล และน้ำหนักตัว</p><span class="bd"><svg class="ic"><use href="#i-up"/></svg></span></div></button></li>
+    <li class="rv" style="--rd:320ms"><button class="srow" data-act="app:train"><div class="srow-in"><span class="n">05</span><h3>Workout Tracker &amp; Ranks</h3><p>บันทึกเซต น้ำหนัก จำนวนครั้ง ดูกราฟความก้าวหน้า สถิติ PR และแรงค์ของกล้ามเนื้อแบบเกม</p><span class="bd"><svg class="ic"><use href="#i-up"/></svg></span></div></button></li>
   </ul>
 </div></section>
 
@@ -561,6 +623,7 @@ button.card{display:flex;flex-direction:column;justify-content:flex-start;align-
     <details class="q"><summary>ควรกินโปรตีนวันละเท่าไหร่<svg class="ic"><use href="#i-plus"/></svg></summary><p class="th">แอปใช้ช่วงที่นิยมใช้ทั่วไปประมาณ 1.4–2.2 กรัมต่อน้ำหนักตัว 1 กิโลกรัม ตามเป้าหมาย แต่งานวิจัยเรื่องปริมาณโปรตีนที่เหมาะสมยังมีความเห็นต่างกัน และถ้ามีโรคประจำตัว (เช่น โรคไต) ควรปรึกษาแพทย์ก่อน</p></details>
     <details class="q"><summary>เพิ่งเริ่มออกกำลังกาย ควรเริ่มอย่างไร<svg class="ic"><use href="#i-plus"/></svg></summary><p class="th">ลองโปรแกรม Beginner ฝึกทั้งตัว 3 วันต่อสัปดาห์ ใช้น้ำหนักเบาและเน้นฟอร์มก่อนเพิ่มน้ำหนัก ถ้ายังไม่แน่ใจท่าไหน ให้เทรนเนอร์ช่วยดูฟอร์ม</p></details>
     <details class="q"><summary>Muscle Map ใช้อย่างไร<svg class="ic"><use href="#i-plus"/></svg></summary><p class="th">เปิด Fit App ไปที่แท็บ "ค้นหา" แตะกล้ามเนื้อบนร่างกายด้านหน้าหรือด้านหลัง จะเห็นหน้าที่ของกล้ามเนื้อนั้น และท่าที่ใช้เป็นกล้ามเนื้อหลักและรอง กรองตามอุปกรณ์ได้</p></details>
+    <details class="q"><summary>แรงค์และ PR คำนวณอย่างไร<svg class="ic"><use href="#i-plus"/></svg></summary><p class="th">แรงค์เป็นระบบเกมที่นับจากปริมาณที่ยกที่คุณบันทึก (น้ำหนัก × จำนวนครั้ง) ให้ XP กับกล้ามเนื้อหลักเต็มส่วนและกล้ามเนื้อรอง 40% เมื่อ XP ถึงเกณฑ์ ระดับจะขึ้นตั้งแต่ Iron ถึง Legend ไม่ใช่มาตรฐานความแข็งแรง ส่วน PR คือสถิติที่ดีที่สุดของแต่ละท่า นับจากน้ำหนักสูงสุดและค่า 1RM ประมาณ</p></details>
     <details class="q"><summary>ถ้ามีอาการเจ็บหรือโรคประจำตัวต้องทำอย่างไร<svg class="ic"><use href="#i-plus"/></svg></summary><p class="th">หยุดท่านั้นก่อน ถ้าเจ็บแปลบ เวียนหัว หายใจไม่สะดวก หรือมีโรคประจำตัว ควรปรึกษาแพทย์ก่อนเริ่มหรือกลับมาออกกำลังกาย ข้อมูลในเว็บนี้ไม่ใช่คำแนะนำทางการแพทย์</p></details>
   </div>
 </div></section>
@@ -574,7 +637,7 @@ button.card{display:flex;flex-direction:column;justify-content:flex-start;align-
     <div class="f-cols">
       <div><div class="f-brand"><svg class="ic f"><use href="#i-logo"/></svg>My gym</div><p class="f-tag">รวมแผนที่กล้ามเนื้อ ท่าออกกำลังกาย เครื่องมือ และงานวิจัยไว้ในที่เดียว</p></div>
       <div><h4>Explore</h4><ul><li><button class="alink" data-act="scroll:exercises"><span>Exercises</span></button></li><li><button class="alink" data-act="scroll:programs"><span>Programs</span></button></li><li><button class="alink" data-act="scroll:works"><span>Research</span></button></li><li><button class="alink" data-act="scroll:faq"><span>FAQ</span></button></li></ul></div>
-      <div><h4>Fit App</h4><ul><li><button class="alink" data-act="app:search"><span>Muscle Map</span></button></li><li><button class="alink" data-act="app:calc"><span>Calculator</span></button></li><li><button class="alink" data-act="app:schedule"><span>Planner</span></button></li><li><button class="alink" data-act="app:profile"><span>Profile</span></button></li></ul></div>
+      <div><h4>Fit App</h4><ul><li><button class="alink" data-act="app:search"><span>Muscle Map</span></button></li><li><button class="alink" data-act="app:calc"><span>Calculator</span></button></li><li><button class="alink" data-act="app:train"><span>Tracker</span></button></li><li><button class="alink" data-act="app:schedule"><span>Planner</span></button></li><li><button class="alink" data-act="app:profile"><span>Profile</span></button></li></ul></div>
       <div><h4>Visit</h4><ul><li><button class="alink" data-act="scroll:gym"><span>Location</span></button></li><li><button class="alink" data-act="scroll:gym"><span>Opening Hours</span></button></li><li><button class="alink" data-act="scroll:gym"><span>Trainers</span></button></li><li><button class="alink" data-act="contact"><span>Contact</span></button></li></ul></div>
     </div>
     <div class="legal"><span>© 2026 My gym. All rights reserved.</span><div><a class="alink" href="#privacy"><span>Privacy</span></a><a class="alink" href="#terms"><span>Terms</span></a></div></div>
@@ -637,11 +700,44 @@ button.card{display:flex;flex-direction:column;justify-content:flex-start;align-
 </div>
 <div id='view-home' class='view' hidden>
   <div class='ah'><div><h1 id='home-hello'>สวัสดี</h1><p class='sub'>วันนี้เล่นอะไรดี</p></div><button type='button' id='home-avatar' class='avatar' data-go='profile' aria-label='โปรไฟล์ของฉัน'></button></div>
+  <div id='home-rank'></div>
   <div class='panel result'><h2>แผนวันนี้</h2><div class='big' id='home-today' style='font-size:1.7rem'>–</div><p class='hint'>แก้แผนได้ที่แท็บตาราง</p></div>
   <div class='pair'><button type='button' class='panel go' data-go='search'>แผนที่กล้ามเนื้อและท่าฝึก</button><button type='button' class='panel go' data-go='calc'>คำนวณแคลอรี่</button></div>
+  <button type='button' class='panel go' data-go='train' style='margin-bottom:.8rem'>บันทึกการฝึก<span class='hint' id='home-sets' style='display:block;font-weight:400;margin:0'></span></button>
   <h2 class='news-h'>ข่าวและงานวิจัย</h2>
   <p class='hint' style='margin:0 0 .8rem'>รวบรวมเมื่อ 13 พ.ย. 2026 จากแหล่งข่าวภายนอก (ไม่อัปเดตเอง) งานวิจัยบางชิ้นเป็นการสังเกต ไม่ได้พิสูจน์เหตุและผล</p>
   <div id='news-list'></div>
+</div>
+<div id='view-train' class='view' hidden>
+  <h1>ฝึก</h1><p class='sub'>บันทึกเซต ดูความก้าวหน้า สถิติ PR และแรงค์ของแต่ละกล้ามเนื้อ</p>
+  <div class='seg' role='group' aria-label='ส่วนของหน้าฝึก'>
+    <button type='button' data-seg='log' aria-pressed='true'>บันทึก</button>
+    <button type='button' data-seg='stats' aria-pressed='false'>สถิติ</button>
+    <button type='button' data-seg='rank' aria-pressed='false'>แรงค์</button>
+  </div>
+  <section id='seg-log'>
+    <div class='panel'>
+      <label for='t-ex'>ท่าออกกำลังกาย</label><select id='t-ex'></select>
+      <p class='hint' id='t-last'></p>
+      <div class='grid' style='margin-top:.7rem'>
+        <div><label for='t-w'>น้ำหนัก (กก.)</label><input id='t-w' type='number' inputmode='decimal' step='0.5' min='0' max='1000' placeholder='0 = น้ำหนักตัว'></div>
+        <div><label for='t-r'>จำนวนครั้ง (Reps)</label><input id='t-r' type='number' inputmode='numeric' min='1' max='200'></div>
+      </div>
+      <div class='t-row'><b id='t-setno'>เซตที่ 1</b><button class='save' id='t-add' type='button'>บันทึกเซต</button></div>
+      <p class='hint' id='t-msg' aria-live='polite'></p>
+    </div>
+    <div class='panel' id='t-rest'>
+      <div class='rest-top'><span id='t-rest-state'></span><b id='t-rest-time'>00:00</b></div>
+      <div class='rk-bar'><i id='t-rest-bar' style='width:0;background:#b15f2c'></i></div>
+      <div class='rest-btns'><span>เวลาพัก</span>
+        <button type='button' data-rest='60' aria-pressed='false'>1:00</button><button type='button' data-rest='90' aria-pressed='true'>1:30</button><button type='button' data-rest='120' aria-pressed='false'>2:00</button><button type='button' data-rest='180' aria-pressed='false'>3:00</button>
+        <button type='button' id='t-stop' class='link' style='padding:.3rem .4rem'>หยุด</button></div>
+    </div>
+    <h2 class='mm-h'>วันนี้</h2>
+    <div id='t-today'></div>
+  </section>
+  <section id='seg-stats' hidden></section>
+  <section id='seg-rank' hidden></section>
 </div>
 <div id='view-exercises' class='view' hidden>
   <h1>แผนที่กล้ามเนื้อ</h1>
@@ -754,6 +850,7 @@ button.card{display:flex;flex-direction:column;justify-content:flex-start;align-
   <nav class="tabbar" id="app-tabbar" aria-label="เมนูแอป" hidden><div class="tabbar-in"><span class="tab-pill" id="tab-pill" aria-hidden="true"></span>
     <button type="button" data-page="home"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/></svg><span>หน้าแรก</span></button>
     <button type="button" data-page="search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><span>ค้นหา</span></button>
+    <button type="button" data-page="train"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 6.5v11M17.5 6.5v11M3.5 9v6M20.5 9v6M6.5 12h11"/></svg><span>ฝึก</span></button>
     <button type="button" data-page="calc"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 12h2M14 12h2M8 16h2M14 16h2"/></svg><span>คำนวณ</span></button>
     <button type="button" data-page="schedule"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><span>ตาราง</span></button>
     <button type="button" data-page="profile"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg><span>โปรไฟล์</span></button>
@@ -1165,24 +1262,32 @@ const MAP_LABELS = {
       ['lowback', 'หลังล่าง', 'r', 128, 10, 118], ['glutes', 'ก้น', 'r', 158, 22, 150], ['hams', 'ต้นขาหลัง', 'r', 196, 17, 192],
       ['calf', 'น่อง', 'r', 238, 17, 242]],
 };
+// สีตามกลุ่มกล้ามเนื้อ (ตามภาพตัวอย่าง: อกเหลือง ไหล่แดง แขนน้ำเงิน ขาม่วง) และสีเพิ่มสำหรับหลังกับแกนกลาง
+const GROUP_COLOR = { chest: '#f2d363', delt: '#e4605d', biceps: '#79b0f2', triceps: '#79b0f2', forearm: '#79b0f2',
+  quad: '#c783e8', hams: '#c783e8', glutes: '#c783e8', calf: '#c783e8', adductor: '#c783e8', abductor: '#c783e8',
+  traps: '#5fd0c0', lats: '#5fd0c0', lowback: '#5fd0c0', abs: '#7bd389', obliques: '#7bd389' };
 function mapSVG() {
   const S = 0.9, OY = 8, CX = { f: 124, b: 302 };
   const X = (view, x) => n1(CX[view] + S * x);
   const Y = (y) => n1(OY + S * y);
   const fig = (view) => `<g transform='translate(${CX[view]} ${OY}) scale(${S})'>${body(view, (id) =>
-    `class='zone' data-z='${id}' tabindex='0' role='button' aria-pressed='false' aria-label='${ZONES[id].n}'`)}</g>`;
+    `class='zone' data-z='${id}' style='--gc:${GROUP_COLOR[id]}' tabindex='0' role='button' aria-pressed='false' aria-label='${ZONES[id].n}'`)}</g>`;
+  // ป้ายชื่อ: ตัวหนังสือบนเส้นใต้ แล้วลากเส้นเฉียงไปที่กล้ามเนื้อ (เหมือนภาพตัวอย่าง) ใต้ป้ายมีที่ว่างสำหรับแรงค์
   const labels = (view) => MAP_LABELS[view].map(([id, text, side, ly, px, py]) => {
     const left = side === 'l';
-    const tx = view === 'f' ? (left ? 62 : 186) : 366;
-    const lx = view === 'f' ? (left ? 65 : 182) : 362;
-    const y = Y(ly);
-    return `<g class='lbl' data-z='${id}' aria-hidden='true'><rect x='${left ? 0 : tx - 3}' y='${y - 10}' width='${left ? 66 : 56}' height='20' style='fill:transparent'/><line x1='${lx}' y1='${y}' x2='${X(view, px)}' y2='${Y(py)}'/><circle cx='${X(view, px)}' cy='${Y(py)}' r='2'/><text x='${tx}' y='${y + 4.5}' text-anchor='${left ? 'end' : 'start'}'>${text}</text></g>`;
+    const tx = view === 'f' ? (left ? 62 : 190) : 366;
+    const y = Y(ly), ty = Y(py), tgx = X(view, px);
+    const ulStart = left ? 4 : tx - 4, ulEnd = left ? 66 : tx + 56, elbow = left ? ulEnd : ulStart;
+    return `<g class='lbl' data-z='${id}' aria-hidden='true'><rect x='${left ? 0 : tx - 6}' y='${y - 12}' width='${left ? 70 : 64}' height='34' style='fill:transparent'/>`
+      + `<path class='ul' d='M${ulStart} ${n1(y + 5)}H${ulEnd}'/><path class='dg' d='M${elbow} ${n1(y + 5)}L${tgx} ${ty}'/><circle cx='${tgx}' cy='${ty}' r='2'/>`
+      + `<text x='${tx}' y='${y + 1}' text-anchor='${left ? 'end' : 'start'}'>${text}</text>`
+      + `<text class='rk' data-rk='${id}' x='${tx}' y='${y + 16}' text-anchor='${left ? 'end' : 'start'}'></text></g>`;
   }).join('');
-  return `<svg class='bm mm' id='mm-svg' viewBox='0 0 424 304' role='group' aria-label='แผนที่กล้ามเนื้อ'><g style='stroke:var(--card);stroke-width:1'>${fig('f')}${fig('b')}</g>${labels('f')}${labels('b')}<text x='124' y='298' ${CAP}>ด้านหน้า</text><text x='302' y='298' ${CAP}>ด้านหลัง</text></svg>`;
+  return `<svg class='bm mm' id='mm-svg' viewBox='0 0 424 312' role='group' aria-label='แผนที่กล้ามเนื้อ'><g style='stroke:var(--card);stroke-width:1'>${fig('f')}${fig('b')}</g>${labels('f')}${labels('b')}<text x='124' y='304' ${CAP}>ด้านหน้า</text><text x='302' y='304' ${CAP}>ด้านหลัง</text></svg>`;
 }
 
 // การ์ดท่าออกกำลังกาย (กดกางดูภาพกล้ามเนื้อและขั้นตอน)
-const exCard = (e) => `<details class='panel ex'><summary><span class='name'>${e.name}</span><span class='meta'>${e.muscle}, ${e.gear}</span></summary><div class='body'>${bodyMap(e)}<ol>${e.steps.map((st) => `<li>${st}</li>`).join('')}</ol><div class='tip'>${e.tip}</div></div></details>`;
+const exCard = (e) => `<details class='panel ex'><summary><span class='name'>${e.name}</span><span class='meta'>${e.muscle}, ${e.gear}</span></summary><div class='body'>${bodyMap(e)}<ol>${e.steps.map((st) => `<li>${st}</li>`).join('')}</ol><div class='tip'>${e.tip}</div><button class='link' type='button' data-log='${e.name}'>+ บันทึกการฝึกท่านี้</button></div></details>`;
 
 function renderInfo() {
   const box = $('mm-info');
@@ -1394,7 +1499,7 @@ function renderHome() {
 }
 
 /* ===== สลับหน้าในแอป (เลื่อนซ้าย/ขวาตามลำดับแท็บ) ===== */
-const PAGES = { home: 'view-home', search: 'view-exercises', calc: 'view-calc', schedule: 'view-schedule', profile: 'view-profile' };
+const PAGES = { home: 'view-home', search: 'view-exercises', train: 'view-train', calc: 'view-calc', schedule: 'view-schedule', profile: 'view-profile' };
 const ORDER = Object.keys(PAGES);
 let page = 'home';
 function movePill() {
@@ -1422,6 +1527,410 @@ $('app-drawer').addEventListener('click', (ev) => { const b = ev.target.closest(
 window.addEventListener('fitapp:open', movePill);
 window.addEventListener('resize', movePill);
 
+
+/* ===== Workout Tracker: บันทึกเซต สถิติ PR และแรงค์กล้ามเนื้อ ===== */
+const TIERS = [
+  { n: 'Iron', xp: 0, c: '#9a9aa5' }, { n: 'Bronze', xp: 300, c: '#c98343' }, { n: 'Silver', xp: 1200, c: '#c3ccd6' },
+  { n: 'Gold', xp: 4000, c: '#f2c94c' }, { n: 'Platinum', xp: 10000, c: '#5fd0c0' }, { n: 'Diamond', xp: 25000, c: '#6fa8f0' },
+  { n: 'Master', xp: 60000, c: '#c783e8' }, { n: 'Legend', xp: 120000, c: '#ff6a5c' },
+];
+const exByName = {};
+EXERCISES.forEach((e) => { exByName[e.name] = e; });
+let sets = []; // { id, t, ex, sn, reps, w, rest, synced }
+const SETS_Q = '/rest/v1/workout_sets';
+let seg = 'log', restPick = 90, restLeft = 0, restTotal = 0, restTimer = 0, statEx = '', syncTimer = 0, syncBusy = false;
+
+const pad2 = (n) => String(n).padStart(2, '0');
+const dayKey = (t) => { const d = new Date(t); return d.getFullYear() + '-' + pad2(d.getMonth() + 1) + '-' + pad2(d.getDate()); };
+const dShort = (t) => new Date(t).toLocaleDateString('th-TH', { day: 'numeric', month: 'short' });
+const kgs = (n) => String(Math.round(n * 10) / 10);
+const nf = (n) => Math.round(n).toLocaleString('th-TH');
+const est1RM = (w, r) => (w > 0 ? w * (1 + r / 30) : 0); // สูตร Epley
+const bodyKg = () => (Number(profile.weight) > 0 ? Number(profile.weight) : 60);
+const effW = (s) => (s.w > 0 ? s.w : bodyKg() * 0.5);          // ท่าน้ำหนักตัว (น้ำหนัก 0) นับเป็น 50% ของน้ำหนักตัว
+const volOf = (s) => effW(s) * s.reps;
+const tierOf = (xp) => {
+  let i = 0; TIERS.forEach((t, k) => { if (xp >= t.xp) i = k; });
+  const t = TIERS[i], nx = TIERS[i + 1] || null;
+  return { i, t, next: nx, pct: nx ? Math.min(1, (xp - t.xp) / (nx.xp - t.xp)) : 1 };
+};
+function muscleXP() {
+  const xp = {}; Object.keys(ZONES).forEach((id) => { xp[id] = 0; });
+  sets.forEach((s) => {
+    const e = exByName[s.ex]; if (!e) return;
+    const v = volOf(s) / 10;
+    e.main.forEach((id) => { xp[id] += v; });
+    e.sec.forEach((id) => { xp[id] += v * 0.4; });
+  });
+  return xp;
+}
+function prFlags() {
+  const best = {}, flags = {};
+  sets.slice().sort((a, b) => a.t - b.t).forEach((s) => {
+    const b = best[s.ex] || (best[s.ex] = { n: 0, w: 0, e: 0, r: 0 });
+    const f = [];
+    if (s.w > 0) {
+      if (s.w > b.w) f.push('น้ำหนัก');
+      const e1 = est1RM(s.w, s.reps);
+      if (e1 > b.e + 0.01) f.push('1RM');
+      b.w = Math.max(b.w, s.w); b.e = Math.max(b.e, e1);
+    } else {
+      if (s.reps > b.r) f.push('จำนวนครั้ง');
+      b.r = Math.max(b.r, s.reps);
+    }
+    if (b.n > 0 && f.length) flags[s.id] = f; // เซตแรกของท่าไม่นับเป็น PR (เป็นแค่ค่าตั้งต้น)
+    b.n++;
+  });
+  return flags;
+}
+function bestsByExercise() {
+  const out = {};
+  sets.forEach((s) => {
+    const b = out[s.ex] || (out[s.ex] = { ex: s.ex, w: 0, wT: 0, e: 0, eT: 0, eS: null, r: 0, rT: 0, last: 0, bodyweight: true });
+    if (s.w > 0) {
+      b.bodyweight = false;
+      if (s.w > b.w) { b.w = s.w; b.wT = s.t; }
+      const e1 = est1RM(s.w, s.reps); if (e1 > b.e) { b.e = e1; b.eT = s.t; b.eS = s; }
+    } else if (s.reps > b.r) { b.r = s.reps; b.rT = s.t; }
+    b.last = Math.max(b.last, s.t);
+  });
+  return Object.values(out).sort((a, b) => b.last - a.last);
+}
+
+/* ---------- จัดเก็บและซิงก์ ---------- */
+const validSet = (s) => s && typeof s.id === 'string' && Number.isFinite(s.t) && typeof s.ex === 'string' && s.reps >= 1 && s.w >= 0;
+const ownerKey = () => 'fitapp:sets:' + (session ? session.user.id : 'guest');
+function readSetsLocal(key) { try { const v = JSON.parse(localStorage.getItem(key)); return Array.isArray(v) ? v.filter(validSet) : []; } catch (e) { return []; } }
+function saveSetsLocal() { try { localStorage.setItem(ownerKey(), JSON.stringify(sets)); } catch (e) { /* เก็บไม่ได้ก็ข้ามไป */ } }
+function newId() {
+  if (window.crypto && crypto.randomUUID) return crypto.randomUUID();
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => { const r = Math.random() * 16 | 0; return (c === 'x' ? r : (r & 3 | 8)).toString(16); });
+}
+function setsError(e) {
+  if (e && (e.status === 404 || e.code === 'PGRST205' || e.code === '42P01')) return 'ยังไม่ได้สร้างตารางบันทึกการฝึกใน Supabase (รันไฟล์ supabase-workout.sql) ตอนนี้ข้อมูลเก็บในเครื่องนี้ก่อน';
+  return 'ซิงก์เซตไม่สำเร็จ จะลองใหม่เมื่อบันทึกเซตถัดไป';
+}
+function scheduleSync() { if (!session) return; clearTimeout(syncTimer); syncTimer = setTimeout(syncSets, 400); }
+async function syncSets() {
+  if (!session || syncBusy) return;
+  const todo = sets.filter((s) => !s.synced);
+  if (!todo.length) return;
+  syncBusy = true;
+  try {
+    await rest(SETS_Q + '?on_conflict=id', { method: 'POST', headers: { Prefer: 'resolution=merge-duplicates,return=minimal' },
+      body: todo.map((s) => ({ id: s.id, user_id: session.user.id, exercise: s.ex, performed_at: new Date(s.t).toISOString(), set_no: s.sn, reps: s.reps, weight: s.w, rest_sec: s.rest })) });
+    todo.forEach((s) => { s.synced = true; });
+    saveSetsLocal(); setSync('ซิงก์ข้อมูลแล้ว');
+  } catch (e) { setSync(setsError(e)); }
+  finally { syncBusy = false; }
+}
+async function pullSets() {
+  const out = [];
+  for (let off = 0; ; off += 1000) {
+    const rows = await rest(SETS_Q + '?select=id,exercise,performed_at,set_no,reps,weight,rest_sec&order=performed_at.asc&limit=1000&offset=' + off);
+    if (!Array.isArray(rows)) break;
+    rows.forEach((r) => out.push({ id: r.id, t: Date.parse(r.performed_at), ex: r.exercise, sn: r.set_no, reps: r.reps, w: Number(r.weight), rest: r.rest_sec, synced: true }));
+    if (rows.length < 1000) break;
+  }
+  return out;
+}
+async function trackerLogin() {
+  const cache = readSetsLocal(ownerKey());
+  sets = cache;
+  let remote = null;
+  try { remote = await pullSets(); } catch (e) { setSync(setsError(e)); }
+  if (remote) {
+    const ids = new Set(remote.map((s) => s.id));
+    sets = remote.concat(cache.filter((s) => !s.synced && !ids.has(s.id)));
+  }
+  const guestSets = readSetsLocal('fitapp:sets:guest'); // เซตที่บันทึกตอนใช้แบบไม่ล็อกอิน ย้ายเข้าบัญชีนี้
+  if (guestSets.length) {
+    const have = new Set(sets.map((s) => s.id));
+    guestSets.forEach((s) => { if (!have.has(s.id)) { s.synced = false; sets.push(s); } });
+    try { localStorage.removeItem('fitapp:sets:guest'); } catch (e) {}
+  }
+  saveSetsLocal(); scheduleSync(); renderTrain(); updateMapRanks();
+}
+function trackerGuest() { sets = readSetsLocal('fitapp:sets:guest'); renderTrain(); updateMapRanks(); }
+function trackerLogout() {
+  if (!sets.some((s) => !s.synced)) { try { localStorage.removeItem(ownerKey()); } catch (e) {} } // ถ้ายังมีเซตที่ไม่ได้ซิงก์ ให้เก็บไว้ก่อน
+  sets = []; clearInterval(restTimer); restLeft = 0; renderTrain(); updateMapRanks();
+}
+
+/* ---------- บันทึกเซต ---------- */
+function addSet(ex, w, reps) {
+  const now = Date.now(), today = dayKey(now);
+  const todays = sets.filter((s) => dayKey(s.t) === today);
+  const prev = todays.reduce((a, b) => (!a || b.t > a.t ? b : a), null);
+  const rest = prev && now - prev.t <= 900000 ? Math.round((now - prev.t) / 1000) : null; // เวลาพักจริงจากเซตก่อนหน้า (ไม่เกิน 15 นาที)
+  const s = { id: newId(), t: now, ex, sn: todays.filter((x) => x.ex === ex).length + 1, reps, w, rest, synced: false };
+  sets.push(s); saveSetsLocal(); scheduleSync();
+  return s;
+}
+function deleteSet(id) {
+  const s = sets.find((x) => x.id === id); if (!s) return;
+  sets = sets.filter((x) => x.id !== id); saveSetsLocal();
+  if (session && s.synced) rest(SETS_Q + '?id=eq.' + encodeURIComponent(id), { method: 'DELETE' }).catch(() => setSync('ลบเซตในบัญชีไม่สำเร็จ เซตอาจกลับมาตอนล็อกอินครั้งหน้า'));
+}
+function fillExerciseSelect() {
+  const sel = $('t-ex'), cur = sel.value;
+  const recent = [];
+  sets.slice().sort((a, b) => b.t - a.t).forEach((s) => { if (!recent.includes(s.ex) && recent.length < 6) recent.push(s.ex); });
+  const opt = (e) => `<option value="${e}">${e}</option>`;
+  let h = recent.length ? `<optgroup label="ใช้ล่าสุด">${recent.map(opt).join('')}</optgroup>` : '';
+  ['อก', 'หลัง', 'ขา', 'ไหล่', 'แขน', 'แกนกลาง'].forEach((m) => {
+    h += `<optgroup label="${m}">${EXERCISES.filter((e) => e.muscle === m).map((e) => opt(e.name)).join('')}</optgroup>`;
+  });
+  sel.innerHTML = h; sel.value = cur && exByName[cur] ? cur : (recent[0] || EXERCISES[0].name);
+}
+function lastSessionText(ex) {
+  const past = sets.filter((s) => s.ex === ex && dayKey(s.t) !== dayKey(Date.now()));
+  if (!past.length) return 'ยังไม่เคยบันทึกท่านี้';
+  const day = dayKey(past.reduce((a, b) => (b.t > a.t ? b : a)).t);
+  const list = past.filter((s) => dayKey(s.t) === day).sort((a, b) => a.t - b.t);
+  return 'ครั้งก่อน (' + dShort(list[0].t) + '): ' + list.map((s) => (s.w > 0 ? kgs(s.w) + ' กก. × ' : '') + s.reps + (s.w > 0 ? '' : ' ครั้ง')).join(', ');
+}
+function prefillFromLast() {
+  const ex = $('t-ex').value;
+  const past = sets.filter((s) => s.ex === ex).sort((a, b) => b.t - a.t);
+  if (past.length) { $('t-w').value = past[0].w > 0 ? kgs(past[0].w) : ''; $('t-r').value = past[0].reps; } else { $('t-w').value = ''; $('t-r').value = ''; }
+  $('t-last').textContent = lastSessionText(ex);
+  $('t-setno').textContent = 'เซตที่ ' + (sets.filter((s) => s.ex === ex && dayKey(s.t) === dayKey(Date.now())).length + 1);
+}
+function setRow(s, flags) {
+  const pr = flags[s.id] ? `<span class="pr">PR ${flags[s.id].join(' + ')}</span>` : '';
+  const main = s.w > 0 ? `${kgs(s.w)} กก. × ${s.reps}` : `${s.reps} ครั้ง (น้ำหนักตัว)`;
+  const rest = s.rest != null ? `<small>พัก ${Math.floor(s.rest / 60)}:${pad2(s.rest % 60)}</small>` : '';
+  return `<div class="srow2"><span class="sn">เซต ${s.sn}</span><span class="sv2"><b>${main}</b> ${pr}${rest}</span><button type="button" class="x" data-del="${s.id}" aria-label="ลบเซตนี้">ลบ</button></div>`;
+}
+function renderToday() {
+  const today = dayKey(Date.now()), flags = prFlags();
+  const list = sets.filter((s) => dayKey(s.t) === today).sort((a, b) => a.t - b.t);
+  if (!list.length) { $('t-today').innerHTML = "<p class='empty'>วันนี้ยังไม่ได้บันทึกเซต</p>"; return; }
+  const order = []; list.forEach((s) => { if (!order.includes(s.ex)) order.push(s.ex); });
+  const vol = list.reduce((a, s) => a + volOf(s), 0);
+  $('t-today').innerHTML = order.map((ex) => `<section class="panel"><h3 class="mm-h" style="margin:0 0 .4rem">${ex}</h3>${list.filter((s) => s.ex === ex).map((s) => setRow(s, flags)).join('')}</section>`).join('')
+    + `<p class="hint">วันนี้ ${list.length} เซต · ปริมาณรวม ${nf(vol)} กก.</p>`;
+}
+function renderRest() {
+  const mm = Math.floor(restLeft / 60), ss = restLeft % 60;
+  $('t-rest-time').textContent = pad2(mm) + ':' + pad2(ss);
+  $('t-rest-bar').style.width = (restTotal ? (restLeft / restTotal) * 100 : 0) + '%';
+  $('t-rest-state').textContent = restLeft > 0 ? 'กำลังพักระหว่างเซต' : (restTotal ? 'พักครบแล้ว พร้อมเซตถัดไป' : 'จับเวลาพักอัตโนมัติหลังบันทึกเซต');
+  document.querySelectorAll('[data-rest]').forEach((b) => b.setAttribute('aria-pressed', String(Number(b.dataset.rest) === restPick)));
+}
+function startRest(sec) {
+  clearInterval(restTimer); restTotal = sec; restLeft = sec; renderRest();
+  restTimer = setInterval(() => {
+    restLeft--;
+    if (restLeft <= 0) { clearInterval(restTimer); restLeft = 0; try { if (navigator.vibrate) navigator.vibrate([200, 100, 200]); } catch (e) {} }
+    renderRest();
+  }, 1000);
+}
+
+/* ---------- กราฟ SVG ---------- */
+function svgLine(series, yFmt) {
+  const W = 320, H = 150, L = 38, R = 10, T = 10, B = 24;
+  const all = series.flatMap((s) => s.pts.map((p) => p.y));
+  if (!all.length) return '';
+  let lo = Math.min(...all), hi = Math.max(...all);
+  if (lo === hi) { lo = lo * 0.9; hi = hi * 1.1 + 1; }
+  const xs = (i, n) => L + (n <= 1 ? (W - L - R) / 2 : (i * (W - L - R)) / (n - 1));
+  const ys = (v) => T + (H - T - B) * (1 - (v - lo) / (hi - lo));
+  const grid = [0, 0.5, 1].map((f) => { const v = lo + (hi - lo) * f; return `<line x1="${L}" x2="${W - R}" y1="${ys(v)}" y2="${ys(v)}" class="gl"/><text x="${L - 4}" y="${ys(v) + 3}" text-anchor="end" class="ax">${yFmt(v)}</text>`; }).join('');
+  const long = series.reduce((a, s) => (s.pts.length > a.pts.length ? s : a), series[0]);
+  const xl = long.pts.length > 1 ? `<text x="${xs(0, long.pts.length)}" y="${H - 6}" class="ax">${long.pts[0].x}</text><text x="${xs(long.pts.length - 1, long.pts.length)}" y="${H - 6}" text-anchor="end" class="ax">${long.pts[long.pts.length - 1].x}</text>` : `<text x="${xs(0, 1)}" y="${H - 6}" text-anchor="middle" class="ax">${long.pts[0].x}</text>`;
+  const lines = series.map((s) => {
+    const pts = s.pts.map((p, i) => [xs(i, s.pts.length), ys(p.y)]);
+    return `<polyline fill="none" stroke="${s.color}" stroke-width="2" stroke-linejoin="round" points="${pts.map((p) => p.join(',')).join(' ')}"/>` + pts.map((p) => `<circle cx="${p[0]}" cy="${p[1]}" r="3" fill="${s.color}"/>`).join('');
+  }).join('');
+  return `<svg class="chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="กราฟเส้น">${grid}${xl}${lines}</svg>`;
+}
+function svgBars(vals, labels, color) {
+  const W = 320, H = 120, L = 24, R = 6, T = 8, B = 20, n = vals.length, mx = Math.max(1, ...vals);
+  const bw = (W - L - R) / n;
+  const bars = vals.map((v, i) => { const h = ((H - T - B) * v) / mx; return `<rect x="${L + i * bw + bw * 0.18}" y="${H - B - h}" width="${bw * 0.64}" height="${Math.max(h, v ? 2 : 0)}" rx="3" fill="${color}" opacity="${i === n - 1 ? 1 : 0.55}"/>`
+    + (i % 3 === n % 3 ? `<text x="${L + i * bw + bw / 2}" y="${H - 6}" text-anchor="middle" class="ax">${labels[i]}</text>` : ''); }).join('');
+  return `<svg class="chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="กราฟแท่ง"><line x1="${L}" x2="${W - R}" y1="${H - B}" y2="${H - B}" class="gl"/><text x="${L - 4}" y="${T + 8}" text-anchor="end" class="ax">${mx}</text>${bars}</svg>`;
+}
+
+/* ---------- สถิติ ---------- */
+const weekStart = (t) => { const d = new Date(t); d.setHours(0, 0, 0, 0); d.setDate(d.getDate() - ((d.getDay() + 6) % 7)); return d.getTime(); };
+function periodStats(a, b) {
+  const list = sets.filter((s) => s.t >= a && s.t < b);
+  return { days: new Set(list.map((s) => dayKey(s.t))).size, sets: list.length, vol: list.reduce((x, s) => x + volOf(s), 0) };
+}
+function cmpCard(title, cur, prev) {
+  const row = (label, c, p, unit) => {
+    const d = p > 0 ? Math.round(((c - p) / p) * 100) : null;
+    const tag = d === null ? (c > 0 ? '<i class="up">ใหม่</i>' : '<i>–</i>') : `<i class="${d >= 0 ? 'up' : 'dn'}">${d >= 0 ? '▲' : '▼'} ${Math.abs(d)}%</i>`;
+    return `<div class="cmp-r"><span>${label}</span><b>${nf(c)}${unit}</b><small>ก่อนหน้า ${nf(p)}${unit}</small>${tag}</div>`;
+  };
+  return `<section class="panel"><h3 class="mm-h" style="margin:0 0 .5rem">${title}</h3>${row('วันที่ฝึก', cur.days, prev.days, ' วัน')}${row('จำนวนเซต', cur.sets, prev.sets, ' เซต')}${row('ปริมาณรวม', cur.vol, prev.vol, ' กก.')}</section>`;
+}
+function renderStats() {
+  const box = $('seg-stats');
+  if (!sets.length) { box.innerHTML = "<p class='empty'>ยังไม่มีข้อมูล เริ่มบันทึกเซตแรกที่แท็บ \"บันทึก\" แล้วสถิติจะขึ้นที่นี่</p>"; return; }
+  const DAY = 86400000, now = Date.now(), ws = weekStart(now);
+  // ความสม่ำเสมอ: จำนวนวันที่ฝึกต่อสัปดาห์ ย้อนหลัง 12 สัปดาห์
+  const weeks = [], wl = [];
+  for (let i = 11; i >= 0; i--) { const a = ws - i * 7 * DAY; weeks.push(periodStats(a, a + 7 * DAY).days); wl.push(dShort(a)); }
+  let streak = 0, k = weeks.length - 1; if (weeks[k] === 0) k--;
+  for (; k >= 0 && weeks[k] > 0; k--) streak++;
+  const first = new Date(now); first.setDate(1); first.setHours(0, 0, 0, 0);
+  const prevM = new Date(first); prevM.setMonth(prevM.getMonth() - 1), nextM = new Date(first); nextM.setMonth(nextM.getMonth() + 1);
+  const allDays = new Set(sets.map((s) => dayKey(s.t))).size;
+  // ความก้าวหน้าต่อท่า
+  const exs = bestsByExercise();
+  if (!statEx || !exByName[statEx] || !exs.some((b) => b.ex === statEx)) statEx = exs[0].ex;
+  const mine = sets.filter((s) => s.ex === statEx).sort((a, b) => a.t - b.t);
+  const byDay = {}; mine.forEach((s) => { (byDay[dayKey(s.t)] = byDay[dayKey(s.t)] || []).push(s); });
+  const days = Object.keys(byDay).sort();
+  const bw = mine.every((s) => s.w === 0);
+  const wPts = days.map((d) => ({ x: dShort(byDay[d][0].t), y: bw ? Math.max(...byDay[d].map((s) => s.reps)) : Math.max(...byDay[d].map((s) => s.w)) }));
+  const ePts = bw ? [] : days.map((d) => ({ x: dShort(byDay[d][0].t), y: Math.max(...byDay[d].map((s) => est1RM(s.w, s.reps))) }));
+  const chart = svgLine([{ pts: wPts, color: '#b15f2c' }].concat(ePts.length ? [{ pts: ePts, color: '#6fa8f0' }] : []), (v) => kgs(v));
+  const hist = days.slice().reverse().map((d) => {
+    const l = byDay[d]; const v = l.reduce((a, s) => a + volOf(s), 0);
+    return `<div class="h-r"><b>${dShort(l[0].t)}</b><span>${l.map((s) => (s.w > 0 ? kgs(s.w) + '×' + s.reps : s.reps + ' ครั้ง')).join(', ')}</span><small>${nf(v)} กก.</small></div>`;
+  }).join('');
+  const prs = exs.map((b) => `<div class="h-r"><b>${b.ex.replace(/ \(.*\)/, '')}</b><span>${b.bodyweight ? 'สูงสุด ' + b.r + ' ครั้ง' : 'หนักสุด ' + kgs(b.w) + ' กก. · 1RM ประมาณ ' + kgs(b.e) + ' กก.'}</span><small>${dShort(b.bodyweight ? b.rT : b.wT)}</small></div>`).join('');
+  box.innerHTML =
+    `<div class="pair"><div class="panel"><h2 class="hint" style="margin:0">ฝึกต่อเนื่อง</h2><div class="num">${streak} สัปดาห์</div></div><div class="panel"><h2 class="hint" style="margin:0">วันที่ฝึกทั้งหมด</h2><div class="num">${allDays} วัน</div></div></div>`
+    + `<section class="panel"><h3 class="mm-h" style="margin:0 0 .3rem">ความสม่ำเสมอ (วันที่ฝึกต่อสัปดาห์)</h3>${svgBars(weeks, wl, '#b15f2c')}</section>`
+    + cmpCard('สัปดาห์นี้ เทียบสัปดาห์ก่อน', periodStats(ws, ws + 7 * DAY), periodStats(ws - 7 * DAY, ws))
+    + cmpCard('เดือนนี้ เทียบเดือนก่อน', periodStats(first.getTime(), nextM.getTime()), periodStats(prevM.getTime(), first.getTime()))
+    + `<section class="panel"><h3 class="mm-h" style="margin:0 0 .5rem">ความก้าวหน้าของแต่ละท่า</h3><select id="st-ex" aria-label="เลือกท่า">${exs.map((b) => `<option value="${b.ex}"${b.ex === statEx ? ' selected' : ''}>${b.ex}</option>`).join('')}</select>`
+    + `<p class="legend" style="margin:.6rem 0 0"><span class="dot p"></span>${bw ? 'จำนวนครั้งสูงสุดต่อวัน' : 'น้ำหนักสูงสุดต่อวัน (กก.)'}${ePts.length ? '&nbsp;&nbsp;<span class="dot" style="background:#6fa8f0"></span>1RM ประมาณ (กก.)' : ''}</p>${chart}<div class="hist">${hist}</div></section>`
+    + `<section class="panel"><h3 class="mm-h" style="margin:0 0 .4rem">สถิติที่ดีที่สุด (Personal Record)</h3><div class="hist">${prs}</div><p class="hint">1RM ประมาณจากสูตร Epley (น้ำหนัก × (1 + จำนวนครั้ง ÷ 30)) เป็นค่าประมาณ ไม่ใช่การทดสอบจริง</p></section>`;
+  $('st-ex').addEventListener('change', (ev) => { statEx = ev.target.value; renderStats(); });
+}
+
+/* ---------- แรงค์กล้ามเนื้อ ---------- */
+
+/* ---------- ไอคอนตราแรงค์ 8 ระดับ (วาดด้วย SVG) ---------- */
+const OVERALL_DIV = 4; // แรงค์รวม = XP รวมของทุกกล้ามเนื้อ ÷ 4 (มี 16 กลุ่มกล้ามเนื้อ)
+function shade(hex, f) {
+  const n = parseInt(hex.slice(1), 16); let r = n >> 16, g = (n >> 8) & 255, b = n & 255;
+  const t = f < 0 ? 0 : 255, p = Math.abs(f);
+  r = Math.round((t - r) * p + r); g = Math.round((t - g) * p + g); b = Math.round((t - b) * p + b);
+  return '#' + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+}
+function injectTierDefs() {
+  if (document.getElementById('tier-defs')) return;
+  const SHIELD = 'M32 3 L56 11 V30 C56 45 46 56 32 61 C18 56 8 45 8 30 V11 Z';
+  const INNER = 'M32 8.5 L51 14.8 V30 C51 42 43 50.5 32 55 C21 50.5 13 42 13 30 V14.8 Z';
+  const ENG = 'rgba(12,12,18,.78)';
+  const star = (cx, cy, R, r) => { const p = []; for (let i = 0; i < 10; i++) { const a = -Math.PI / 2 + (i * Math.PI) / 5, rad = i % 2 ? r : R; p.push((cx + rad * Math.cos(a)).toFixed(1) + ',' + (cy + rad * Math.sin(a)).toFixed(1)); } return p.join(' '); };
+  const crown = `<path d="M19 42 L21 26 L28 33 L32 23 L36 33 L43 26 L45 42 Z" fill="${ENG}" stroke="${ENG}" stroke-width="1.5" stroke-linejoin="round"/><path d="M19 46 H45" stroke="${ENG}" stroke-width="3" stroke-linecap="round"/>`;
+  const wing = (fill) => `<g fill="${fill}" stroke="rgba(0,0,0,.35)" stroke-width="1"><path d="M9 19 C4 18 1 12 2 6 C7 9 11 13 12.5 18 Z"/><path d="M9 28 C3 27 0 22 1 16 C6 18 10 22 11.5 27 Z"/><path d="M9 37 C4 36 2 32 3 27 C7 29 10 32 11 36 Z"/></g>`;
+  const flame = (fill) => `<path d="M11 42 C1 35 3 22 13 13 C12 23 18 26 17 36 C16 40 14 42 11 42 Z" fill="${fill}" stroke="rgba(120,20,0,.5)" stroke-width="1"/>`;
+  const EMB = [
+    `<path d="M32 19 L41 24 V35 L32 40 L23 35 V24 Z" fill="none" stroke="${ENG}" stroke-width="3.2" stroke-linejoin="round"/><circle cx="32" cy="29.5" r="3.4" fill="${ENG}"/>`,
+    `<path d="M20 40 L32 28 L44 40" fill="none" stroke="${ENG}" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>`,
+    `<path d="M20 34 L32 22 L44 34 M20 46 L32 34 L44 46" fill="none" stroke="${ENG}" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>`,
+    `<polygon points="${star(32, 33, 16, 7)}" fill="${ENG}" stroke="${ENG}" stroke-width="1.5" stroke-linejoin="round"/>`,
+    `<polygon points="${star(32, 33, 16, 7)}" fill="${ENG}" stroke="${ENG}" stroke-width="1.5" stroke-linejoin="round"/>`,
+    `<path d="M20.5 28 L26.5 20.5 H37.5 L43.5 28 L32 45 Z" fill="rgba(255,255,255,.92)" stroke="${ENG}" stroke-width="2.4" stroke-linejoin="round"/><path d="M20.5 28 H43.5 M26.5 20.5 L29.5 28 L32 45 M37.5 20.5 L34.5 28 L32 45" fill="none" stroke="${ENG}" stroke-width="1.6" stroke-linejoin="round"/>`,
+    crown,
+    crown + `<circle cx="32" cy="19" r="3.6" fill="#fff" stroke="${ENG}" stroke-width="1.6"/>`,
+  ];
+  let h = '';
+  TIERS.forEach((t, i) => {
+    h += `<linearGradient id="tg${i}" x1="0.1" y1="0" x2="0.5" y2="1"><stop offset="0" stop-color="${shade(t.c, 0.55)}"/><stop offset="0.5" stop-color="${t.c}"/><stop offset="1" stop-color="${shade(t.c, -0.4)}"/></linearGradient>`;
+    const behind = i >= 4 && i < 7 ? `${wing(shade(t.c, 0.1))}<g transform="translate(64 0) scale(-1 1)">${wing(shade(t.c, 0.1))}</g>`
+      : i === 7 ? `${flame('#ff8a3d')}<g transform="translate(64 0) scale(-1 1)">${flame('#ff8a3d')}</g>` : '';
+    h += `<symbol id="tier-${i}" viewBox="0 0 64 64">${behind}<path d="${SHIELD}" fill="url(#tg${i})" stroke="${shade(t.c, -0.55)}" stroke-width="2" stroke-linejoin="round"/><path d="${INNER}" fill="none" stroke="rgba(255,255,255,.5)" stroke-width="1.2"/>${EMB[i]}</symbol>`;
+  });
+  document.body.insertAdjacentHTML('beforeend', `<svg id="tier-defs" width="0" height="0" style="position:absolute" aria-hidden="true"><defs>${h}</defs></svg>`);
+}
+const tierIcon = (i, size) => `<svg class="tic ${size || 'sm'}${i >= 3 ? ' g' : ''}" viewBox="0 0 64 64" style="--tc:${TIERS[i].c}" aria-hidden="true"><use href="#tier-${i}"/></svg>`;
+const badge = (ti) => `<span class="tier" style="--tc:${ti.t.c}">${tierIcon(ti.i, 'sm')}${ti.t.n}</span>`;
+function overallInfo() { const xp = muscleXP(), total = Object.keys(xp).reduce((a, id) => a + xp[id], 0); return { xp, total, ti: tierOf(total / OVERALL_DIV), shown: total / OVERALL_DIV }; }
+function renderHomeRank() {
+  const box = $('home-rank'); if (!box) return;
+  const o = overallInfo(), ti = o.ti, ids = Object.keys(o.xp).sort((a, b) => o.xp[b] - o.xp[a]).filter((id) => o.xp[id] > 0).slice(0, 3);
+  const ladder = TIERS.map((t, i) => `<span class="lad${i === ti.i ? ' cur' : ''}${i > ti.i ? ' lock' : ''}" title="${t.n} · ${nf(t.xp)} XP">${tierIcon(i, 'md')}</span>`).join('');
+  const chips = ids.length ? ids.map((id) => { const mt = tierOf(o.xp[id]); return `<span class="mchip2">${tierIcon(mt.i, 'sm')}${ZONES[id].n.replace(/ \(.*\)/, '')} <b style="color:${mt.t.c}">${mt.t.n}</b></span>`; }).join('')
+    : '<span class="hint" style="margin:0">ยังไม่มี XP บันทึกเซตแรกเพื่อเริ่มสะสมแรงค์</span>';
+  box.innerHTML = `<section class="panel rank-card" style="--tc:${ti.t.c}"><div class="rc-icon">${tierIcon(ti.i, 'xl')}</div><div class="rc-body"><div class="hint" style="margin:0">แรงค์รวม</div><div class="rc-name" style="color:${shade(ti.t.c, -0.25)}">${ti.t.n}</div><div class="rk-bar"><i style="width:${Math.round(ti.pct * 100)}%;background:${ti.t.c}"></i></div><small>${nf(o.shown)} XP${ti.next ? ' · อีก ' + nf(ti.next.xp - o.shown) + ' ถึง ' + ti.next.n : ' · ระดับสูงสุด'}</small></div></section>`
+    + `<div class="ladder" aria-label="ลำดับแรงค์">${ladder}</div><div class="rc-chips">${chips}</div><button type="button" class="link" data-open-rank style="padding-left:0">ดูแรงค์ของทุกกล้ามเนื้อ</button>`;
+}
+function renderRanks() {
+  const xp = muscleXP(), ids = Object.keys(ZONES).sort((a, b) => xp[b] - xp[a]);
+  const total = ids.reduce((a, id) => a + xp[id], 0), ot = tierOf(total / OVERALL_DIV);
+  $('seg-rank').innerHTML =
+    `<section class="panel result"><h2>แรงค์รวม</h2><div style="display:flex;align-items:center;gap:.7rem;flex-wrap:wrap">${tierIcon(ot.i, "lg")}<span class="big" style="font-size:1.9rem">${nf(total / OVERALL_DIV)} XP</span>${badge(ot)}</div><p class="hint">XP ของกล้ามเนื้อแต่ละส่วนคิดจากปริมาณที่ยก (น้ำหนัก × จำนวนครั้ง ÷ 10) เต็มส่วนให้กล้ามเนื้อหลัก และ 40% ให้กล้ามเนื้อรอง แรงค์รวมคิดจาก XP รวมทุกกล้ามเนื้อ ÷ 4</p></section>`
+    + ids.map((id) => {
+      const ti = tierOf(xp[id]);
+      return `<div class="rk-row">${tierIcon(ti.i, "md")}<div class="rk-main"><div class="rk-top"><b>${ZONES[id].n.replace(/ \(.*\)/, '')}</b>${badge(ti)}</div><div class="rk-bar"><i style="width:${Math.round(ti.pct * 100)}%;background:${ti.t.c}"></i></div><small>${nf(xp[id])} XP${ti.next ? ' · อีก ' + nf(ti.next.xp - xp[id]) + ' ถึง ' + ti.next.n : ' · ระดับสูงสุด'}</small></div></div>`;
+    }).join('')
+    + `<p class="note">ระดับ: ${TIERS.map((t) => t.n + ' ' + nf(t.xp)).join(' → ')} XP แรงค์นี้เป็นระบบเกมที่นับจากปริมาณการฝึกที่บันทึก ไม่ใช่มาตรฐานความแข็งแรง</p>`;
+}
+function updateMapRanks() {
+  const xp = muscleXP();
+  document.querySelectorAll('#mm-svg [data-rk]').forEach((el) => {
+    const id = el.dataset.rk;
+    if (!(xp[id] > 0)) { el.textContent = ''; return; }
+    const ti = tierOf(xp[id]); el.textContent = ti.t.n; el.style.fill = ti.t.c;
+  });
+}
+function decorateInfo() {
+  const box = $('mm-info'); if (!selected || !box.firstElementChild) return;
+  const xp = muscleXP()[selected] || 0, ti = tierOf(xp), bests = bestsByExercise().filter((b) => exByName[b.ex] && exByName[b.ex].main.includes(selected)).slice(0, 3);
+  const prs = bests.length ? bests.map((b) => `${b.ex.replace(/ \(.*\)/, '')}: ${b.bodyweight ? b.r + ' ครั้ง' : kgs(b.w) + ' กก.'}`).join(' · ') : 'ยังไม่มีสถิติของกล้ามเนื้อนี้';
+  const card = document.createElement('section'); card.className = 'panel'; card.id = 'mm-rank';
+  card.innerHTML = `<div class="rk-top"><b>แรงค์ของกล้ามเนื้อนี้</b>${badge(ti)}</div><div class="rk-bar"><i style="width:${Math.round(ti.pct * 100)}%;background:${ti.t.c}"></i></div><small>${nf(xp)} XP${ti.next ? ' · อีก ' + nf(ti.next.xp - xp) + ' ถึง ' + ti.next.n : ''}</small><p class="hint" style="margin-top:.5rem">PR: ${prs}</p>`;
+  box.firstElementChild.after(card);
+}
+const _renderInfo = renderInfo;
+renderInfo = function () { _renderInfo(); decorateInfo(); };
+
+/* ---------- วาดหน้า "ฝึก" ---------- */
+function renderTrain() {
+  if (!$('t-ex')) return;
+  injectTierDefs(); renderHomeRank();
+  fillExerciseSelect(); prefillFromLast(); renderToday(); renderRest();
+  document.querySelectorAll('[data-seg]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.seg === seg)));
+  ['log', 'stats', 'rank'].forEach((k) => { $('seg-' + k).hidden = seg !== k; });
+  if (seg === 'stats') renderStats();
+  if (seg === 'rank') renderRanks();
+  const n = sets.filter((s) => dayKey(s.t) === dayKey(Date.now())).length;
+  $('home-sets').textContent = n ? 'วันนี้บันทึกแล้ว ' + n + ' เซต' : 'ยังไม่ได้บันทึกวันนี้ แตะเพื่อเริ่ม';
+}
+function openLog(name) {
+  go('train'); seg = 'log';
+  renderTrain();
+  if (exByName[name]) { $('t-ex').value = name; prefillFromLast(); }
+  $('t-w').focus();
+}
+$('view-train').addEventListener('click', (ev) => {
+  const sb = ev.target.closest('[data-seg]');
+  if (sb) { seg = sb.dataset.seg; renderTrain(); return; }
+  const del = ev.target.closest('[data-del]');
+  if (del) { deleteSet(del.dataset.del); renderTrain(); updateMapRanks(); return; }
+  const rb = ev.target.closest('[data-rest]');
+  if (rb) { restPick = Number(rb.dataset.rest); renderRest(); return; }
+  if (ev.target.closest('#t-stop')) { clearInterval(restTimer); restLeft = 0; restTotal = 0; renderRest(); }
+});
+$('t-ex').addEventListener('change', prefillFromLast);
+$('t-add').addEventListener('click', () => {
+  const ex = $('t-ex').value, w = Number($('t-w').value || 0), reps = Math.round(Number($('t-r').value));
+  const msg = (t) => { $('t-msg').textContent = t; };
+  if (!exByName[ex]) return msg('เลือกท่าก่อน');
+  if (!(w >= 0 && w <= 1000)) return msg('น้ำหนักต้องอยู่ระหว่าง 0–1000 กก.');
+  if (!(reps >= 1 && reps <= 200)) return msg('จำนวนครั้งต้องอยู่ระหว่าง 1–200');
+  const s = addSet(ex, w, reps), pr = prFlags()[s.id];
+  msg(pr ? 'บันทึกแล้ว และเป็น PR ใหม่ (' + pr.join(' + ') + ')' : 'บันทึกเซตแล้ว');
+  startRest(restPick); renderTrain(); updateMapRanks();
+});
+$('app-drawer').addEventListener('click', (ev) => {
+  const b = ev.target.closest('[data-log]'); if (b) { openLog(b.dataset.log); return; }
+  if (ev.target.closest('[data-open-rank]')) { seg = 'rank'; go('train'); renderTrain(); }
+});
+const _go = go;
+go = function (p) { _go(p); if (p === 'home') { injectTierDefs(); renderHomeRank(); } };
+injectTierDefs(); renderHomeRank();
 
 /* ===== บัญชีผู้ใช้จริงด้วย Supabase =====
    หลังสร้างโปรเจกต์ Supabase ให้ใส่ 2 ค่านี้ (anon key เป็นกุญแจสาธารณะ ใส่ในเว็บได้ ห้ามใส่ service_role เด็ดขาด)
@@ -1498,6 +2007,7 @@ async function pullRemote() {
     if (!dirty) { try { localStorage.removeItem(KEY); } catch (e) {} }
   }
   fillProfile(); renderSchedule(); renderHome();
+  try { await trackerLogin(); } catch (e) { /* ใช้ข้อมูลที่อยู่ในเครื่องต่อ */ }
 }
 async function pushRemote() {
   if (!session || !dirty) return;
@@ -1626,13 +2136,13 @@ $('a-guest').addEventListener('click', () => {
   const g = loadPrefs();
   profile = g.profile && typeof g.profile === 'object' ? g.profile : {};
   plan = Array.isArray(g.plan) && g.plan.length === 7 ? g.plan : DEFAULT_PLAN.slice();
-  fillProfile(); renderSchedule(); enterApp();
+  trackerGuest(); fillProfile(); renderSchedule(); enterApp();
 });
 $('acct-login').addEventListener('click', () => { guest = false; showAuth(); });
 $('acct-logout').addEventListener('click', async () => {
-  await pushRemote();
+  await pushRemote(); await syncSets();
   try { await api('/auth/v1/logout', { method: 'POST', token: session.access_token }); } catch (e) { /* ออกจากระบบฝั่งเครื่องต่อไป */ }
-  clearSession(); resetLocalState(); page = 'home'; showAuth('ออกจากระบบแล้ว');
+  trackerLogout(); clearSession(); resetLocalState(); page = 'home'; showAuth('ออกจากระบบแล้ว');
 });
 
 function openDrawerLater() {
